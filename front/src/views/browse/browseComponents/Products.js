@@ -3,7 +3,7 @@ import './Products.css';
 import ProductTable from '../ProductTable';
 import axios from 'axios';
 
-class Workers extends Component {
+class Products extends Component {
     constructor(props) {
         super(props);
 
@@ -13,7 +13,7 @@ class Workers extends Component {
                 "Name",
                 "Price",
                 "Measurements",
-                "Image",
+                "Image"
             ]
         };
 
@@ -43,4 +43,4 @@ class Workers extends Component {
     }
 }
 
-export default Workers;
+export default Products;
