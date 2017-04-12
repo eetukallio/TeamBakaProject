@@ -8,9 +8,7 @@ class Management extends Component {
         super(props);
 
         this.state = {
-            customerData: [],
-            workerData: [],
-            entryData: [],
+            productData: [],
             searchInput:""
         }
     }
