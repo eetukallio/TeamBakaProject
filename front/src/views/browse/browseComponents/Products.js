@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Products.css';
+// import './Products.css';
 import ProductTable from '../ProductTable';
 import axios from 'axios';
 
@@ -35,10 +35,8 @@ class Products extends Component {
     render() {
 
         return (
-            <div className="container">
             <ProductTable type="products" searchInput={this.props.searchInput}
                        data={this.state.data} headers={this.state.headers}/>
-            </div>
         );
     }
 }
