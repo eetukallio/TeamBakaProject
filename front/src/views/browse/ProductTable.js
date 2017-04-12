@@ -45,8 +45,8 @@ class DataTable extends Component {
         return tmp.filter(function (obj) {
 
             return obj.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-                obj.measurements.toLowerCase().includes(searchInput.toLowerCase()) ||
-                obj.price.toLowerCase().includes(searchInput.toLowerCase());
+                obj.measurements.toLowerCase().includes(searchInput.toLowerCase()); //||
+                // obj.price.includes(searchInput.toLowerCase());
         }).map(function (obj) {
                 console.log("map");
                  return <tr key={obj.id}>
