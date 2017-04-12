@@ -12,4 +12,4 @@ To compile and run the server, navigate to the server directory and execute `mvn
 
 The server should now be running at a port displayed in terminal.
 
-In *Releases* you'll find an executable jar for the backend.
+In **Releases** you'll find an executable jar for the backend.
