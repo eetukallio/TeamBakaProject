@@ -56,7 +56,7 @@ public class ProductController {
     /**
      * Returns a product by id.
      *
-     * @param id
+     * @param id Id of the product.
      * @return Product matching the id.
      */
     @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
