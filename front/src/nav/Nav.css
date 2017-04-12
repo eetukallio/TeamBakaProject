@@ -1,6 +1,6 @@
 .header {
     text-align: center;
-    background: sandybrown;
+    background: #54a8c4;
     background-size: cover;
     position: relative;
     overflow: visible;
@@ -34,3 +34,11 @@
 .header-subnav li a:hover {
     background: rgba(250, 250, 250, 0.15);
     transition: all 0.35s ease-in-out; }
+
+.glyphicon-shopping-cart {
+    font-size: 4em
+}
+
+.hasItems {
+    color: red;
+}

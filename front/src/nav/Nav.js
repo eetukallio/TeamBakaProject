@@ -3,6 +3,7 @@ import './Nav.css';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/actionCreators';
+import cartImg from '../images/shoppingCart.png';
 // import logo from '../images/urho-logo.png';
 
 class Nav extends Component {
@@ -16,7 +17,8 @@ class Nav extends Component {
                     <ul className="header-subnav">
                         <li><Link to="/browse">BROWSE PRODUCTS</Link></li>
                         <li><Link to="/info"> PLACEHOLDER </Link></li>
-                        <li><Link to="/home"> PLACEHOLDER2 </Link> </li>
+                        <li><Link to="/home"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
+
                         {this.props.loggedIn ? (
                                 <li><a href="#" onClick={this.props.logout}>LOG OUT</a></li>
                             ) : (
