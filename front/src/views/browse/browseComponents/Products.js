@@ -1,0 +1,59 @@
+/**
+ * Created by mickykyei on 9.3.2017.
+ */
+import React, { Component } from 'react';
+import './Products.css';
+import DataTable from '../ProductTable';
+
+class Workers extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            data: [],
+            headers: [
+                "Nimi",
+                "Osoite",
+                "Kaupunki",
+                "Postinumero",
+                "Veroprosentti",
+                "Tuntipalkka",
+                "Käyttäjätunnus"
+            ]
+        }
+
+        this.fetchData = this.fetchData.bind(this);
+    }
+
+    fetchData() {
+        fetch("http://207.154.228.188:3000/users")
+            .then( (response) => {
+                console.log("fetching...")
+                return response.json() })
+            .then( (json) => {
+                console.log("fetch done");
+                console.log(json)
+                this.setState({data: [...json]});
+            });
+    }
+
+    componentDidMount() {
+
+        console.log("ComponentDidMount Workers")
+
+        this.fetchData();
+    }
+
+    render() {
+
+        console.log("render workers data:")
+        console.log(this.state.data);
+
+        return (
+            <DataTable type="workers" searchInput={this.props.searchInput}
+                       data={this.state.data} headers={this.state.headers}/>
+        );
+    }
+}
+
+export default Workers;
