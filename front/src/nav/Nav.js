@@ -17,7 +17,7 @@ class Nav extends Component {
                     <ul className="header-subnav">
                         <li><Link to="/browse">BROWSE PRODUCTS</Link></li>
                         <li><Link to="/info"> PLACEHOLDER </Link></li>
-                        <li><Link to="/home"><img className="cartImg" src={cartImg} alt="Shopping cart" /> </Link> </li>
+                        <li><Link to="/home"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
 
                         {this.props.loggedIn ? (
                                 <li><a href="#" onClick={this.props.logout}>LOG OUT</a></li>
