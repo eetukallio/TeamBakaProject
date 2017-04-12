@@ -2,6 +2,8 @@ package fi.tamk.tiko;
 
 import javax.persistence.*;
 
+//The Product Entity
+
 @Entity
 @Table(name="products")
 public class Product {

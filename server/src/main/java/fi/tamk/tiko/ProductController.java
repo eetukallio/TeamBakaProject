@@ -4,7 +4,7 @@ package fi.tamk.tiko;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-// This class acts as a controller.
+// This class acts as the Product controller.
 // Usually when using @Controller, you will use also @RequestMapping
 @RestController
 public class ProductController {
