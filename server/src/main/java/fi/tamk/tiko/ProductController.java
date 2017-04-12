@@ -1,22 +1,34 @@
-
 package fi.tamk.tiko;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-// This class acts as the Product controller.
-// Usually when using @Controller, you will use also @RequestMapping
+/**
+ *  The product controller class
+ *
+ *  @author eetukallio
+ *  @version 1.0
+ *  @since 1.0
+ */
 @RestController
 public class ProductController {
 
     @Autowired
     ProductRepository db;
 
+    /**
+     * Saves a product in the database.
+     *
+     * @param ml Product to be stored in the database.
+     */
     @RequestMapping(value = "/products",  method=RequestMethod.POST)
     public void saveProduct(@RequestBody Product ml) {
         db.save(ml);
     }
 
+    /**
+     * Floods the database with dummy data.
+     */
     @RequestMapping(value = "/products/flood",  method=RequestMethod.POST)
     public void floodProducts() {
 
@@ -30,15 +42,25 @@ public class ProductController {
         }
     }
 
+    /**
+     * Returns all products in the database.
+     *
+     * @return All products in the database as an iterable.
+     */
     @RequestMapping(value = "/products", method = RequestMethod.GET)
-    // The return value will be the HTTP Body
     @ResponseBody
     public Iterable<Product> fetchProducts() {
         return db.findAll();
     }
 
+    /**
+     * Returns a product by id.
+     *
+     * @param id
+     * @return Product matching the id.
+     */
     @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
-    public Product fetchProduct(@PathVariable long locationId) {
-        return db.findOne(locationId);
+    public Product fetchProduct(@PathVariable long id) {
+        return db.findOne(id);
     }
 }
