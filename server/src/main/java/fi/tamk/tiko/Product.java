@@ -3,47 +3,69 @@ package fi.tamk.tiko;
 import javax.persistence.*;
 
 @Entity
-@Table(name="locations")
+@Table(name="products")
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
-    @Column(name="latitude")
-    private double latitude;
-    @Column(name="longitude")
-    private double longitude;
+    @Column(name="price")
+    private double price;
+    @Column(name="name")
+    private String name;
+    @Column(name="measurements")
+    private String measurements;
+    @Column(name="imgUrl")
+    private String imgUrl;
 
     public Product() {}
 
-    public Product(long id, double latitude, double longitude) {
+    public Product(long id, double price, String name, String measurements, String imgUrl) {
         this.id = id;
-        this.latitude = latitude;
-        this.longitude = longitude;
+        this.price = price;
+        this.name = name;
+        this.measurements = measurements;
+        this.imgUrl = imgUrl;
     }
 
     public long getId() {
         return this.id;
     }
 
-    public double getLatitude() {
-        return this.latitude;
-    }
-
-    public double getLongitude() {
-        return this.longitude;
-    }
-
     public void setId(long id) {
         this.id = id;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public double getPrice() {
+        return price;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getMeasurements() {
+        return measurements;
+    }
+
+    public void setMeasurements(String measurements) {
+        this.measurements = measurements;
+    }
+
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
     }
 }

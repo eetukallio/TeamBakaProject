@@ -12,21 +12,19 @@ public class ProductController {
     @Autowired
     ProductRepository db;
 
-    // curl -H "Content-type: application/json" -X POST -d '{"latitude": 61.4978,
-    // "longitude": 23.7610}' http://localhost:8080/locations
-    @RequestMapping(value = "/locations",  method=RequestMethod.POST)
+    @RequestMapping(value = "/products",  method=RequestMethod.POST)
     public void saveLocation(@RequestBody Product ml) {
         db.save(ml);
     }
 
-    @RequestMapping(value = "/locations", method = RequestMethod.GET)
+    @RequestMapping(value = "/products", method = RequestMethod.GET)
     // The return value will be the HTTP Body
     @ResponseBody
     public Iterable<Product> fetchLocations() {
         return db.findAll();
     }
 
-    @RequestMapping(value = "/locations/{locationId}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
     public Product fetchLocation(@PathVariable long locationId) {
         return db.findOne(locationId);
     }
