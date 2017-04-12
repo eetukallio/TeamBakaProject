@@ -34,3 +34,8 @@
 .header-subnav li a:hover {
     background: rgba(250, 250, 250, 0.15);
     transition: all 0.35s ease-in-out; }
+
+.cartImg {
+    width: 20px;
+    height: 20px;
+}
