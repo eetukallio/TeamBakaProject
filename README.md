@@ -11,3 +11,5 @@ You may the run the frontend by executing `npm start`.
 To compile and run the server, navigate to the server directory and execute `mvn spring-boot:run`.
 
 The server should now be running at a port displayed in terminal.
+
+In *Releases* you'll find an executable jar for the backend.
