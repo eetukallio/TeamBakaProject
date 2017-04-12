@@ -15,6 +15,7 @@ import { homeReducer } from './reducers/index';
 import { checkAuth } from './utils/checkAuth';
 import cookie from 'react-cookie';
 import {SET_AUTH} from './constants/AppConstants';
+import axios from 'axios';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(homeReducer);
@@ -24,6 +25,8 @@ const token = cookie.load('token');
 if (token) {
     store.dispatch({type: SET_AUTH})
 }
+
+axios.defaults.baseURL = 'http://localhost:8080';
 
 ReactDOM.render(
     <Provider store={store}>
