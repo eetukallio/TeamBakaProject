@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Products.css';
-import DataTable from '../ProductTable';
+import ProductTable from '../ProductTable';
 import axios from 'axios';
 
 class Workers extends Component {
@@ -33,9 +33,12 @@ class Workers extends Component {
     }
 
     render() {
+
         return (
-            <DataTable type="products" searchInput={this.props.searchInput}
+            <div className="container">
+            <ProductTable type="products" searchInput={this.props.searchInput}
                        data={this.state.data} headers={this.state.headers}/>
+            </div>
         );
     }
 }

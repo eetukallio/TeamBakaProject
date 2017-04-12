@@ -1,6 +1,10 @@
-.workers table{
-    width: 100%;
+table{
+    width: 70%;
     text-align: left;
+}
+
+.container{
+    width: 70%;
 }
 
 
