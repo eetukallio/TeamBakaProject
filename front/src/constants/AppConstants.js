@@ -7,3 +7,6 @@ export const SENDING_REQUEST = 'SENDING_REQUEST';
 export const SENDING_FORM = 'SENDING_FORM';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const UNAUTH_USER = 'UNAUTH_USER';
+export const ADD_ITEM = 'ADD_ITEM';
+export const REMOVE_ITEM = 'REMOVE_ITEM';
+export const CLEAR_SHOPPINGCART = 'CLEAR_SHOPPINGCART';
