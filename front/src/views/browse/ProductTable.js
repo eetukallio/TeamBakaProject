@@ -6,7 +6,10 @@ class DataTable extends Component {
         super(props);
         this.state = {
             headers: this.props.headers,
-            type: this.props.type
+            type: this.props.type,
+            sortBy: 'name',
+            sortDir: 'ASC',
+            prevSort: ''
         };
 
         this.setUpTable = this.setUpTable.bind(this);
@@ -18,8 +21,15 @@ class DataTable extends Component {
     setUpHeaders() {
 
         return this.state.headers.map(head => {
-            return <th key={head}><div onClick={() => this.setProducts(head)}>{head}</div></th>;
+            return <th key={head}><div onClick={() => this.setSorting(head)}>{head}</div></th>;
         });
+    }
+
+    setSorting(head){
+
+        this.setState({sortBy:head});
+        if (this.state.sortBy !== this.state.prevSort) this.setState({prevSort:this.state.sortBy});
+        this.state.sortDir === 'ASC' ? this.setState({sortDir:'DESC'}) : this.setState({sortDir:'ASC'});
     }
 
     setUpTable() {
@@ -28,7 +38,7 @@ class DataTable extends Component {
         let rows = [];
 
         if(this.state.type === "products") {
-            rows = this.setProducts('Name');
+            rows = this.setProducts(this.state.sortBy);
         }
         return rows;
     }
@@ -40,7 +50,7 @@ class DataTable extends Component {
 
     setProducts(head) {
 
-        console.log('setProducts');
+        console.log(head);
         const tmp = this.props.data;
         const searchInput = this.props.searchInput;
 
@@ -52,13 +62,38 @@ class DataTable extends Component {
             }
 
         }).sort((obj1, obj2) => {
-            switch (head.toLowerCase()) {
-                case 'name':
-                    console.log(obj1.name);
-                    return obj1.name-obj2.name;
-                case 'price':
-                    return obj1.price-obj2.price;
+
+            if (this.state.sortDir === 'ASC') {
+                switch (head.toLowerCase()) {
+                    case 'name':
+                        // console.log(obj1.name);
+                        if ( obj1.name < obj2.name ) return -1;
+                        if ( obj1.name > obj2.name ) return 1;
+                        return 0;
+                    case 'price':
+                        // console.log('price');
+                        return obj1.price-obj2.price;
+                    case 'measurements':
+                        // console.log(obj1.name);
+                        return ( obj1.measurements.split('cm')[0] - obj2.measurements.split('cm')[0] );
+                }
             }
+            if (this.state.sortDir === 'DESC') {
+                switch (head.toLowerCase()) {
+                    case 'name':
+                        // console.log(obj1.name);
+                        if ( obj1.name < obj2.name ) return 1;
+                        if ( obj1.name > obj2.name ) return -1;
+                        return 0;
+                    case 'price':
+                        // console.log('price');
+                        return obj2.price-obj1.price;
+                    case 'measurements':
+                        // console.log(obj1.name);
+                        return ( obj2.measurements.split('cm')[0] - obj1.measurements.split('cm')[0] );
+                }
+            }
+
         }).map(obj => {
                 console.log("map");
                  return <tr key={obj.id}>
@@ -80,7 +115,7 @@ class DataTable extends Component {
                 </tr>
                 </thead>
                 <tbody>
-                    {this.setUpTable()}
+                    {this.setUpTable(this.state.sortBy)}
                 </tbody>
             </Table>
         )
