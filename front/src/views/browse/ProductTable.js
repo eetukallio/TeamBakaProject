@@ -51,6 +51,14 @@ class DataTable extends Component {
                     obj.measurements.toLowerCase().includes(searchInput.toLowerCase());
             }
 
+        }).sort((obj1, obj2) => {
+            switch (head.toLowerCase()) {
+                case 'name':
+                    console.log(obj1.name);
+                    return obj1.name-obj2.name;
+                case 'price':
+                    return obj1.price-obj2.price;
+            }
         }).map(obj => {
                 console.log("map");
                  return <tr key={obj.id}>
@@ -60,15 +68,6 @@ class DataTable extends Component {
                     <td key="image">{obj.imgUrl}</td>
                      <td key="button"><button onClick={ () => this.addToCart(obj)} /></td>
                 </tr>;
-        }).sort((obj1, obj2) => {
-            console.log(head);
-            switch (head.toLowerCase()) {
-                case 'name':
-                    console.log(obj1.name);
-                    return obj1.name-obj2.name;
-                case 'price':
-                    return obj1.price-obj2.price;
-            }
         });
     }
 
