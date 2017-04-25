@@ -12,14 +12,14 @@ class DataTable extends Component {
         this.setUpTable = this.setUpTable.bind(this);
         this.setUpHeaders = this.setUpHeaders.bind(this);
         this.setProducts = this.setProducts.bind(this);
+        this.addToCart = this.addToCart.bind(this);
     }
 
     setUpHeaders() {
 
-        let arr = this.state.headers.map(function (head) {
-            return <th key={head}>{head}</th>;
+        return this.state.headers.map(head => {
+            return <th key={head}><div onClick={() => this.setProducts(head)}>{head}</div></th>;
         });
-        return arr;
     }
 
     setUpTable() {
@@ -28,37 +28,48 @@ class DataTable extends Component {
         let rows = [];
 
         if(this.state.type === "products") {
-            rows = this.setProducts();
-        } else if(this.state.type === "customers") {
-            rows = this.setCustomers();
-        } else if(this.state.type === "entries") {
-            rows = this.setEntries();
+            rows = this.setProducts('Name');
         }
         return rows;
     }
 
-    setProducts() {
+    addToCart(obj) {
+        console.log('add to cart:');
+        console.log(obj);
+    }
 
+    setProducts(head) {
+
+        console.log('setProducts');
         const tmp = this.props.data;
         const searchInput = this.props.searchInput;
 
-        return tmp.filter(function (obj) {
+        return tmp.filter(obj => {
 
             if (obj.name !== null) {
                 return obj.name.toLowerCase().includes(searchInput.toLowerCase()) ||
                     obj.measurements.toLowerCase().includes(searchInput.toLowerCase());
             }
 
-        }).map(function (obj) {
+        }).map(obj => {
                 console.log("map");
                  return <tr key={obj.id}>
                     <td key="name">{obj.name}</td>
                     <td key="price">{obj.price}</td>
                     <td key="measurements">{obj.measurements}</td>
                     <td key="image">{obj.imgUrl}</td>
+                     <td key="button"><button onClick={ () => this.addToCart(obj)} /></td>
                 </tr>;
+        }).sort((obj1, obj2) => {
+            console.log(head);
+            switch (head.toLowerCase()) {
+                case 'name':
+                    console.log(obj1.name);
+                    return obj1.name-obj2.name;
+                case 'price':
+                    return obj1.price-obj2.price;
+            }
         });
-
     }
 
     render() {
