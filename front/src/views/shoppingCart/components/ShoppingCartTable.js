@@ -45,6 +45,6 @@ export default class ShoppingCartTable extends Component {
 
 ShoppingCartTable.propTypes = {
     onRemove: React.PropTypes.func.isRequired,
-    onClear: React.PropTypes.string.isRequired,
+    onClear: React.PropTypes.func.isRequired,
     data: React.PropTypes.array.isRequired
 };

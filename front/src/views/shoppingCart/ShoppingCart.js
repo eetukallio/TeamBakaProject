@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import './ShoppingCart.css';
 import ShoppingCartTable from './components/ShoppingCartTable';
 import { removeItem, clearItems } from '../../actions/shoppingcart_actions';
@@ -20,6 +21,7 @@ class ShoppingCart extends Component {
                 <ShoppingCartTable  onRemove={this.removeItem.bind(this)}
                                     onClear={this.props.clearItems.bind(this)}
                                     data={this.props.data} />
+                <Link to="/cart/checkout"><button>Proceed to Checkout</button></Link>
             </div>
         );
     }

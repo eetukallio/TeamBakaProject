@@ -5,6 +5,7 @@ import App from './App';
 import Login from './views/login/Login'
 import Info from './views/info/Info';
 import ShoppingCart from './views/shoppingCart/ShoppingCart';
+import Checkout from './views/checkout/Checkout'
 import Browse from './views/browse/Browse';
 import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute } from 'react-router';
@@ -34,7 +35,9 @@ ReactDOM.render(
             <Route path="/" component={App}>
                 <IndexRoute component={Browse}/>
                 {/*<Route path="/login" component={Login}/>*/}
-                <Route path="/cart" component={ShoppingCart}/>
+                <Route path="/cart" component={ShoppingCart}>
+                    <Route path="/cart/checkout" component={Checkout} />
+                </Route>
                 <Route path="/info" component={Info}/>
                 <Route path="/browse" component={Browse}/>
             </Route>
