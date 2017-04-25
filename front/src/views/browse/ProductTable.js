@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import {addItem} from '../../actions/shoppingcart_actions';
+import './ProductTable.css';
 
 class DataTable extends Component {
     constructor(props) {
@@ -105,8 +106,8 @@ class DataTable extends Component {
                     <td key="price">{obj.price}</td>
                     <td key="measurements">{obj.measurements}</td>
                     <td key="image">{obj.imgUrl}</td>
-                     <td key="button"><button onClick={ () => this.addToCart(obj)} /></td>
-                </tr>;
+                     <td key="button"><button onClick={ () => this.addToCart(obj)} > Add to cart</button></td>
+                 </tr>;
         });
     }
 
@@ -114,7 +115,7 @@ class DataTable extends Component {
         return (
             <Table striped bordered condensed hover>
                 <thead>
-                <tr>
+                <tr >
                     {this.setUpHeaders()}
                 </tr>
                 </thead>
