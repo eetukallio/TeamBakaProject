@@ -19,7 +19,7 @@ class Nav extends Component {
                         <li><Link to="/info" activeClassName="active"> PLACEHOLDER </Link></li>
 
                         <div className="logInOut" >
-                            <li><Link to="/home" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
+                            <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
                         {this.props.loggedIn ? (
                                 <li><a href="#" onClick={this.props.logout}>LOG OUT</a></li>
                             ) : (
