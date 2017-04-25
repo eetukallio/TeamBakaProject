@@ -1,7 +1,9 @@
 export const CHANGE_FORM = 'CHANGE_FORM';
+export const CHANGE_REGISTER_FORM = 'CHANGE_REGISTER_FORM';
+export const REGISTER_SENT = "REGISTER_SENT";
 export const SET_AUTH = 'SET_AUTH';
+export const SET_USER = 'SET_USER';
 export const SENDING_REQUEST = 'SENDING_REQUEST';
+export const SENDING_FORM = 'SENDING_FORM';
 export const SET_ERROR_MESSAGE = 'SET_ERROR_MESSAGE';
 export const UNAUTH_USER = 'UNAUTH_USER';
-export const AUTH_ERROR = 'AUTH_ERROR';
-export const PROTECTED_TEST = 'PROTECTED_TEST';
