@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
+import {addItem} from '../../actions/shoppingcart_actions';
 
 class DataTable extends Component {
     constructor(props) {
@@ -46,6 +48,7 @@ class DataTable extends Component {
     addToCart(obj) {
         console.log('add to cart:');
         console.log(obj);
+        addItem(obj);
     }
 
     setProducts(head) {
@@ -54,6 +57,7 @@ class DataTable extends Component {
         const tmp = this.props.data;
         const searchInput = this.props.searchInput;
 
+        console.log(tmp);
         return tmp.filter(obj => {
 
             if (obj.name !== null) {
@@ -121,4 +125,11 @@ class DataTable extends Component {
         )
     }
 }
- export default DataTable;
+
+function mapStateToProps(state) {
+    return {
+        stuff: state.shoppingCart
+    }
+}
+
+export default connect(mapStateToProps, {addItem})(DataTable);

@@ -4,14 +4,16 @@ const assign = Object.assign;
 
 // The initial application state
 const initialState = {
-    items: []
+    items: ''
 };
 
 // Takes care of changing the application state
 export default function (state = initialState, action) {
+    console.log("SHOPPING CART REDUCER HELLO");
     switch (action.type) {
         case ADD_ITEM:
-            return {...state, formState: action.newState};
+            console.log("IN REDUCER: " + action);
+            return {...state, items: "lol"};
         case REMOVE_ITEM:
             return {...state, items: [...state.items.slice(0, action.payload),
                     ...state.items.slice(action.payload + 1)]};
