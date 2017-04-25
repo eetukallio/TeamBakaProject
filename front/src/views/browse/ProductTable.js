@@ -48,7 +48,7 @@ class DataTable extends Component {
     addToCart(obj) {
         console.log('add to cart:');
         console.log(obj);
-        addItem(obj);
+        this.props.addItem(obj);
     }
 
     setProducts(head) {
