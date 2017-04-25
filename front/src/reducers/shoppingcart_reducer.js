@@ -1,4 +1,4 @@
-import { CHANGE_REGISTER_FORM, REGISTER_SENT, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 
 const assign = Object.assign;
 

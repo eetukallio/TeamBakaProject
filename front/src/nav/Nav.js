@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import './Nav.css';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
-import { logout } from '../actions/actionCreators';
+import { logout } from '../actions/auth';
 import cartImg from '../images/shoppingCart.png';
-// import logo from '../images/urho-logo.png';
 
 class Nav extends Component {
 
