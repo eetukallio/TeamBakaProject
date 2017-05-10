@@ -23,7 +23,7 @@ class Management extends Component {
 
     render() {
         return (
-            <div className="management">
+            <div className="products">
                 <div className="searchBar">
                     <span className="glyphicon glyphicon-search" />
                     <input id="input" onChange={this.handleSearchInput.bind(this)} />

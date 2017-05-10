@@ -13,7 +13,8 @@ class Products extends Component {
                 "Name",
                 "Price",
                 "Measurements",
-                "Image"
+                "Image",
+                "Stock"
             ]
         };
 

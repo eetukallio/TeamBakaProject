@@ -106,7 +106,10 @@ class DataTable extends Component {
                     <td key="price">{obj.price}</td>
                     <td key="measurements">{obj.measurements}</td>
                     <td key="image">{obj.imgUrl}</td>
-                     <td key="button"><button onClick={ () => this.addToCart(obj)} > Add to cart</button></td>
+                     <td key="stock">{obj.stock}</td>
+                     <td key="button"><button onClick={ () => this.addToCart(obj)} >
+                         <span className="glyphicon glyphicon-shopping-cart"/>
+                     </button></td>
                  </tr>;
         });
     }

@@ -26,7 +26,7 @@ export default class ShoppingCartTable extends Component {
                 <td key="price">{obj.price}</td>
                 <td key="measurements">{obj.measurements}</td>
                 <td key="image">{obj.imgUrl}</td>
-                <td key="button"><button onClick={ () => this.props.onRemove(obj.id)} /></td>
+                <td key="button"><button onClick={ () => this.props.onRemove(obj.id)}>Remove</button></td>
             </tr>;
         });
     }
