@@ -25,7 +25,6 @@ class ShoppingCart extends Component {
             </div>
         );
     }
-
 }
 
 function mapStateToProps(state) {
