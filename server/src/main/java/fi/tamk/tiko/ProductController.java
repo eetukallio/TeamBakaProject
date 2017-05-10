@@ -38,7 +38,7 @@ public class ProductController {
         for (int i = 0; i < 100; i++) {
             random = (int) Math.floor((Math.random()*5));
             db.save(new Product(i, i, names[random] + " best girl", i + "cm x " + i + "cm x " + i +"cm",
-                    "myanimelist.com", i));
+                    "http://bit.ly/2r0t4t6", i));
         }
     }
 
