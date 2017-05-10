@@ -4,6 +4,7 @@ import {Table} from 'react-bootstrap';
 import {addItem} from '../../actions/shoppingcart_actions';
 import './ProductTable.css';
 import {Pagination} from 'react-bootstrap';
+import {Link} from 'react-router';
 
 class DataTable extends Component {
     constructor(props) {
@@ -146,9 +147,11 @@ class DataTable extends Component {
                  return <tr key={obj.id}>
                     <td key="product">
                         <div className="productInfoContainer">
+                            <Link to={{ pathname: '/item', query: { id: obj.id } }}>
                             <span className="productName">{obj.name}</span><br/><br/>
                             <span className="productMeasurements">{obj.measurements}</span><br/>
                             <span className="productStock">In stock: {obj.stock}</span>
+                            </Link>
                         </div>
                     </td>
                      <td key="image">
