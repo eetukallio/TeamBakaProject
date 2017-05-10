@@ -35,9 +35,8 @@ ReactDOM.render(
             <Route path="/" component={App}>
                 <IndexRoute component={Browse}/>
                 {/*<Route path="/login" component={Login}/>*/}
-                <Route path="/cart" component={ShoppingCart}>
-                    <Route path="/cart/checkout" component={Checkout} />
-                </Route>
+                <Route path="/cart" component={ShoppingCart} />
+                <Route path="/checkout" component={Checkout} />
                 <Route path="/info" component={Info}/>
                 <Route path="/browse" component={Browse}/>
             </Route>
