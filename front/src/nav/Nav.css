@@ -1,7 +1,7 @@
 .header {
     position: relative;
     text-align: left;
-    background: sandybrown;
+    background: deepskyblue;
     background-size: cover;
     overflow: visible;
     padding: 1em 0;
@@ -55,7 +55,7 @@
     transition: all 0.35s ease-in-out; }
 
 .header-burger {
-    background: sandybrown;
+    background: deepskyblue;
     background-size: cover;
     text-align: left;
     clear: both;
