@@ -10,11 +10,9 @@ class Products extends Component {
         this.state = {
             data: [],
             headers: [
-                "Name",
-                "Price",
-                "Measurements",
+                "Product",
                 "Image",
-                "Stock"
+                "Price"
             ]
         };
 

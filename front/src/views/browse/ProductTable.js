@@ -102,14 +102,28 @@ class DataTable extends Component {
         }).map(obj => {
                 console.log("map");
                  return <tr key={obj.id}>
-                    <td key="name">{obj.name}</td>
-                    <td key="price">{obj.price}</td>
-                    <td key="measurements">{obj.measurements}</td>
-                    <td key="image"><img className="productImage" src={obj.imgUrl} alt="Not available" title="Product image" /></td>
-                     <td key="stock">{obj.stock}</td>
-                     <td key="button"><button onClick={ () => this.addToCart(obj)} >
-                         <span className="glyphicon glyphicon-shopping-cart"/>
-                     </button></td>
+                    <td key="product">
+                        <div className="productInfoContainer">
+                            <span className="productName">{obj.name}</span><br/><br/>
+                            <span className="productMeasurements">{obj.measurements}</span><br/>
+                            <span className="productStock">In stock: {obj.stock}</span>
+                        </div>
+                    </td>
+                     <td key="image">
+                         <img className="productImage" src={obj.imgUrl} alt="Not available" title="Product image" />
+                     </td>
+                     <td key="price">
+                         <div className="priceTag">
+                         <span className="price">
+                             {Number(obj.price).toFixed(2)}€
+                         </span>
+                         </div>
+                     </td>
+                     <td key="button" className="cartButtonContainer">
+                         <button className="cartButton" onClick={ () => this.addToCart(obj)} >
+                         <span className="glyphicon glyphicon-shopping-cart "/>
+                     </button>
+                     </td>
                  </tr>;
         });
     }
