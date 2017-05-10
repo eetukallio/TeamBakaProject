@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import {Table} from 'react-bootstrap';
 import {addItem} from '../../actions/shoppingcart_actions';
 import './ProductTable.css';
+import {Pagination} from 'react-bootstrap';
 
 class DataTable extends Component {
     constructor(props) {
@@ -12,13 +13,19 @@ class DataTable extends Component {
             type: this.props.type,
             sortBy: 'name',
             sortDir: 'ASC',
-            prevSort: ''
+            prevSort: '',
+            data: [],
+            page: 1,
+            productsPerPage: 10
         };
 
         this.setUpTable = this.setUpTable.bind(this);
         this.setUpHeaders = this.setUpHeaders.bind(this);
         this.setProducts = this.setProducts.bind(this);
         this.addToCart = this.addToCart.bind(this);
+        this.handlePageShift = this.handlePageShift.bind(this);
+        this.setPage = this.setPage.bind(this);
+        this.setPageShifter = this.setPageShifter.bind(this);
     }
 
     setUpHeaders() {
@@ -52,14 +59,49 @@ class DataTable extends Component {
         this.props.addItem(obj);
     }
 
+    handlePageShift(eventKey) {
+        this.setState({
+            page: eventKey
+        });
+    }
+
+    setPageShifter() {
+        const { productsPerPage }  = this.state;
+        const data = this.props.data;
+        let items = 0;
+        for (let i = 1; i <= Math.ceil(data.length / productsPerPage); i++) {
+            items++;
+        }
+        return items;
+    }
+
+    setPage() {
+        const { page, productsPerPage } = this.state;
+        const data = this.props.data;
+        console.log(data);
+        console.log('Per page: ' + productsPerPage);
+        console.log('Page: ' + page);
+        const indexOfLastProduct = page * productsPerPage;
+        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+        console.log( indexOfFirstProduct +', '+indexOfLastProduct);
+        if (data !== []) {
+            console.log(data.slice(indexOfFirstProduct, indexOfLastProduct));
+            return data.slice(indexOfFirstProduct, indexOfLastProduct);
+        }
+
+    }
+
+
     setProducts(head) {
 
         console.log(head);
-        const tmp = this.props.data;
+        console.log('setProducts');
+        const page = this.setPage();
         const searchInput = this.props.searchInput;
 
-        console.log(tmp);
-        return tmp.filter(obj => {
+        console.log(page);
+        return page.filter(obj => {
+
 
             if (obj.name !== null) {
                 return obj.name.toLowerCase().includes(searchInput.toLowerCase()) ||
@@ -130,6 +172,7 @@ class DataTable extends Component {
 
     render() {
         return (
+            <div>
             <Table striped bordered condensed hover>
                 <thead>
                 <tr >
@@ -140,6 +183,12 @@ class DataTable extends Component {
                     {this.setUpTable(this.state.sortBy)}
                 </tbody>
             </Table>
+                <Pagination
+                    bsSize="medium"
+                    items={this.setPageShifter()}
+                    activePage={this.state.page}
+                    onSelect={this.handlePageShift} />
+            </div>
         )
     }
 }
