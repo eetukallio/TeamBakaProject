@@ -1,5 +1,5 @@
-.hourEntry {
-    text-align: center;
-    margin: auto;
-    padding: 1em;
+.shoppingCart {
+    height: 100vh;
+    margin: 20px auto;
+    width: 60%;
 }

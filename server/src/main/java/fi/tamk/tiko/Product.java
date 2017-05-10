@@ -26,6 +26,8 @@ public class Product {
     private String measurements;
     @Column(name="imgUrl")
     private String imgUrl;
+    @Column(name="stock")
+    private int stock;
 
 
     /**
@@ -42,12 +44,13 @@ public class Product {
      * @param measurements The measurements of the product.
      * @param imgUrl The url of the product's image.
      */
-    public Product(long id, double price, String name, String measurements, String imgUrl) {
+    public Product(long id, double price, String name, String measurements, String imgUrl, int stock) {
         this.id = id;
         this.price = price;
         this.name = name;
         this.measurements = measurements;
         this.imgUrl = imgUrl;
+        this.stock = stock;
     }
 
     /**
@@ -138,5 +141,21 @@ public class Product {
      */
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    /**
+     * Setter for the product stock.
+     */
+    public int getStock() {
+        return stock;
+    }
+
+    /**
+     * Setter for the product stock.
+     *
+     * @param stock Stock of the product.
+     */
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

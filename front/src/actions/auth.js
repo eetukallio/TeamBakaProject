@@ -1,19 +1,27 @@
-import { SET_AUTH, UNAUTH_USER, CHANGE_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { SET_AUTH, SET_USER, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookie';
 
 export function login(username, password) {
     return function(dispatch) {
+        dispatch(sendingRequest(true));
 
-        axios.post("http://207.154.228.188:3000/api/auth/login", {username, password})
-            .then(res => {
-                console.log(res);
+        axios.post("api/auth/login", {username, password})
+            .then((res) => {
+                console.log("USER ID IS " + res.data.user.id);
                 cookie.save('token', res.data.token, {path: '/'});
+                cookie.save('user', res.data.user, {path: '/'});
+                dispatch(sendingRequest(false));
                 dispatch({type: SET_AUTH});
+                dispatch(setUser(res.data.user.id));
                 browserHistory.push("/home");
             })
-            .catch(err => console.log(err));
+            .catch((err) => {
+                dispatch(sendingRequest(false));
+                dispatch(setErrorMessage(err.response.statusText));
+                console.log(err.response)
+            });
     }
 }
 
@@ -26,12 +34,35 @@ export function logout() {
     }
 }
 
+export function register(formData) {
+    console.log(formData);
+    return function(dispatch) {
+        dispatch(sendingRequest(true));
+
+        axios.post("/register", JSON.stringify(formData), {headers: {'Content-Type': 'application/json'}})
+            .then(res => {
+                console.log("REGISTRATION FORM SENT " + res);
+                dispatch(sendingRequest(false));
+                dispatch(registerFormSent());
+            })
+            .catch((err) => {
+                dispatch(sendingRequest(false));
+                console.log(err.message);
+            });
+    }
+}
+
+
 /**
  * Sets the authentication state of the application
  * @param {boolean} newState True means a user is logged in, false means no user is logged in
  */
 export function setAuthState(newState) {
     return { type: SET_AUTH, newState };
+}
+
+export function setUser(newState) {
+    return { type: SET_USER, newState}
 }
 
 /**
@@ -45,6 +76,10 @@ export function changeForm(newState) {
     return { type: CHANGE_FORM, newState };
 }
 
+export function changeRegisterForm(newState) {
+    return { type: CHANGE_REGISTER_FORM, newState}
+}
+
 /**
  * Sets the requestSending state, which displays a loading indicator during requests
  * @param  {boolean} sending The new state the app should have
@@ -54,7 +89,6 @@ export function sendingRequest(sending) {
     return { type: SENDING_REQUEST, sending };
 }
 
-
 /**
  * Sets the errorMessage state, which displays the ErrorMessage component when it is not empty
  * @param message
@@ -62,22 +96,11 @@ export function sendingRequest(sending) {
 function setErrorMessage(message) {
     return (dispatch) => {
         dispatch({ type: SET_ERROR_MESSAGE, message });
-
-        const form = document.querySelector('.form-page__form-wrapper');
-        if (form) {
-            form.classList.add('js-form__err-animation');
-            // Remove the animation class after the animation is finished, so it
-            // can play again on the next error
-            setTimeout(() => {
-                form.classList.remove('js-form__err-animation');
-            }, 150);
-
-            // Remove the error message after 3 seconds
-            setTimeout(() => {
-                dispatch({ type: SET_ERROR_MESSAGE, message: '' });
-            }, 3000);
-        }
     }
+}
+
+function registerFormSent() {
+    return { type: REGISTER_SENT}
 }
 
 /**

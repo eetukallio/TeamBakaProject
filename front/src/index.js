@@ -5,20 +5,22 @@ import App from './App';
 import Login from './views/login/Login'
 import Info from './views/info/Info';
 import ShoppingCart from './views/shoppingCart/ShoppingCart';
+import Checkout from './views/checkout/Checkout'
 import Browse from './views/browse/Browse';
+import ProductShowcase from './views/browse/browseComponents/ProductShowcase';
 import thunk from 'redux-thunk';
 import { Router, Route, IndexRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
-import { homeReducer } from './reducers/index';
+import rootReducer from './reducers/index';
 import { checkAuth } from './utils/checkAuth';
 import cookie from 'react-cookie';
 import {SET_AUTH} from './constants/AppConstants';
 import axios from 'axios';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
-const store = createStoreWithMiddleware(homeReducer);
+const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 const token = cookie.load('token');
 
@@ -34,9 +36,13 @@ ReactDOM.render(
             <Route path="/" component={App}>
                 <IndexRoute component={Browse}/>
                 {/*<Route path="/login" component={Login}/>*/}
-                <Route path="/cart" component={ShoppingCart}/>
+                <Route path="/cart" component={ShoppingCart} />
+                <Route path="/checkout" component={Checkout} />
                 <Route path="/info" component={Info}/>
-                <Route path="/browse" component={Browse}/>
+                <Route path="/browse">
+                    <IndexRoute component={Browse} />
+                    <Route path="/item" component={ProductShowcase} />
+                </Route>
             </Route>
         </Router>
     </Provider>,

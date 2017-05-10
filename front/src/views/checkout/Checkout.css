@@ -1,0 +1,45 @@
+.checkout {
+    padding: 1em;
+    width: 80%;
+    margin: auto;
+    justify-content: center;
+}
+
+.checkoutForm {
+    display: block;
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.listContainer {
+    padding: 1em;
+    margin: 1em;
+    border: 1px lightgray solid;
+    width: 60%;
+    display: block;
+    float: left;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.formContainer {
+    padding: 1em;
+    margin: 1em;
+    border: 1px lightgray solid;
+    width: 25%;
+    display: block;
+    float: left;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.container {
+    width: auto;
+}
+
