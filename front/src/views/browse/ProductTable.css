@@ -1,6 +1,7 @@
-.productImage {
-    height: 100px;
-    width: 60px;
+.productImage1 {
+    height: 150px;
+    width: 100px;
+    display: block;
 }
 
 .productName {
@@ -30,21 +31,51 @@
     vertical-align: middle;
 }
 
-.cartButton {
-    width: 100%;
+.cartButton1 {
+    width: 100px;
     height: 100%;
+    display: block;
+    margin: 10px auto;
 }
 
-.priceTag {
+.priceTag1 {
     background-color: deepskyblue;
     border-radius: 10px;
-    width: 70%;
-    margin: auto;
+    width: 100px;
+    height: 20px;
+    margin: 10px auto;
     vertical-align: middle;
 }
 
-.price {
+.price1 {
     color: white;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 15px;
+
+}
+
+.productRowContainer {
+    margin: 30px auto;
+    width: 70%;
+    height: 250px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 10px;
+    background-color: white;
+}
+
+.rightSide {
+    width: 100px;
+    float: right;
+    display: block;
+    text-align: center;
+    align-content: center;
+}
+
+.leftSide {
+    float: left;
+}
+
+.productListContainer {
+
 }

@@ -144,8 +144,8 @@ class DataTable extends Component {
 
         }).map(obj => {
                 console.log("map");
-                 return <tr key={obj.id}>
-                    <td key="product">
+                 return <div key={obj.id} className="productRowContainer">
+                    <div className="leftSide" key="product">
                         <div className="productInfoContainer">
                             <Link to={{ pathname: '/item', query: { id: obj.id } }}>
                             <span className="productName">{obj.name}</span><br/><br/>
@@ -153,39 +153,34 @@ class DataTable extends Component {
                             <span className="productStock">In stock: {obj.stock}</span>
                             </Link>
                         </div>
-                    </td>
-                     <td key="image">
-                         <img className="productImage" src={obj.imgUrl} alt="Not available" title="Product image" />
-                     </td>
-                     <td key="price">
-                         <div className="priceTag">
-                         <span className="price">
-                             {Number(obj.price).toFixed(2)}€
-                         </span>
+                    </div>
+                     <div className="rightSide">
+                         <div>
+                             <img className="productImage1" src={obj.imgUrl} alt="Not available" title="Product image" />
                          </div>
-                     </td>
-                     <td key="button" className="cartButtonContainer">
-                         <button className="cartButton" onClick={ () => this.addToCart(obj)} >
-                         <span className="glyphicon glyphicon-shopping-cart "/>
-                     </button>
-                     </td>
-                 </tr>;
+
+                         <br/>
+                         <div className="priceTag1">
+                             <span className="price1">
+                                 {Number(obj.price).toFixed(2)}€
+                             </span>
+                         </div>
+                         <div key="button" className="cartButtonContainer">
+                             <button className="cartButton1" onClick={ () => this.addToCart(obj)} >
+                                 <span className="glyphicon glyphicon-shopping-cart "/>
+                             </button>
+                         </div>
+                     </div>
+
+                 </div>;
         });
     }
 
     render() {
         return (
-            <div>
-            <Table striped bordered condensed hover>
-                <thead>
-                <tr >
-                    {this.setUpHeaders()}
-                </tr>
-                </thead>
-                <tbody>
-                    {this.setUpTable(this.state.sortBy)}
-                </tbody>
-            </Table>
+            <div className="productListContainer">
+                {this.setUpTable(this.state.sortBy)}
+
                 <Pagination
                     bsSize="medium"
                     items={this.setPageShifter()}
