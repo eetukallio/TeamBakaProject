@@ -59,7 +59,7 @@ public class ProductController {
      * @param id Id of the product.
      * @return Product matching the id.
      */
-    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/products/{id}",  method=RequestMethod.GET)
     public Product fetchProduct(@PathVariable long id) {
         return db.findOne(id);
     }

@@ -1,0 +1,27 @@
+.productContainer {
+    margin: 30px auto;
+    width: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 10px;
+}
+
+.priceTag {
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.price {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 40px;
+}
+
+.productImage {
+    float: right;
+    height: 140px;
+    width: 100px;
+    margin-right: 40px;
+}
