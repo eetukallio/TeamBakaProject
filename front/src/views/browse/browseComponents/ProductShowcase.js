@@ -41,27 +41,41 @@ class ProductShowcase extends Component {
     setProduct() {
         const product = this.state.data;
         return <div className="productContainer">
+            <div className="leftSide">
             <span className="productName">
                 {product.name}
-            </span>
-            <img className="productImage" src={product.imgUrl} alt="Not available" title="Product image" />
-            <br/><br/>
-            <div className="productInfo">
-                <span className="productMeasurements">
-                    {product.measurements}
-                </span>
-                <br/><br/>
-                <span className="productStock">
-                    Stock: {product.stock}
-                </span>
-
-            </div>
-            <br/><br/>
-            <div className="priceTag">
-                <span className="price">
+            </span> <br/> <br/>
+                <div className="priceTag2">
+                <span className="price2">
                     {Number(product.price).toFixed(2)}€
                 </span>
+                </div>
+                <br/><br/>
+                <div className="productInfo1">
+                <span className="productMeasurements1">
+                    {product.measurements}
+                </span>
+                    <br/><br/>
+                    <span className="productStock1">
+                    Stock: {product.stock}
+                </span>
+                    <br/><br/>
+                    <span className="additionalInfo1">{product.info}</span>
+                    <br/><br/>
+
+                    <br/>
+                    <div key="button" className="cartButtonContainer2">
+                        <button className="cartButton2" onClick={ () => this.addToCart(product)} >
+                            <span className="glyphicon glyphicon-shopping-cart "/>
+                        </button>
+                    </div>
+
+                </div>
             </div>
+            <div className="rightSide">
+                <img className="productImage2" src={product.imgUrl} alt="Not available" title="Product image" />
+            </div>
+
 
         </div>
     }
