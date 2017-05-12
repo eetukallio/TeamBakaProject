@@ -145,31 +145,28 @@ class DataTable extends Component {
         }).map(obj => {
                 console.log("map");
                  return <div key={obj.id} className="productRowContainer">
-                    <div className="leftSide" key="product">
-                        <div className="productInfoContainer">
-                            <Link to={{ pathname: '/item', query: { id: obj.id } }}>
-                            <span className="productName">{obj.name}</span><br/><br/>
-                            <span className="productMeasurements">{obj.measurements}</span><br/>
-                            <span className="productStock">In stock: {obj.stock}</span>
-                            </Link>
-                        </div>
-                    </div>
+                     <div className="leftSide" key="product">
+                         <div className="productInfoContainer">
+                             <Link to={{ pathname: '/item', query: { id: obj.id } }}>
+                                 <span className="productName">{obj.name}</span><br/><br/>
+                                 <div className="priceTag1">
+                                    <span className="price1">
+                                        {Number(obj.price).toFixed(2)}€
+                                    </span>
+                                 </div><br/>
+                                 <span className="productMeasurements1">{obj.measurements}</span><br/><br/>
+                                 <span className="productStock1">In stock: {obj.stock}</span><br/><br/>
+                                 <span className="additionalInfo1">{obj.info}</span><br/><br/>
+                                 <div key="button" className="cartButtonContainer">
+                                     <button className="cartButton1" onClick={ () => this.addToCart(obj)} >
+                                         <span className="glyphicon glyphicon-shopping-cart "/>
+                                     </button>
+                                 </div>
+                             </Link>
+                         </div>
+                     </div>
                      <div className="rightSide">
-                         <div>
                              <img className="productImage1" src={obj.imgUrl} alt="Not available" title="Product image" />
-                         </div>
-
-                         <br/>
-                         <div className="priceTag1">
-                             <span className="price1">
-                                 {Number(obj.price).toFixed(2)}€
-                             </span>
-                         </div>
-                         <div key="button" className="cartButtonContainer">
-                             <button className="cartButton1" onClick={ () => this.addToCart(obj)} >
-                                 <span className="glyphicon glyphicon-shopping-cart "/>
-                             </button>
-                         </div>
                      </div>
 
                  </div>;

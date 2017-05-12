@@ -28,6 +28,8 @@ public class Product {
     private String imgUrl;
     @Column(name="stock")
     private int stock;
+    @Column(name = "info")
+    private String info;
 
 
     /**
@@ -43,14 +45,16 @@ public class Product {
      * @param name The name of the product.
      * @param measurements The measurements of the product.
      * @param imgUrl The url of the product's image.
+     * @param stock Stock of the product.
      */
-    public Product(long id, double price, String name, String measurements, String imgUrl, int stock) {
+    public Product(long id, double price, String name, String measurements, String imgUrl, int stock, String info) {
         this.id = id;
         this.price = price;
         this.name = name;
         this.measurements = measurements;
         this.imgUrl = imgUrl;
         this.stock = stock;
+        this.info = info;
     }
 
     /**
@@ -157,5 +161,23 @@ public class Product {
      */
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    /**
+     * Getter for additional info on the product.
+     *
+     * @return Additional info on the product.
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
+     * Setter for additional info on the product.
+     *
+     * @param info Additional info on the product.
+     */
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
