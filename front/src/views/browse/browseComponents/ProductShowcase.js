@@ -41,8 +41,8 @@ class ProductShowcase extends Component {
     setProduct() {
         const product = this.state.data;
         return <div className="productContainer">
-            <div className="leftSide">
-            <span className="productName">
+            <div className="leftSide2">
+            <span className="productName2">
                 {product.name}
             </span> <br/> <br/>
                 <div className="priceTag2">
@@ -72,7 +72,7 @@ class ProductShowcase extends Component {
 
                 </div>
             </div>
-            <div className="rightSide">
+            <div className="rightSide2">
                 <img className="productImage2" src={product.imgUrl} alt="Not available" title="Product image" />
             </div>
 

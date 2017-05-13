@@ -19,7 +19,7 @@
     transition: 0.3s;
 }
 
-.productName {
+.productName2 {
     font-size: 20px;
     font-weight: bold;
     float: left;
@@ -45,7 +45,7 @@
     font-weight: normal;
 }
 
-.productInfoContainer {
+.productInfoContainer2 {
     margin: auto;
 }
 
@@ -82,7 +82,7 @@
 
 }
 
-.rightSide {
+.rightSide2 {
     width: 33%;
     height: 100%;
     float: right;
@@ -91,10 +91,6 @@
     align-content: center;
 }
 
-.leftSide {
+.leftSide2 {
     float: left;
-}
-
-.productListContainer {
-
 }
