@@ -27,7 +27,7 @@
 .additionalInfo1 {
     display: flex;
     margin: 0 0 0 0;
-    width: 300px;
+    max-width: 300px;
     text-align: left;
     font-weight: normal;
 }
@@ -50,8 +50,8 @@
 .priceTag1 {
     background-color: deepskyblue;
     border-radius: 5px;
-    width: 100px;
-    height: 30px;
+    max-width: 100px;
+    max-height: 30px;
     line-height: 30px;
     text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -92,4 +92,15 @@
 .top {
     display: flex;
     flex-direction: row;
+}
+
+@media screen and (max-width: 600px){
+
+    .top {
+        flex-direction: column;
+    }
+
+    .productImage1 {
+        margin: auto;
+    }
 }

@@ -5,6 +5,7 @@ import {addItem} from '../../actions/shoppingcart_actions';
 import './ProductTable.css';
 import {Pagination} from 'react-bootstrap';
 import {Link} from 'react-router';
+import Scroll from 'react-scroll';
 
 class DataTable extends Component {
     constructor(props) {
@@ -64,6 +65,8 @@ class DataTable extends Component {
         this.setState({
             page: eventKey
         });
+        Scroll.animateScroll.scrollToTop();
+        Scroll.scrollSpy.update();
     }
 
     setPageShifter() {
