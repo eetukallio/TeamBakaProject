@@ -1,7 +1,10 @@
 package fi.tamk.tiko;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  *  The product controller class
@@ -23,6 +26,7 @@ public class ProductController {
      */
     @RequestMapping(value = "/products",  method=RequestMethod.POST)
     public void saveProduct(@RequestBody Product ml) {
+
         db.save(ml);
     }
 
@@ -37,8 +41,9 @@ public class ProductController {
 
         for (int i = 0; i < 100; i++) {
             random = (int) Math.floor((Math.random()*5));
-            db.save(new Product(i, i, names[random] + " best girl", i + "cm x " + i + "cm x " + i +"cm",
-                    "http://bit.ly/2r0t4t6", i, "Quality bodypillow made out of all natural materials. No child labor involved either."));
+            Product product = new Product(i, i, names[random] + " best girl", i + "cm x " + i + "cm x " + i +"cm",
+                    "http://bit.ly/2r0t4t6", i, "Quality bodypillow made out of all natural materials. No child labor involved either.");
+            db.save(product);
         }
     }
 
@@ -50,17 +55,27 @@ public class ProductController {
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public Iterable<Product> fetchProducts() {
-        return db.findAll();
+
+        List<Product> products = (List<Product>) db.findAll();
+
+        for (Product p: products) {
+            p.add(linkTo(ProductController.class).slash(p.getProductId()).withSelfRel());
+        }
+
+        return products;
     }
 
     /**
      * Returns a product by id.
      *
-     * @param id Id of the product.
+     * @param productId Id of the product.
      * @return Product matching the id.
      */
-    @RequestMapping(value = "/products/{id}",  method=RequestMethod.GET)
-    public Product fetchProduct(@PathVariable long id) {
-        return db.findOne(id);
+    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
+    public Product fetchProduct(@PathVariable long productId) {
+
+        Product product = db.findOne(productId);
+        product.add(linkTo(ProductController.class).slash(product.getProductId()).withSelfRel());
+        return product;
     }
 }

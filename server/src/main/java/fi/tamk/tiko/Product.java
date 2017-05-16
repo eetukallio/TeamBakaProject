@@ -1,5 +1,7 @@
 package fi.tamk.tiko;
 
+import org.springframework.hateoas.ResourceSupport;
+
 import javax.persistence.*;
 
 /**
@@ -12,12 +14,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="products")
-public class Product {
+public class Product extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private long id;
+    private long productId;
     @Column(name="price")
     private double price;
     @Column(name="name")
@@ -40,15 +42,15 @@ public class Product {
     /**
      * Constructor for initializing attributes
      *
-     * @param id The id of the product.
+     * @param productId The productId of the product.
      * @param price The price of the product.
      * @param name The name of the product.
      * @param measurements The measurements of the product.
      * @param imgUrl The url of the product's image.
      * @param stock Stock of the product.
      */
-    public Product(long id, double price, String name, String measurements, String imgUrl, int stock, String info) {
-        this.id = id;
+    public Product(long productId, double price, String name, String measurements, String imgUrl, int stock, String info) {
+        this.productId = productId;
         this.price = price;
         this.name = name;
         this.measurements = measurements;
@@ -58,21 +60,21 @@ public class Product {
     }
 
     /**
-     * Getter for the product's id.
+     * Getter for the product's productId.
      *
      * @return Id of the product.
      */
-    public long getId() {
-        return this.id;
+    public long getProductId() {
+        return this.productId;
     }
 
     /**
-     * Setter for the product's id.
+     * Setter for the product's productId.
      *
-     * @param id Id of the product.
+     * @param productId Id of the product.
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setProductId(long productId) {
+        this.productId = productId;
     }
 
     /**
