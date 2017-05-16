@@ -13,7 +13,7 @@ import java.util.List;
  *  @since 1.0
  */
 @Entity
-@Table(name="products")
+@Table(name="purchases")
 public class Purchases {
 
     @Id
@@ -22,8 +22,8 @@ public class Purchases {
     @ManyToOne
     private User user;
     @ElementCollection
-    @CollectionTable(name ="tracks" , joinColumns=@JoinColumn(name="playlist_id"))
-    @Column(name="track")
+    @CollectionTable(name ="products" , joinColumns=@JoinColumn(name="productId"))
+    @Column(name="products")
     private List<Product> purchases = new ArrayList<>();
 
 

@@ -40,6 +40,10 @@
     flex-direction: column;
 }
 
+.productInfoContainer a{
+    text-decoration: none;
+}
+
 .cartButton1 {
     width: 100%;
     height: 30px;
