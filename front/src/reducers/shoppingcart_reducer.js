@@ -16,8 +16,8 @@ export default function (state = initialState, action) {
             return {...state, items: [...state.items, action.newItem]};
         case REMOVE_ITEM:
             return {items : state.items.filter( (item) => {
-                console.log("ID IS " + item.id + " AND PAYLOAD IS " + action.payload);
-                return item.id !== action.payload})};
+                console.log("ID IS " + item.productId + " AND PAYLOAD IS " + action.payload);
+                return item.productId !== action.payload})};
         case CLEAR_SHOPPINGCART:
             return {...state, initialState };
         case SET_ERROR_MESSAGE:

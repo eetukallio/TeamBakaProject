@@ -19,14 +19,17 @@ export default class ShoppingCartTable extends Component {
 
         console.log(data);
 
+        let key = 0;
+
         return data.map(obj => {
             console.log("map");
-            return <tr key={obj.id}>
+            key++;
+            return <tr key={key}>
                 <td key="name">{obj.name}</td>
                 <td key="price">{obj.price}</td>
                 <td key="measurements">{obj.measurements}</td>
                 <td key="image">{obj.imgUrl}</td>
-                <td key="button"><button onClick={ () => this.props.onRemove(obj.id)}>Remove</button></td>
+                <td key="button"><button onClick={ () => this.props.onRemove(obj.productId)}>Remove</button></td>
             </tr>;
         });
     }

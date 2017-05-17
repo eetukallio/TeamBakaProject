@@ -9,27 +9,14 @@ class Management extends Component {
 
         this.state = {
             productData: [],
-            searchInput:""
         }
-    }
-
-    handleSearchInput(e) {
-        const searchInput = e.target.value;
-        console.log(e.target.value);
-        this.setState({
-            searchInput
-        })
     }
 
     render() {
         return (
             <div className="products">
-                <div className="searchBar">
-                    <span className="glyphicon glyphicon-search" />
-                    <input id="input" onChange={this.handleSearchInput.bind(this)} />
-                </div>
                 <div className="content">
-                    <Products searchInput = {this.state.searchInput}  />
+                    <Products />
                 </div>
             </div>
         );

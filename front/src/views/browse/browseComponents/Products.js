@@ -34,7 +34,7 @@ class Products extends Component {
     render() {
 
         return (
-            <ProductTable type="products" searchInput={this.props.searchInput}
+            <ProductTable type="products"
                        data={this.state.data} headers={this.state.headers}/>
         );
     }

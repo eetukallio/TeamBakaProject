@@ -101,23 +101,15 @@ class DataTable extends Component {
         console.log(head);
         console.log('setProducts');
         const page = this.setPage();
-        const searchInput = this.props.searchInput;
 
         console.log(page);
-        return page.filter(obj => {
-
-
-            if (obj.name !== null) {
-                return obj.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-                    obj.measurements.toLowerCase().includes(searchInput.toLowerCase());
-            }
-
-        }).map(obj => {
+        return page.map(obj => {
                 console.log("map");
-                 return <div key={obj.id} className="productRowContainer">
+                console.log(obj.productId);
+                 return <div key={obj.productId} className="productRowContainer">
                      <div className="top">
                          <div className="productInfoContainer">
-                             <Link to={{ pathname: '/item', query: { id: obj.id } }}>
+                             <Link to={{ pathname: '/item', query: { id: obj.productId } }}>
                                  <span className="productName">{obj.name}</span>
 
                                  <div className="priceTag1">
