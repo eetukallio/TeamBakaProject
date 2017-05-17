@@ -20,7 +20,7 @@ public class UserController {
      * Saves the user to the database
      * @param user The user object to be saved
      */
-    @RequestMapping(value = "/users",  method=RequestMethod.POST)
+    @RequestMapping(value = "/register",  method=RequestMethod.POST)
     public void saveUser(@RequestBody User user) {
         users.save(user);
     }
@@ -43,5 +43,15 @@ public class UserController {
     @RequestMapping(value = "/users/{userId}",  method=RequestMethod.GET)
     public User fetchUsers(@PathVariable long userId) {
         return users.findOne(userId);
+    }
+
+    /**
+     * Gets a user from the database specified by username.
+     *
+     * @param username username to search with
+     * @return found user
+     */
+    public User findByUsername(String username) {
+        return users.findByUsername(username);
     }
 }

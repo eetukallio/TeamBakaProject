@@ -1,6 +1,11 @@
 package fi.tamk.tiko;
 
+import fi.tamk.tiko.settings.validators.UniqueUsername;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Set;
 
 /**
  * User entity class
@@ -17,12 +22,24 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long id;
-    @Column(name="username")
+    @NotNull
+    @UniqueUsername(message="Username already exists")
+    @Size(min = 4, max = 255, message = "Username has to be longer than 4 characters")
+    @Column(unique = true)
     private String username;
-    @Column(name="password")
+    @NotNull
+    @Size(min = 5, max = 255, message = "Password must be longer than 5 characters")
     private String password;
+    @NotNull
     @Column(name="email")
     private String email;
+
+    @Transient
+    private String passwordConfirm;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+    private Set<Role> roles;
 
     /**
      * Default constructor
@@ -115,5 +132,22 @@ public class User {
      */
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Transient
+    public String getPasswordConfirm() {
+        return passwordConfirm;
+    }
+
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
