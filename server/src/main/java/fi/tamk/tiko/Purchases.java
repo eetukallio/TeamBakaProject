@@ -18,11 +18,12 @@ public class Purchases {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name="id")
+    private long purchaseId;
     @ManyToOne
     private User user;
     @ElementCollection
-    @CollectionTable(name ="products" , joinColumns=@JoinColumn(name="productId"))
+    @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
     @Column(name="products")
     private List<Product> purchases = new ArrayList<>();
 
@@ -35,30 +36,30 @@ public class Purchases {
     /**
      * Constructor for initializing attributes
      *
-     * @param id The id of the product.
+     * @param purchaseId The purchaseId of the product.
      * @param purchases A list of IDs the purchased products
      */
-    public Purchases(long id, List<Product> purchases) {
-        this.id = id;
+    public Purchases(long purchaseId, List<Product> purchases) {
+        this.purchaseId = purchaseId;
         this.purchases = purchases;
     }
 
     /**
-     * Getter for the product's id.
+     * Getter for the product's purchaseId.
      *
      * @return Id of the product.
      */
-    public long getId() {
-        return this.id;
+    public long getPurchaseId() {
+        return this.purchaseId;
     }
 
     /**
-     * Setter for the product's id.
+     * Setter for the product's purchaseId.
      *
-     * @param id Id of the product.
+     * @param purchaseId Id of the product.
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setPurchaseId(long purchaseId) {
+        this.purchaseId = purchaseId;
     }
 
     /**
@@ -71,7 +72,7 @@ public class Purchases {
     }
 
     /**
-     * Setter for the product's id.
+     * Setter for the product's purchaseId.
      *
      * @param user Id of the user.
      */

@@ -112,39 +112,6 @@ class DataTable extends Component {
                     obj.measurements.toLowerCase().includes(searchInput.toLowerCase());
             }
 
-        }).sort((obj1, obj2) => {
-
-            if (this.state.sortDir === 'ASC') {
-                switch (head.toLowerCase()) {
-                    case 'name':
-                        // console.log(obj1.name);
-                        if ( obj1.name < obj2.name ) return -1;
-                        if ( obj1.name > obj2.name ) return 1;
-                        return 0;
-                    case 'price':
-                        // console.log('price');
-                        return obj1.price-obj2.price;
-                    case 'measurements':
-                        // console.log(obj1.name);
-                        return ( obj1.measurements.split('cm')[0] - obj2.measurements.split('cm')[0] );
-                }
-            }
-            if (this.state.sortDir === 'DESC') {
-                switch (head.toLowerCase()) {
-                    case 'name':
-                        // console.log(obj1.name);
-                        if ( obj1.name < obj2.name ) return 1;
-                        if ( obj1.name > obj2.name ) return -1;
-                        return 0;
-                    case 'price':
-                        // console.log('price');
-                        return obj2.price-obj1.price;
-                    case 'measurements':
-                        // console.log(obj1.name);
-                        return ( obj2.measurements.split('cm')[0] - obj1.measurements.split('cm')[0] );
-                }
-            }
-
         }).map(obj => {
                 console.log("map");
                  return <div key={obj.id} className="productRowContainer">
