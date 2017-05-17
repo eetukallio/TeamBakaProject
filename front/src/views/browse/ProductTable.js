@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Table} from 'react-bootstrap';
+import {DropdownButton, MenuItem} from 'react-bootstrap';
 import {addItem} from '../../actions/shoppingcart_actions';
 import './ProductTable.css';
 import {Pagination} from 'react-bootstrap';
@@ -11,18 +11,15 @@ class DataTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            headers: this.props.headers,
             type: this.props.type,
             sortBy: 'name',
             sortDir: 'ASC',
-            prevSort: '',
             data: [],
             page: 1,
             productsPerPage: 10
         };
 
         this.setUpTable = this.setUpTable.bind(this);
-        this.setUpHeaders = this.setUpHeaders.bind(this);
         this.setProducts = this.setProducts.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.handlePageShift = this.handlePageShift.bind(this);
@@ -30,18 +27,24 @@ class DataTable extends Component {
         this.setPageShifter = this.setPageShifter.bind(this);
     }
 
-    setUpHeaders() {
+    setSorting(eventKey){
 
-        return this.state.headers.map(head => {
-            return <th key={head}><div onClick={() => this.setSorting(head)}>{head}</div></th>;
-        });
-    }
+        console.log(eventKey);
 
-    setSorting(head){
-
-        this.setState({sortBy:head});
-        if (this.state.sortBy !== this.state.prevSort) this.setState({prevSort:this.state.sortBy});
-        this.state.sortDir === 'ASC' ? this.setState({sortDir:'DESC'}) : this.setState({sortDir:'ASC'});
+        switch (eventKey) {
+            case 1:
+                this.setState({sortBy: 'price'});
+                break;
+            case 2:
+                this.setState({sortBy: 'name'});
+                break;
+            case 3:
+                this.setState({sortDir: 'ASC'});
+                break;
+            case 4:
+                this.setState({sortDir: 'DES'});
+                break;
+        }
     }
 
     setUpTable() {
@@ -80,8 +83,27 @@ class DataTable extends Component {
     }
 
     setPage() {
-        const { page, productsPerPage } = this.state;
-        const data = this.props.data;
+        const { page, productsPerPage, sortBy, sortDir } = this.state;
+        const data = this.props.data.sort((a, b) => {
+            console.log('sorting');
+            if (sortBy === 'name') {
+                if (sortDir === 'ASC') {
+                    if(a.name < b.name) return -1;
+                    if(a.name > b.name) return 1;
+                    return 0;
+                } else {
+                    if(a.name > b.name) return -1;
+                    if(a.name < b.name) return 1;
+                    return 0;
+                }
+            } else {
+                if (sortDir === 'ASC') {
+                    return a-b;
+                } else {
+                    return b-a;
+                }
+            }
+        });
         console.log(data);
         console.log('Per page: ' + productsPerPage);
         console.log('Page: ' + page);
@@ -96,9 +118,8 @@ class DataTable extends Component {
     }
 
 
-    setProducts(head) {
+    setProducts() {
 
-        console.log(head);
         console.log('setProducts');
         const page = this.setPage();
 
@@ -135,6 +156,17 @@ class DataTable extends Component {
     render() {
         return (
             <div className="productListContainer">
+
+                <div className="sort">
+                    <DropdownButton onSelect={this.setSorting} bsStyle="default" title="Sort by" id="dropdown-basic">
+                        <MenuItem eventKey="1"> Price </MenuItem>
+                        <MenuItem eventKey="2"> Name </MenuItem>
+                    </DropdownButton>
+                    <DropdownButton onSelect={this.setSorting} bsStyle="default" title="Direction" id="dropdown-basic">
+                        <MenuItem eventKey="3"> Ascending </MenuItem>
+                        <MenuItem eventKey="4"> Descending </MenuItem>
+                    </DropdownButton>
+                </div>
                 {this.setUpTable(this.state.sortBy)}
 
                 <Pagination
