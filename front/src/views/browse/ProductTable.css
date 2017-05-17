@@ -98,6 +98,14 @@
     flex-direction: row;
 }
 
+.sort {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    width: 90%;
+    flex-direction: row;
+}
+
 @media screen and (max-width: 600px){
 
     .top {
