@@ -7,15 +7,23 @@ import { logout } from '../actions/auth';
 import { browserHistory } from 'react-router';
 import cartImg from '../images/shoppingCart.png';
 
+/**
+ * The navigation component.
+ */
 class Nav extends Component {
 
+    /**
+     * Constructor for setting the initial state and binding functions to this component's context.
+     */
     constructor(props) {
         super(props);
 
         this.handleSearch = this.handleSearch.bind(this);
     }
 
-
+    /**
+     * Handles the search input and redirection after a search is to be submitted.
+     */
     handleSearch(e) {
         console.log('handle search');
         console.log('handle search');
@@ -30,6 +38,11 @@ class Nav extends Component {
         }
     }
 
+    /**
+     * React render(). Represents the navigation part of the application.
+     *
+     * @return {XML} Returns a <div> element holding the navigation of the application.
+     */
     render() {
         return (
             <div className="Nav">
@@ -64,12 +77,16 @@ class Nav extends Component {
     }
 }
 
-// Which props do we want to inject, given the global state?
+/**
+ * Redux mapping.
+ *
+ * @param state
+ * @return {{loggedIn: (*|boolean)}}
+ */
 function mapStateToProps(state) {
     return {
         loggedIn: state.loggedIn
     }
 }
 
-// Wrap the component to inject dispatch and state into it
 export default connect(mapStateToProps, { logout })(Nav);

@@ -19,17 +19,41 @@ import cookie from 'react-cookie';
 import {SET_AUTH} from './constants/AppConstants';
 import axios from 'axios';
 
+/**
+ * Redux store initialization.
+ *
+ * @type {StoreEnhancerStoreCreator<S>} Middleware to be used by redux.
+ */
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+
+/**
+ * Redux store.
+ */
 const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
+/**
+ * JSON Web Token from the cookie.
+ */
 const token = cookie.load('token');
 
+/**
+ * Setting the authentication state if an existing token was found.
+ */
 if (token) {
     store.dispatch({type: SET_AUTH})
 }
 
+/**
+ * Default baseURL to be used by axios.
+ *
+ * @type {string} URL of the REST API.
+ */
 axios.defaults.baseURL = 'http://localhost:8080';
 
+/**
+ * Entry point of the react application.
+ * Sets the routes to be used in a react-router 3.x.x manner.
+ */
 ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
@@ -43,6 +67,7 @@ ReactDOM.render(
                     <IndexRoute component={Browse} />
                     <Route path="/item" component={ProductShowcase} />
                 </Route>
+                <Route path="/login" name="login" component={Login}/>
             </Route>
         </Router>
     </Provider>,
