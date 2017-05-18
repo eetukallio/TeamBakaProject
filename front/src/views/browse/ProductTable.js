@@ -70,6 +70,8 @@ class DataTable extends Component {
                 this.setState({sortDir: 'DES'});
                 console.log(this.state.sortBy);
                 break;
+            default:
+                break;
         }
     }
 
@@ -121,7 +123,8 @@ class DataTable extends Component {
     searchLogic(obj) {
         if (this.props.search !== undefined) {
             const search = this.props.search;
-            return obj.name.toLowerCase().includes(search.toLowerCase());
+            return obj.name.toLowerCase().includes(search.toLowerCase()) ||
+                obj.tags.toLowerCase().includes(search.toLowerCase());
         }
         return true;
     }
@@ -154,6 +157,8 @@ class DataTable extends Component {
                 } else {
                     return b.price-a.price;
                 }
+            } else {
+                return 0;
             }
         });
         console.log('Per page: ' + productsPerPage);
@@ -182,19 +187,19 @@ class DataTable extends Component {
         console.log(page);
         return page.map(obj => {
                  return <div key={obj.productId} className="productRowContainer">
-                     <div className="top">
-                         <div className="productInfoContainer">
+                     <div className="top1">
+                         <div className="productInfoContainer1">
                              <Link to={{ pathname: '/item', query: { id: obj.productId } }}>
-                                 <span className="productName">{obj.name}</span>
+                                 <span className="productName1">{obj.name}</span>
 
                                  <div className="priceTag1">
                                     <span className="price1">
                                         {Number(obj.price).toFixed(2)}€
                                     </span>
                                  </div>
-                                 <span className="productMeasurements1">{obj.measurements}</span><br/><br/>
-                                 <span className="productStock1">In stock: {obj.stock}</span><br/><br/>
-                                 <span className="additionalInfo1">{obj.info}</span><br/><br/>
+                                 <span className="productMeasurements1">{obj.measurements}</span>
+                                 <span className="productStock1">In stock: {obj.stock}</span>
+                                 <span className="additionalInfo1">{obj.info}</span>
 
                              </Link>
                         </div>

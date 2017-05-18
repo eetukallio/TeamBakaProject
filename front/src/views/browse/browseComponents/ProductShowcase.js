@@ -68,42 +68,33 @@ class ProductShowcase extends Component {
      */
     setProduct() {
         const product = this.state.data;
-        return <div className="productContainer">
-            <div className="leftSide2">
-            <span className="productName2">
-                {product.name}
-            </span> <br/> <br/>
-                <div className="priceTag2">
-                <span className="price2">
-                    {Number(product.price).toFixed(2)}€
-                </span>
-                </div>
-                <br/><br/>
-                <div className="productInfo1">
-                <span className="productMeasurements1">
-                    {product.measurements}
-                </span>
-                    <br/><br/>
-                    <span className="productStock1">
-                    Stock: {product.stock}
-                </span>
-                    <br/><br/>
-                    <span className="additionalInfo1">{product.info}</span>
-                    <br/><br/>
 
-                    <br/>
-                    <div key="button" className="cartButtonContainer2">
-                        <button className="cartButton2" onClick={ () => this.addToCart(product)} >
-                            <span className="glyphicon glyphicon-shopping-cart "/>
-                        </button>
+        return <div className="productContainer2">
+            <div className="top2">
+                <div className="productInfoContainer2">
+                    <span className="productName2">
+                        {product.name}
+                    </span>
+                    <div className="priceTag2">
+                        <span className="price2">
+                            {Number(product.price).toFixed(2)}€
+                        </span>
                     </div>
+                    <span className="productMeasurements2">
+                       {product.measurements}
+                    </span>
+                    <span className="productStock2">
+                    Stock: {product.stock}
+                    </span>
+                    <span className="additionalInfo2">{product.info}</span>
+                    <span className="tags2">Tags: {product.tags}</span>
 
                 </div>
-            </div>
-            <div className="rightSide2">
                 <img className="productImage2" src={product.imgUrl} alt="Not available" title="Product image" />
             </div>
-
+            <button className="cartButton2" onClick={ () => this.addToCart(product)} >
+                <span className="glyphicon glyphicon-shopping-cart "/>
+            </button>
 
         </div>
     }

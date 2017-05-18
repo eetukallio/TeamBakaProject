@@ -42,7 +42,9 @@ public class ProductController {
         for (int i = 0; i < 100; i++) {
             random = (int) Math.floor((Math.random()*5));
             Product product = new Product(i, i, names[random] + " best girl", i + "cm x " + i + "cm x " + i +"cm",
-                    "http://bit.ly/2r0t4t6", i, "Quality bodypillow made out of all natural materials. No child labor involved either.");
+                    "http://bit.ly/2r0t4t6", i,
+                    "Quality bodypillow made out of all natural materials. No child labor involved either.",
+                    "comfy,cotton,natural,soft");
             db.save(product);
         }
     }
