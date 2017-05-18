@@ -106,6 +106,10 @@
     flex-direction: row;
 }
 
+.dropdown {
+    margin-left: 5px;
+}
+
 @media screen and (max-width: 600px){
 
     .top {
