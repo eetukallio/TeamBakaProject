@@ -37,7 +37,7 @@ class Products extends Component {
 
         return (
             <ProductTable type="products" search={search}
-                       data={this.state.data} headers={this.state.headers}/>
+                       data={this.state.data} />
         );
     }
 }
