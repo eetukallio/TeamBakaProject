@@ -15,7 +15,8 @@ class DataTable extends Component {
             sortDir: 'ASC',
             data: [],
             page: 1,
-            productsPerPage: 10
+            productsPerPage: 10,
+            search: ''
         };
 
         this.setProducts = this.setProducts.bind(this);
@@ -24,6 +25,7 @@ class DataTable extends Component {
         this.setPage = this.setPage.bind(this);
         this.setPageShifter = this.setPageShifter.bind(this);
         this.setSorting = this.setSorting.bind(this);
+        this.searchLogic = this.searchLogic.bind(this);
     }
 
     setSorting(eventKey){
@@ -66,7 +68,7 @@ class DataTable extends Component {
 
     setPageShifter() {
         const { productsPerPage }  = this.state;
-        const data = this.props.data;
+        const data = this.props.data.filter(this.searchLogic);
         let items = 0;
         for (let i = 1; i <= Math.ceil(data.length / productsPerPage); i++) {
             items++;
@@ -74,11 +76,20 @@ class DataTable extends Component {
         return items;
     }
 
+    searchLogic(obj) {
+        if (this.props.search !== undefined) {
+            const search = this.props.search;
+            return obj.name.toLowerCase().includes(search.toLowerCase());
+        }
+        return true;
+    }
+
     setPage() {
         const { page, productsPerPage, sortBy, sortDir } = this.state;
         const data = this.props.data;
-        console.log(sortBy + ', ' + sortDir);
-        const sortedData = data.sort((a, b) => {
+        console.log(this.props.search);
+
+        const sortedData = data.filter(this.searchLogic).sort((a, b) => {
             if (sortBy === 'name') {
                 if (sortDir === 'ASC') {
                     if(a.name < b.name) return -1;
@@ -160,12 +171,13 @@ class DataTable extends Component {
 
 
                 {this.setProducts()}
-
+                <div className="pagination">
                 <Pagination
                     bsSize="medium"
                     items={this.setPageShifter()}
                     activePage={this.state.page}
                     onSelect={this.handlePageShift} />
+                </div>
             </div>
         )
     }

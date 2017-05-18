@@ -106,6 +106,12 @@
     flex-direction: row;
 }
 
+.pagination {
+    display: flex;
+    justify-content: center;
+    width: 90%;
+}
+
 .dropdown {
     margin-left: 5px;
 }

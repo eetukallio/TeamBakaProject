@@ -13,10 +13,12 @@ class Management extends Component {
     }
 
     render() {
+        const search = this.props.location.query.search;
+
         return (
             <div className="products">
                 <div className="content">
-                    <Products />
+                    <Products search = {search} />
                 </div>
             </div>
         );

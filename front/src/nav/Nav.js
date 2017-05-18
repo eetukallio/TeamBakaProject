@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import Router from 'react-router'
+import {Router} from 'react-router'
 import './Nav.css';
 import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
+import { browserHistory } from 'react-router';
 import cartImg from '../images/shoppingCart.png';
 
 class Nav extends Component {
@@ -16,10 +17,16 @@ class Nav extends Component {
 
 
     handleSearch(e) {
-        const transitionTo = Router.transitionTo('/browse', {search: e.target.value});
-
-        if (e.key === 'Enter') {
-            this.props.history.push('/browse')
+        console.log('handle search');
+        console.log('handle search');
+        const event = e || window.event;
+        const keyCode = event.keyCode || event.which;
+        if (keyCode === 13) {
+            console.log('ENTER HIT');
+            browserHistory.push({
+                pathname: '/browse',
+                query: { search: e.target.value }
+            });
         }
     }
 

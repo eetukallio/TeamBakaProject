@@ -33,8 +33,10 @@ class Products extends Component {
 
     render() {
 
+        const search = this.props.search;
+
         return (
-            <ProductTable type="products"
+            <ProductTable type="products" search={search}
                        data={this.state.data} headers={this.state.headers}/>
         );
     }
