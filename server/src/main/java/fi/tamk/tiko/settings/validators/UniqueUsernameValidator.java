@@ -1,6 +1,6 @@
 package fi.tamk.tiko.settings.validators;
 
-import fi.tamk.tiko.UserRepository;
+import fi.tamk.tiko.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

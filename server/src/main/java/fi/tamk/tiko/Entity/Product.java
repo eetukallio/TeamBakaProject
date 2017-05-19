@@ -1,4 +1,4 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Entity;
 
 import org.springframework.hateoas.ResourceSupport;
 

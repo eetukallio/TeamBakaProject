@@ -1,5 +1,7 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Controller;
 
+import fi.tamk.tiko.Entity.Product;
+import fi.tamk.tiko.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import org.springframework.web.bind.annotation.*;

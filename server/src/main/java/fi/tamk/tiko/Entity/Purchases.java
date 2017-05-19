@@ -1,4 +1,4 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Entity;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,9 +20,9 @@ public class Purchases {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
     private long purchaseId;
-    @ManyToOne
-    private User user;
-    @ElementCollection
+    @Column(name="user")
+    private long user;
+    @OneToMany(cascade = CascadeType.ALL)
     @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
     @Column(name="products")
     private List<Product> purchases = new ArrayList<>();
@@ -67,7 +67,7 @@ public class Purchases {
      *
      * @return Id of the user.
      */
-    public User getUser() {
+    public long getUser() {
         return user;
     }
 
@@ -76,7 +76,7 @@ public class Purchases {
      *
      * @param user Id of the user.
      */
-    public void setUser(User user) {
+    public void setUser(long user) {
         this.user = user;
     }
 

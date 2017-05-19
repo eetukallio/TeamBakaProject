@@ -1,8 +1,8 @@
 package fi.tamk.tiko.security;
 
-import fi.tamk.tiko.Role;
-import fi.tamk.tiko.User;
-import fi.tamk.tiko.UserRepository;
+import fi.tamk.tiko.Entity.Role;
+import fi.tamk.tiko.Entity.User;
+import fi.tamk.tiko.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,7 +12,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 

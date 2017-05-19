@@ -1,9 +1,11 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Controller;
 
 /**
  * Created by Henkk on 17/05/2017.
  */
 
+import fi.tamk.tiko.Entity.Role;
+import fi.tamk.tiko.Repository.RoleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

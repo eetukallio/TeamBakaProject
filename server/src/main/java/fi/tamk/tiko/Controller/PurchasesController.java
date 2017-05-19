@@ -1,5 +1,7 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Controller;
 
+import fi.tamk.tiko.Entity.Purchases;
+import fi.tamk.tiko.Repository.PurchasesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +25,7 @@ public class PurchasesController {
      */
     @RequestMapping(value = "/purchases",  method=RequestMethod.POST)
     public void saveProduct(@RequestBody Purchases ml) {
+
         db.save(ml);
     }
 
@@ -43,7 +46,7 @@ public class PurchasesController {
      * @param id Id of the purchase.
      * @return Purchase matching the id.
      */
-    @RequestMapping(value = "/purchases/{purchaseId}",  method=RequestMethod.GET)
+    @RequestMapping(value = "/purchases/{id}",  method=RequestMethod.GET)
     public Purchases fetchProduct(@PathVariable long id) {
         return db.findOne(id);
     }

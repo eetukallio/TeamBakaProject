@@ -1,5 +1,6 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Repository;
 
+import fi.tamk.tiko.Entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**
