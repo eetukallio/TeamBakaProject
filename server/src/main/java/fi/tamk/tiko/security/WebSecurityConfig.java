@@ -1,5 +1,6 @@
 package fi.tamk.tiko.security;
 
+import fi.tamk.tiko.WebSecurityCorsFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +11,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.access.channel.ChannelProcessingFilter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsUtils;
 
 @Configuration
 @EnableWebSecurity
@@ -56,10 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/**/*.css",
                         "/**/*.js"
                 ).permitAll()
+                .requestMatchers(CorsUtils::isCorsRequest).permitAll()
                 .antMatchers("/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and().httpBasic()
+                .and().addFilterBefore(new WebSecurityCorsFilter(), ChannelProcessingFilter.class);
 
-        // Custom JWT based security filter
+
+    // Custom JWT based security filter
         http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
 
         // disable page caching

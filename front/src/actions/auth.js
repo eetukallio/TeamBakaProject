@@ -9,7 +9,7 @@ export function login(data) {
 
         console.log("LOGIN INFO BEING SENT AS " + data);
 
-        axios.post("/login", {data}, {headers: {'Content-Type': 'Application/Json'}})
+        axios.post("/login", data, {headers: {'Content-Type': 'Application/Json'}})
             .then((res) => {
                 console.log("=====RESPONSE WAS======");
                 console.log(res);
@@ -24,7 +24,7 @@ export function login(data) {
             .catch((err) => {
                 dispatch(sendingRequest(false));
                 // dispatch(setErrorMessage(err.response.statusText));
-                console.log(err)
+                console.log(err.message)
             });
     }
 }
