@@ -28,6 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/products/flood").permitAll()
                 .antMatchers("/purchases/{id}").permitAll()
                 .antMatchers("/purchases/").permitAll()
+                .antMatchers("/purchases/user/*").permitAll()
                 .antMatchers("/*").permitAll()
                 .antMatchers("/css/*").permitAll()
                 .antMatchers("/js/*").permitAll()

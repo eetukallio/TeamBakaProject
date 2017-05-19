@@ -22,10 +22,10 @@ public class Purchases {
     private long purchaseId;
     @Column(name="user")
     private long user;
-    @OneToMany(cascade = CascadeType.ALL)
+    @ElementCollection
     @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
     @Column(name="products")
-    private List<Product> purchases = new ArrayList<>();
+    private List<Long> purchases = new ArrayList<>();
 
 
     /**
@@ -39,7 +39,7 @@ public class Purchases {
      * @param purchaseId The purchaseId of the product.
      * @param purchases A list of IDs the purchased products
      */
-    public Purchases(long purchaseId, List<Product> purchases) {
+    public Purchases(long purchaseId, List<Long> purchases) {
         this.purchaseId = purchaseId;
         this.purchases = purchases;
     }
@@ -85,7 +85,7 @@ public class Purchases {
      *
      * @return List of the purchased products.
      */
-    public List<Product> getPurchases() {
+    public List<Long> getPurchases() {
         return purchases;
     }
 
@@ -94,7 +94,7 @@ public class Purchases {
      *
      * @param purchases List of the purchased products.
      */
-    public void setPurchases(List<Product> purchases) {
+    public void setPurchases(List<Long> purchases) {
         this.purchases = purchases;
     }
 }

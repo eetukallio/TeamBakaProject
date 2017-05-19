@@ -18,6 +18,7 @@ import { checkAuth } from './utils/checkAuth';
 import cookie from 'react-cookie';
 import {SET_AUTH} from './constants/AppConstants';
 import axios from 'axios';
+import Orders from './views/orders/Orders';
 
 /**
  * Redux store initialization.
@@ -68,6 +69,7 @@ ReactDOM.render(
                     <Route path="/item" component={ProductShowcase} />
                 </Route>
                 <Route path="/login" name="login" component={Login}/>
+                <Route path="/orders" name="orders" component={Orders}/>
             </Route>
         </Router>
     </Provider>,

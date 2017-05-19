@@ -1,6 +1,7 @@
 package fi.tamk.tiko.Repository;
 
 import fi.tamk.tiko.Entity.Purchases;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -40,4 +41,12 @@ public interface PurchasesRepository extends CrudRepository<Purchases, Long> {
      * @return Purchase with the specified Id.
      */
     Purchases findOne(Long id);
+
+    /**
+     * Returns all purchases via userID reference.
+     *
+     * @param user Id of the user.
+     * @return Purchases with the specified User.
+     */
+    Iterable<Purchases> findAllByUser(Long user);
 }

@@ -36,8 +36,19 @@ public class PurchasesController {
      */
     @RequestMapping(value = "/purchases", method = RequestMethod.GET)
     @ResponseBody
-    public Iterable<Purchases> fetchProducts() {
+    public Iterable<Purchases> fetchPurchases() {
         return db.findAll();
+    }
+
+    /**
+     * Returns all purchases by user id.
+     *
+     * @return All purchases with the matching user as an iterable.
+     */
+    @RequestMapping(value = "/purchases/user/{user}", method = RequestMethod.GET)
+    @ResponseBody
+    public Iterable<Purchases> fetchPurchasesByUser(@PathVariable long user) {
+        return db.findAllByUser(user);
     }
 
     /**
@@ -47,7 +58,7 @@ public class PurchasesController {
      * @return Purchase matching the id.
      */
     @RequestMapping(value = "/purchases/{id}",  method=RequestMethod.GET)
-    public Purchases fetchProduct(@PathVariable long id) {
+    public Purchases fetchPurchase(@PathVariable long id) {
         return db.findOne(id);
     }
 }
