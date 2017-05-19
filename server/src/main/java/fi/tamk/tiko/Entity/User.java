@@ -1,10 +1,14 @@
 package fi.tamk.tiko.Entity;
 
 import fi.tamk.tiko.settings.validators.UniqueUsername;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
+import java.util.Date;
 import java.util.Set;
 
 /**
@@ -16,7 +20,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name="locations")
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -34,8 +38,8 @@ public class User {
     @Column(name="email")
     private String email;
 
-    @Transient
-    private String passwordConfirm;
+    private Date lastPasswordResetDate;
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
@@ -54,11 +58,13 @@ public class User {
      * @param password The user's password
      * @param email The user's email
      */
-    public User(long id, String username, String password, String email) {
+    public User(long id, String username, String password, String email, Set<Role> roles, Date lastPasswordResetDate) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roles = roles;
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
     /**
@@ -87,6 +93,31 @@ public class User {
     public String getUsername() {
         return this.username;
 
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     /**
@@ -134,20 +165,19 @@ public class User {
         this.email = email;
     }
 
-    @Transient
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Date getLastPasswordResetDate() {
+        return lastPasswordResetDate;
+    }
+
+    public void setLastPasswordResetDate(Date lastPasswordResetDate) {
+        this.lastPasswordResetDate = lastPasswordResetDate;
     }
 }

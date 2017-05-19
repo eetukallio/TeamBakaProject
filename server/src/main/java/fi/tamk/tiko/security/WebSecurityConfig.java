@@ -1,12 +1,14 @@
 package fi.tamk.tiko.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
@@ -14,32 +16,54 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
+    private JwtAuthenticationEntryPoint unauthorizedHandler;
+
+    @Autowired
     private UserDetailsService userDetailsService;
+
+    @Autowired
+    public void configureAuthentication(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
+        authenticationManagerBuilder
+                .userDetailsService(this.userDetailsService);
+    }
+
+    @Bean
+    public JWTLoginFilter authenticationTokenFilterBean() throws Exception {
+        return new JWTLoginFilter();
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf().disable().authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers(HttpMethod.POST, "/login").permitAll()
-                .antMatchers(HttpMethod.GET,"/products").permitAll()
-                .antMatchers(HttpMethod.GET,"/products/{id}").permitAll()
-                .antMatchers(HttpMethod.POST,"/register").permitAll()
-                .antMatchers(HttpMethod.GET,"/users").permitAll()
-                .antMatchers("/products/flood").permitAll()
-                .antMatchers("/purchases/{id}").permitAll()
-                .antMatchers("/purchases/").permitAll()
-                .antMatchers("/purchases/user/*").permitAll()
-                .antMatchers("/*").permitAll()
-                .antMatchers("/css/*").permitAll()
-                .antMatchers("/js/*").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                // We filter the api/login requests
-                .addFilterBefore(new JWTLoginFilter("/login", authenticationManager()),
-                        UsernamePasswordAuthenticationFilter.class)
-                // And filter other requests to check the presence of JWT in header
-                .addFilterBefore(new JWTAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class);
+        http
+                // we don't need CSRF because our token is invulnerable
+                .csrf().disable()
+
+                .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
+
+                // don't create session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+
+                .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
+                // allow anonymous resource requests
+                .antMatchers(
+                        HttpMethod.GET,
+                        "/",
+                        "/*.html",
+                        "/favicon.ico",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js"
+                ).permitAll()
+                .antMatchers("/**").permitAll()
+                .anyRequest().authenticated();
+
+        // Custom JWT based security filter
+        http.addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
+
+        // disable page caching
+        http.headers().cacheControl();
     }
 
     @Override
@@ -49,6 +73,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("admin")
                 .password("password")
                 .roles("ADMIN");
-        auth.userDetailsService(userDetailsService);
+//        auth.userDetailsService(userDetailsService);
     }
 }

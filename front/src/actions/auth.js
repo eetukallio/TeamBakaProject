@@ -3,24 +3,28 @@ import { browserHistory } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookie';
 
-export function login(username, password) {
+export function login(data) {
     return function(dispatch) {
         dispatch(sendingRequest(true));
 
-        axios.post("api/auth/login", {username, password})
+        console.log("LOGIN INFO BEING SENT AS " + data);
+
+        axios.post("/login", {data}, {headers: {'Content-Type': 'Application/Json'}})
             .then((res) => {
-                console.log("USER ID IS " + res.data.user.id);
+                console.log("=====RESPONSE WAS======");
+                console.log(res);
                 cookie.save('token', res.data.token, {path: '/'});
                 cookie.save('user', res.data.user, {path: '/'});
+                axios.defaults.headers.common['Authorization'] = res.data.token;
                 dispatch(sendingRequest(false));
-                dispatch({type: SET_AUTH});
+                dispatch(setAuthState(res.data.user.isEmployer === 1));
                 dispatch(setUser(res.data.user.id));
                 browserHistory.push("/home");
             })
             .catch((err) => {
                 dispatch(sendingRequest(false));
-                dispatch(setErrorMessage(err.response.statusText));
-                console.log(err.response)
+                // dispatch(setErrorMessage(err.response.statusText));
+                console.log(err)
             });
     }
 }
