@@ -12,7 +12,8 @@ class Orders extends Component {
 
         this.state = {
             orders: [],
-            user: 1
+            user: 1,
+            fetchDone: false
         };
 
         this.fetchData = this.fetchData.bind(this);
@@ -25,10 +26,30 @@ class Orders extends Component {
 
         axios.get("/purchases/user/" + user)
             .then( (response) => {
-
-                this.setState({orders: response.data});
                 console.log('fetching orders');
-                console.log(this.state.orders);
+                this.setState({orders: response.data});
+            })
+            .then(() => {
+                console.log('fetching products');
+                let {orders} = this.state;
+                orders.forEach(obj => {
+                    let promises = [];
+                    const productIds = obj.purchases;
+                    productIds.forEach(obj => {
+                        promises.push(axios.get('/products/' + obj));
+                    });
+                    let productObjects = [];
+                    axios.all(promises).then(response =>{
+                        response.forEach(obj => {
+                            productObjects.push(obj.data);
+                        });
+                    });
+                    obj.purchases = productObjects;
+                });
+                this.setState({
+                    orders:orders,
+                    fetchDone: true
+                });
             }).catch(err => console.log(err));
 
 
@@ -39,13 +60,14 @@ class Orders extends Component {
     }
 
     setDisplayedOrders() {
-        const orders = this.state.orders;
+        const {orders} = this.state;
+        console.log(orders);
+        if (this.state.fetchDone) {
 
-        if (orders !== []) {
-            let i = 1;
             return orders.map(obj => {
-                i++;
-                return <li key={i}>{obj.purchaseId}</li>
+
+                console.log(this.state.orders[0].purchases[0].name);
+                return <li>lol</li>;
             })
         } else return <span>Loading...</span>;
     }
