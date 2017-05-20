@@ -4,6 +4,8 @@
 
 import React, { Component } from 'react';
 import axios from 'axios';
+import SingleOrder from './ordersComponents/SingleOrder';
+import './Orders.css';
 
 class Orders extends Component {
 
@@ -27,32 +29,12 @@ class Orders extends Component {
         axios.get("/purchases/user/" + user)
             .then( (response) => {
                 console.log('fetching orders');
-                this.setState({orders: response.data});
-            })
-            .then(() => {
-                console.log('fetching products');
-                let {orders} = this.state;
-                orders.forEach(obj => {
-                    let promises = [];
-                    const productIds = obj.purchases;
-                    productIds.forEach(obj => {
-                        promises.push(axios.get('/products/' + obj));
-                    });
-                    let productObjects = [];
-                    axios.all(promises).then(response =>{
-                        response.forEach(obj => {
-                            productObjects.push(obj.data);
-                        });
-                    });
-                    obj.purchases = productObjects;
-                });
                 this.setState({
-                    orders:orders,
+                    orders: response.data,
                     fetchDone: true
                 });
+
             }).catch(err => console.log(err));
-
-
     }
 
     componentDidMount() {
@@ -61,21 +43,22 @@ class Orders extends Component {
 
     setDisplayedOrders() {
         const {orders} = this.state;
+        console.log(this.state.fetchDone);
         console.log(orders);
         if (this.state.fetchDone) {
 
+            let key = 1;
             return orders.map(obj => {
-
-                console.log(this.state.orders[0].purchases[0].name);
-                return <li>lol</li>;
+                key++;
+                return <SingleOrder order = {obj}/>;
             })
         } else return <span>Loading...</span>;
     }
 
     render() {
         return (
-            <div  className="paychecks">
-                <ul>{this.setDisplayedOrders()}</ul>
+            <div  className="ordersContainer">
+                {this.setDisplayedOrders()}
             </div>
         );
     }

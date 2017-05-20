@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import { browserHistory } from 'react-router';
 import cartImg from '../images/shoppingCart.png';
+import Orders from '../views/orders/Orders';
 
 /**
  * The navigation component.
@@ -60,7 +61,9 @@ class Nav extends Component {
                             </div>
                         </li>
                         <div className="logInOut" >
+                            <li><Link to="orders">MY ORDERS</Link></li>
                             <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
+
                         {this.props.loggedIn ? (
                                 <li><a href="#" onClick={this.props.logout}>LOG OUT</a></li>
                             ) : (
