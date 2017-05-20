@@ -6,11 +6,10 @@ class Paychecks extends Component {
     render() {
         return (
             <div  className="paychecks">
-                <p>>>Paychecks here</p>
+                <p>placeholder</p>
             </div>
         );
     }
-
 }
 
 export default Paychecks;

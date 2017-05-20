@@ -34,6 +34,10 @@ public class Product extends ResourceSupport {
     private String info;
     @Column(name = "tags")
     private String tags;
+    @Column(name = "categoryId")
+    private long categoryId;
+
+
 
 
     /**
@@ -52,7 +56,7 @@ public class Product extends ResourceSupport {
      * @param stock Stock of the product.
      */
     public Product(long productId, double price, String name, String measurements,
-                   String imgUrl, int stock, String info, String tags) {
+                   String imgUrl, int stock, String info, String tags, long categoryId) {
         this.productId = productId;
         this.price = price;
         this.name = name;
@@ -61,6 +65,7 @@ public class Product extends ResourceSupport {
         this.stock = stock;
         this.info = info;
         this.tags = tags;
+        this.categoryId = categoryId;
     }
 
     /**
@@ -203,5 +208,13 @@ public class Product extends ResourceSupport {
      */
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(long categoryId) {
+        this.categoryId = categoryId;
     }
 }
