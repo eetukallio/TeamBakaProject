@@ -1,10 +1,8 @@
 .products {
-    margin: auto;
-    max-width: 55%;
+    margin: auto 200px auto auto;
+    max-width: 100%;
     font-family: 'Ubuntu', sans-serif;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
 }
 
 .searchBar {

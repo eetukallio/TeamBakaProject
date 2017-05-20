@@ -31,7 +31,7 @@ class DataTable extends Component {
             sortDir: 'ASC',
             data: [],
             page: 1,
-            productsPerPage: 10,
+            productsPerPage: 9,
             search: ''
         };
 

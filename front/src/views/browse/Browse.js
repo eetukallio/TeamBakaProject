@@ -31,9 +31,7 @@ class Management extends Component {
 
         return (
             <div className="products">
-                <div className="content">
-                    <Products search = {search} />
-                </div>
+                <Products search = {search} />
             </div>
         );
     }
