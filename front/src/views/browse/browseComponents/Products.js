@@ -61,9 +61,9 @@ class Products extends Component {
         const search = this.props.search;
         let displayedContent =<div className="noContentMsg">No content</div>;
         categories.forEach(category => {
-            console.log(this.state.categoryId === category.categoryId && category.products.length > 0)
             if (this.state.categoryId === category.categoryId && category.products.length > 0) {
-                displayedContent = <ProductTable data={category.products} search={search} />;
+                displayedContent = <ProductTable data={category.products}
+                                                 search={search}/>;
             }
         });
         return displayedContent;
@@ -75,10 +75,14 @@ class Products extends Component {
      * @returns {XML} Returns the component as a HTML <div> element.
      */
     render() {
+
+        console.log(this.state.categoryId)
         if (this.state.fetchDone) {
             return (
                 <div className="layoutContainer">
-                    <Sidebar data={this.state.categories} handleCategoryChange = {this.handleCategoryChange}/>
+                    <Sidebar data={this.state.categories}
+                             handleCategoryChange = {this.handleCategoryChange}
+                             activeCategory={this.state.categoryId}/>
                     {this.setDisplayedContent()}
                 </div>
             );

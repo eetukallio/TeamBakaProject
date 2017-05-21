@@ -138,7 +138,6 @@ class DataTable extends Component {
     setPage() {
         const { page, productsPerPage, sortBy, sortDir } = this.state;
         const data = this.props.data;
-        console.log(this.props.search);
 
         const sortedData = data.filter(this.searchLogic).sort((a, b) => {
             if (sortBy === 'name') {

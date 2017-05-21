@@ -16,9 +16,16 @@ class Sidebar extends Component {
         const categories = this.props.data;
         const handleCategoryChange = this.props.handleCategoryChange;
         return categories.map( category => {
-            return <a className="categoryTitle"
-                      key={category.categoryId}
-                      onClick={() => handleCategoryChange(category.categoryId)}>{category.name}</a>;
+            if (category.categoryId === this.props.activeCategory) {
+                return <a className="activeCategoryTitle"
+                          key={category.categoryId}
+                          onClick={() => handleCategoryChange(category.categoryId)}>{category.name}</a>;
+            } else {
+                return <a className="categoryTitle"
+                          key={category.categoryId}
+                          onClick={() => handleCategoryChange(category.categoryId)}>{category.name}</a>;
+            }
+
         } )
     }
 

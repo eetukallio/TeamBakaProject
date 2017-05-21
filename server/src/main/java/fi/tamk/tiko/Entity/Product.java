@@ -48,16 +48,14 @@ public class Product extends ResourceSupport {
     /**
      * Constructor for initializing attributes
      *
-     * @param productId The productId of the product.
      * @param price The price of the product.
      * @param name The name of the product.
      * @param measurements The measurements of the product.
      * @param imgUrl The url of the product's image.
      * @param stock Stock of the product.
      */
-    public Product(long productId, double price, String name, String measurements,
+    public Product(double price, String name, String measurements,
                    String imgUrl, int stock, String info, String tags, long categoryId) {
-        this.productId = productId;
         this.price = price;
         this.name = name;
         this.measurements = measurements;
