@@ -36,12 +36,11 @@ public class Purchases {
     /**
      * Constructor for initializing attributes
      *
-     * @param purchaseId The purchaseId of the product.
      * @param purchases A list of IDs the purchased products
      */
-    public Purchases(long purchaseId, List<Long> purchases) {
-        this.purchaseId = purchaseId;
+    public Purchases(List<Long> purchases, long user) {
         this.purchases = purchases;
+        this.user = user;
     }
 
     /**

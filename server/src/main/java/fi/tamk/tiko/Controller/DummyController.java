@@ -2,12 +2,17 @@ package fi.tamk.tiko.Controller;
 
 import fi.tamk.tiko.Entity.Category;
 import fi.tamk.tiko.Entity.Product;
+import fi.tamk.tiko.Entity.Purchases;
 import fi.tamk.tiko.Repository.CategoryRepository;
 import fi.tamk.tiko.Repository.ProductRepository;
+import fi.tamk.tiko.Repository.PurchasesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Eetu Kallio on 21.5.2017
@@ -17,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class DummyController {
 
     @Autowired
-    CategoryRepository categoryRepository;
+    private CategoryRepository categoryRepository;
     @Autowired
     private ProductRepository productRepository;
+    @Autowired
+    private PurchasesRepository purchasesRepository;
 
     /**
      * Floods the database with dummy data.
@@ -64,6 +71,16 @@ public class DummyController {
                     "Quality mug made out of clay. No child labor involved either.",
                     "natural,sturdy,mug", 2);
             productRepository.save(product);
+        }
+
+        List<Long> purchases = new ArrayList<>();
+        purchases.add(new Long(1));
+        purchases.add(new Long(4));
+        purchases.add(new Long(10));
+        purchases.add(new Long(10));
+
+        for (int i = 0; i < 20; i++) {
+            purchasesRepository.save(new Purchases(purchases, 1));
         }
     }
 
