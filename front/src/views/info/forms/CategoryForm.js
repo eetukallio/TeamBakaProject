@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button} from 'react-bootstrap';
+import axios from 'axios';
 
 class CategoryForm extends Component {
 
@@ -11,11 +12,13 @@ class CategoryForm extends Component {
         super(props);
 
         this.state = {
-            value:''
+            value:'',
+            name:''
         };
 
         this.getValidationState = this.getValidationState.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     getValidationState() {
@@ -26,12 +29,25 @@ class CategoryForm extends Component {
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value });
+        this.setState({ name: e.target.value });
+    }
+
+    onSubmit() {
+        const category = {
+            name: this.state.name
+        };
+
+        axios.post("/categories", category)
+            .then(response => {
+                console.log(response)
+            }).catch(err => {
+            console.log(err)
+        })
     }
 
     render() {
         return (
-            <form className="productForm" onSubmit={this.props.onProductSubmit}>
+            <form className="productForm" onSubmit={this.onSubmit}>
                 <h3>Add a new category:</h3>
                 <FormGroup
                     controlId="formBasicText"
@@ -40,7 +56,8 @@ class CategoryForm extends Component {
                     <ControlLabel>Name</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        placeholder="Category"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                 </FormGroup>

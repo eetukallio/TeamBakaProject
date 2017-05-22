@@ -22,6 +22,7 @@
 .productStock1 {
     display: flex;
     margin: auto;
+    color: green;
 }
 
 .additionalInfo1 {
@@ -113,6 +114,12 @@
 
 .dropdown {
     margin-left: 5px;
+}
+
+.productStockLow1 {
+    display: flex;
+    margin: auto;
+    color: firebrick;
 }
 
 @media screen and (max-width: 600px){

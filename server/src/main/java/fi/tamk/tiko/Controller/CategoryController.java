@@ -3,6 +3,7 @@ package fi.tamk.tiko.Controller;
 import fi.tamk.tiko.Entity.Category;
 import fi.tamk.tiko.Repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,6 +37,11 @@ public class CategoryController {
     @RequestMapping(value = "/categories",  method= RequestMethod.GET)
     public List<Category> getCategories () {
         return db.findAll();
+    }
+
+    @RequestMapping(value = "/categories",  method= RequestMethod.POST)
+    public void postCategories (@RequestBody Category c) {
+         db.save(c);
     }
 
 }

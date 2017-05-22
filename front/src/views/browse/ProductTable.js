@@ -197,7 +197,7 @@ class DataTable extends Component {
                                     </span>
                                  </div>
                                  <span className="productMeasurements1">{obj.measurements}</span>
-                                 <span className="productStock1">In stock: {obj.stock}</span>
+                                 <span className={obj.stock > 1 ? "productStock1" : "productStockLow1"}>In stock: {obj.stock}</span>
                                  <span className="additionalInfo1">{obj.info}</span>
 
                              </Link>
