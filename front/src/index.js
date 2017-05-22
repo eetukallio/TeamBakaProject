@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import Login from './views/login/Login'
-import Info from './views/info/Info';
+import Config from './views/info/Config';
 import ShoppingCart from './views/shoppingCart/ShoppingCart';
 import Checkout from './views/checkout/Checkout'
 import Browse from './views/browse/Browse';
@@ -59,11 +59,11 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={App}>
-                <IndexRoute path={"/browse"} component={Browse}/>
+                <IndexRoute component={Browse}/>
                 {/*<Route path="/login" component={Login}/>*/}
                 <Route path="/cart" component={ShoppingCart} />
                 <Route path="/checkout" component={Checkout} />
-                <Route path="/info" component={Info}/>
+                <Route path="/config" component={Config}/>
                 <Route path="/browse">
                     <IndexRoute component={Browse} />
                     <Route path="/item" component={ProductShowcase} />

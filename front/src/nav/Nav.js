@@ -62,7 +62,7 @@ class Nav extends Component {
                         </li>
                         <div className="logInOut" >
                             <li><Link to="orders" activeClassName="active">MY ORDERS</Link></li>
-                            <li><Link to="/info" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link></li>
+                            <li><Link to="/config" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link></li>
                             <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
 
                         {this.props.loggedIn ? (
