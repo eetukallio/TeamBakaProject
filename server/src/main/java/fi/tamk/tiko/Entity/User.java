@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -44,6 +45,10 @@ public class User implements UserDetails {
     @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
     private Set<Role> roles;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressId")
+    private ShippingAddress address;
 
     /**
      * Default constructor
@@ -179,5 +184,13 @@ public class User implements UserDetails {
 
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public ShippingAddress getAddress() {
+        return address;
+    }
+
+    public void setAddress(ShippingAddress address) {
+        this.address = address;
     }
 }

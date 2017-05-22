@@ -22,6 +22,10 @@ public class Purchases {
     private long purchaseId;
     @Column(name="user")
     private long user;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "addressId")
+    private ShippingAddress address;
+
     @ElementCollection
     @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
     @Column(name="products")
@@ -95,5 +99,13 @@ public class Purchases {
      */
     public void setPurchases(List<Long> purchases) {
         this.purchases = purchases;
+    }
+
+    public ShippingAddress getAddress() {
+        return address;
+    }
+
+    public void setAddress(ShippingAddress address) {
+        this.address = address;
     }
 }
