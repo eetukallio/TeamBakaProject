@@ -59,7 +59,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={App}>
-                <IndexRoute component={Browse}/>
+                <IndexRoute path={"/browse"} component={Browse}/>
                 {/*<Route path="/login" component={Login}/>*/}
                 <Route path="/cart" component={ShoppingCart} />
                 <Route path="/checkout" component={Checkout} />

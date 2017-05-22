@@ -53,7 +53,7 @@ class Nav extends Component {
                     <h1 className="headline"> BODY PILLOW E-STORE</h1>
                     <ul className="header-subnav">
                         <li><Link to="/browse" activeClassName="active">BROWSE PRODUCTS</Link></li>
-                        <li><Link to="/info" activeClassName="active"> PLACEHOLDER </Link></li>
+
                         <li>
                             <div className="searchBar">
                                 <span className="glyphicon glyphicon-search" />
@@ -61,7 +61,8 @@ class Nav extends Component {
                             </div>
                         </li>
                         <div className="logInOut" >
-                            <li><Link to="orders">MY ORDERS</Link></li>
+                            <li><Link to="orders" activeClassName="active">MY ORDERS</Link></li>
+                            <li><Link to="/info" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link></li>
                             <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
 
                         {this.props.loggedIn ? (

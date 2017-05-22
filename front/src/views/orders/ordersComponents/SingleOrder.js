@@ -92,13 +92,10 @@ class SingleOrder extends Component {
                 <span>Order ID: {order.purchaseId}</span>
                 <span className="totalPrice">Total: {this.state.totalPrice} €</span>
             </a>
-
-
             <div className="orderInfo">
                 {this.setDisplayedOrder()}
             </div>
-
-            </div> ;
+        </div> ;
     }
 }
 
