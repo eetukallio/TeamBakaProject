@@ -4,6 +4,7 @@
 
 import React, {Component} from 'react';
 import {FormGroup, ControlLabel, FormControl, HelpBlock, Button} from 'react-bootstrap';
+import axios from 'axios';
 
 class ProductForm extends Component {
 
@@ -11,27 +12,107 @@ class ProductForm extends Component {
         super(props);
 
         this.state = {
-            value:''
+            value:'',
+            name:'',
+            price:'',
+            measurements:'',
+            stock:'',
+            url:'',
+            info:'',
+            tags:'',
+            category:1,
+            categories:[],
+            fetchDone: false
         };
 
         this.getValidationState = this.getValidationState.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.onProductSubmit = this.onProductSubmit.bind(this);
+        this.setCategories = this.setCategories.bind(this);
+        this.fetchData = this.fetchData.bind(this);
+        this.handleSelect = this.handleSelect.bind(this);
     }
 
     getValidationState() {
-        const length = this.state.value.length;
-        if (length > 10) return 'success';
-        else if (length > 5) return 'warning';
-        else if (length > 0) return 'error';
+
+    }
+
+    componentDidMount() {
+        this.fetchData()
+    }
+
+    fetchData() {
+        axios.get('/categories')
+            .then(response => {
+                this.setState({
+                    categories: response.data,
+                    fetchDone:true
+                })
+            }).catch(err => {
+                  console.log(err)
+            })
     }
 
     handleChange(e) {
-        this.setState({ value: e.target.value });
+
+        this.setState({ [e.target.name]: e.target.value });
+        console.log(this.state.name)
+    }
+
+    onProductSubmit() {
+
+        const product = {
+            name: this.state.name,
+            price: this.state.price,
+            measurements: this.state.measurements,
+            stock: this.state.stock,
+            imgUrl: this.state.url,
+            info: this.state.info,
+            tags: this.state.tags,
+            categoryId: this.state.category
+        }
+
+        console.log(product)
+
+        axios.post("/products", product)
+            .then(response => {
+                console.log(response)
+            }).catch(err => {
+                console.log(err)
+        })
+    }
+
+    setCategories() {
+        if (this.state.fetchDone) {
+            const {categories} = this.state;
+            return categories.map(obj => {
+                return (
+                    <option key={obj.categoryId} value={obj.categoryId} name={obj.name}>{obj.name}</option>
+                )
+            })
+        }
+    }
+
+    handleSelect(e) {
+        this.setState({
+            category:e.target.value
+        })
+        const product = {
+            name: this.state.name,
+            price: this.state.price,
+            measurements: this.state.measurements,
+            stock: this.state.stock,
+            url: this.state.url,
+            info: this.state.info,
+            tags: this.state.tags,
+            categoryId: this.state.category
+        }
+        console.log(product)
     }
 
     render() {
         return (
-            <form className="productForm" onSubmit={this.props.onProductSubmit}>
+            <form className="productForm" onSubmit={this.onProductSubmit}>
                 <h3>Add a new product:</h3>
                 <FormGroup
                     controlId="formBasicText"
@@ -40,45 +121,66 @@ class ProductForm extends Component {
                     <ControlLabel>Name</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        name="name"
+                        placeholder="Name"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>Price</ControlLabel>
                     <FormControl
-                        type="text"
-                        placeholder="Enter text"
+                        type="number"
+                        name="price"
+                        placeholder="Price"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>Measurements</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        name="measurements"
+                        placeholder="0cm x 0cm x 0cm"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>Initial stock</ControlLabel>
                     <FormControl
-                        type="text"
-                        placeholder="Enter text"
+                        type="number"
+                        name="stock"
+                        placeholder="Stock"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>URL</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        name="url"
+                        placeholder="http://example.com"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>Info</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        name="info"
+                        placeholder="Additional info"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
                     <ControlLabel>Tags (separate with comma)</ControlLabel>
                     <FormControl
                         type="text"
-                        placeholder="Enter text"
+                        name="tags"
+                        placeholder="tag,tag,tag"
+                        onChange={this.handleChange}
                     />
                     <FormControl.Feedback />
+                    <ControlLabel>Category</ControlLabel>
+                    <FormControl
+                        onChange={this.handleSelect}
+                        componentClass="select"
+                        placeholder="Category">
+                        {this.setCategories()}
+                    </FormControl>
                 </FormGroup>
                 <Button type="submit">
                     Submit
