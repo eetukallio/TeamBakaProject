@@ -65,4 +65,10 @@ public class ProductController {
         product.add(linkTo(ProductController.class).slash(product.getProductId()).withSelfRel());
         return product;
     }
+
+    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.DELETE)
+    public void deleteProduct(@PathVariable long productId) {
+
+        db.delete(productId);
+    }
 }

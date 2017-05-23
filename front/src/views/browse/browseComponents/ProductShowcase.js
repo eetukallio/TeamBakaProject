@@ -6,6 +6,8 @@ import { connect } from 'react-redux';
 import {addItem} from '../../../actions/shoppingcart_actions';
 import axios from 'axios';
 import './ProductShowcase.css'
+import cookie from 'react-cookie';
+import { browserHistory } from 'react-router';
 
 /**
  * A component representing a single product in the product showcase view.
@@ -21,13 +23,19 @@ class ProductShowcase extends Component {
      */
     constructor(props) {
         super(props);
+
+
+        console.log(cookie.load('user').role === 'admin');
+
         this.state = {
-            data: {}
+            data: {},
+            isAdmin: cookie.load('user').role === 'admin'
         };
 
         this.setProduct = this.setProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.fetchData = this.fetchData.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
     }
 
     /**
@@ -39,7 +47,8 @@ class ProductShowcase extends Component {
         axios.get("/products/" + this.props.location.query.id)
             .then( (response) => {
                 console.log(response);
-                this.setState({data: response.data})
+                this.setState({data: response.data});
+
             }).catch(err => console.log(err));
     }
 
@@ -61,6 +70,17 @@ class ProductShowcase extends Component {
         this.fetchData();
     }
 
+    deleteProduct() {
+        axios.delete("/products/" + this.state.data.productId)
+            .then( (response) => {
+                console.log(response);
+                browserHistory.push({
+                    pathname: '/browse'
+                });
+            }).catch(err => console.log(err));
+
+    }
+
     /**
      * Used to craft a <div> element representing the product that is showcased in the view.
      *
@@ -68,6 +88,7 @@ class ProductShowcase extends Component {
      */
     setProduct() {
         const product = this.state.data;
+        const {isAdmin} = this.state;
 
         return <div className="productContainer2">
             <div className="top2">
@@ -95,7 +116,21 @@ class ProductShowcase extends Component {
             <button className="cartButton2" onClick={ () => this.addToCart(product)} >
                 <span className="glyphicon glyphicon-shopping-cart "/>
             </button>
-
+            {
+                isAdmin ?
+                    <div className="adminSet">
+                        <button
+                            className="stockInput"
+                            onClick={this.deleteProduct}>DELETE
+                        </button>
+                        Update stock value:
+                        <input
+                            className="stockInput"
+                            placeholder="Stock"
+                            type="number"/>
+                    </div>
+                    : null
+            }
         </div>
     }
 

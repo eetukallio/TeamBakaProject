@@ -90,6 +90,21 @@
     font-style: italic;
 }
 
+.stockInput {
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    display: block;
+    margin: 10px auto 0 auto;
+}
+
+.adminSet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
 @media screen and (max-width: 900px){
     .top2 {
         flex-direction: column;
