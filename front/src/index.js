@@ -33,15 +33,18 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 /**
- * JSON Web Token from the cookie.
+ * JSON Web Token and admin user info from the cookie.
  */
 const token = cookie.load('token');
+const isAdmin = cookie.load(('user')).isAdmin;
+
 
 /**
  * Setting the authentication state if an existing token was found.
  */
 if (token) {
-    store.dispatch({type: SET_AUTH})
+    store.dispatch({type: SET_AUTH, isAdmin: isAdmin === "admin"});
+    axios.defaults.headers.common['Authorization'] = token;
 }
 
 /**
