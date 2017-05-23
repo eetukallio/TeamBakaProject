@@ -63,7 +63,6 @@
 
 .dropdown-content {
     top: 3em;
-    display: none;
     position: absolute;
     z-index: 3;
     right: 0;

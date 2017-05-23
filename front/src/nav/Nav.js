@@ -95,7 +95,7 @@ class Nav extends Component {
                                 <div className="user-dropdown" id="user-dropdown">
                                     <span className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} />
 
-                                    <div className="dropdown-content" id="dropdown-content">
+                                    <div className="dropdown-content" id="dropdown-content" style={{display: "none"}}>
 
                                         <Link to="orders" activeClassName="active">MY ORDERS</Link>
                                         <a className="logout-button" href="#" onClick={this.props.logout}>LOG OUT</a>
