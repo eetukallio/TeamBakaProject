@@ -18,31 +18,4 @@ import java.util.List;
 @RepositoryRestController
 public class CategoryController {
 
-    @Autowired
-    CategoryRepository db;
-
-    @RequestMapping(value = "/categories/flood",  method= RequestMethod.POST)
-    public void floodCategories() {
-
-        Category category = new Category();
-        category.setName("pillows");
-        db.save(category);
-        Category category2 = new Category();
-        category2.setName("accessories");
-        db.save(category2);
-        Category category3 = new Category();
-        category3.setName("clothes");
-        db.save(category3);
-    }
-
-    @RequestMapping(value = "/categories",  method= RequestMethod.GET)
-    public List<Category> getCategories () {
-        return db.findAll();
-    }
-
-    @RequestMapping(value = "/categories",  method= RequestMethod.POST)
-    public void postCategories (@RequestBody Category c) {
-         db.save(c);
-    }
-
 }

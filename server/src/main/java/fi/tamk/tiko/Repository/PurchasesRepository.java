@@ -1,7 +1,6 @@
 package fi.tamk.tiko.Repository;
 
-import fi.tamk.tiko.Entity.Purchases;
-import org.springframework.data.jpa.repository.Query;
+import fi.tamk.tiko.Entity.Purchase;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -11,21 +10,21 @@ import org.springframework.data.repository.CrudRepository;
  *  @version 1.0
  *  @since 1.0
  */
-public interface PurchasesRepository extends CrudRepository<Purchases, Long> {
+public interface PurchasesRepository extends CrudRepository<Purchase, Long> {
 
     /**
      * Returns all the purchases.
      *
      * @return All purchases.
      */
-    Iterable<Purchases> findAll();
+    Iterable<Purchase> findAll();
 
     /**
      * Deletes a purchase from the database via object reference.
      *
      * @param entity A purchase in the database.
      */
-    void delete(Purchases entity);
+    void delete(Purchase entity);
 
     /**
      * Deletes a purchase from the database via ID reference.
@@ -40,13 +39,13 @@ public interface PurchasesRepository extends CrudRepository<Purchases, Long> {
      * @param id Id of the purchase.
      * @return Purchase with the specified Id.
      */
-    Purchases findOne(Long id);
+    Purchase findOne(Long id);
 
     /**
      * Returns all purchases via userID reference.
      *
      * @param user Id of the user.
-     * @return Purchases with the specified User.
+     * @return Purchase with the specified User.
      */
-    Iterable<Purchases> findAllByUser(Long user);
+    Iterable<Purchase> findAllByUser(Long user);
 }

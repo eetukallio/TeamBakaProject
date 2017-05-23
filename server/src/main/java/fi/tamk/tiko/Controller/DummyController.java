@@ -2,7 +2,7 @@ package fi.tamk.tiko.Controller;
 
 import fi.tamk.tiko.Entity.Category;
 import fi.tamk.tiko.Entity.Product;
-import fi.tamk.tiko.Entity.Purchases;
+import fi.tamk.tiko.Entity.Purchase;
 import fi.tamk.tiko.Repository.CategoryRepository;
 import fi.tamk.tiko.Repository.ProductRepository;
 import fi.tamk.tiko.Repository.PurchasesRepository;
@@ -79,7 +79,7 @@ public class DummyController {
         purchases.add(new Long(400));
 
         for (int i = 0; i < 20; i++) {
-            purchasesRepository.save(new Purchases(purchases, 1));
+            purchasesRepository.save(new Purchase(purchases, 1));
         }
     }
 

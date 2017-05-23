@@ -3,6 +3,7 @@ package fi.tamk.tiko.Controller;
 import fi.tamk.tiko.Entity.User;
 import fi.tamk.tiko.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,48 +13,8 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  * @since 1.0
  */
-@RestController
+@RepositoryRestController
 public class UserController {
 
-    @Autowired
-    private UserRepository users;
 
-    /**
-     * Saves the user to the database
-     * @param user The user object to be saved
-     */
-    @RequestMapping(value = "/register",  method=RequestMethod.POST)
-    public void saveUser(@RequestBody User user) {
-        users.save(user);
-    }
-
-    /**
-     * Gets all the users from the database
-     * @return Returns the result
-     */
-    @RequestMapping(value = "/users", method = RequestMethod.GET)
-    @ResponseBody
-    public Iterable<User> fetchUsers() {
-        return users.findAll();
-    }
-
-    /**
-     * Gets a specific user from the database
-     * @param userId ID of the user to be found
-     * @return Returns the result
-     */
-    @RequestMapping(value = "/users/{userId}",  method=RequestMethod.GET)
-    public User fetchUsers(@PathVariable long userId) {
-        return users.findOne(userId);
-    }
-
-    /**
-     * Gets a user from the database specified by username.
-     *
-     * @param username username to search with
-     * @return found user
-     */
-    public User findByUsername(String username) {
-        return users.findByUsername(username);
-    }
 }

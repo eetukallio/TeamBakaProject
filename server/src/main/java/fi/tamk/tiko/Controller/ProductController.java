@@ -20,52 +20,5 @@ import java.util.List;
 @RepositoryRestController
 public class ProductController {
 
-    @Autowired
-    ProductRepository db;
 
-    /**
-     * Saves a product in the database.
-     *
-     * @param ml Product to be stored in the database.
-     */
-    @RequestMapping(value = "/products",  method=RequestMethod.POST)
-    public void saveProduct(@RequestBody Product ml) {
-
-        db.save(ml);
-    }
-
-
-
-    /**
-     * Returns all products in the database.
-     *
-     * @return All products in the database as an iterable.
-     */
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody
-    public Iterable<Product> fetchProducts() {
-
-        return db.findAll();
-    }
-
-    /**
-     * Returns a product by id.
-     *
-     * @param productId Id of the product.
-     * @return Product matching the id.
-     */
-    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.GET)
-    @ResponseBody
-    public Product fetchProduct(@PathVariable long productId) {
-
-        Product product = db.findOne(productId);
-        product.add(linkTo(ProductController.class).slash(product.getProductId()).withSelfRel());
-        return product;
-    }
-
-    @RequestMapping(value = "/products/{productId}",  method=RequestMethod.DELETE)
-    public void deleteProduct(@PathVariable long productId) {
-
-        db.delete(productId);
-    }
 }
