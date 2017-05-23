@@ -40,4 +40,5 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
      * @return Product with the specified Id.
      */
     Product findOne(Long id);
+
 }

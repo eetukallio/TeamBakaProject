@@ -73,13 +73,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().cacheControl();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // Create a default account
-        auth.inMemoryAuthentication()
-                .withUser("admin")
-                .password("password")
-                .roles("ADMIN");
-//        auth.userDetailsService(userDetailsService);
-    }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        // Create a default account
+//        auth.inMemoryAuthentication()
+//                .withUser("admin")
+//                .password("password")
+//                .roles("ADMIN");
+////        auth.userDetailsService(userDetailsService);
+//    }
 }

@@ -9,6 +9,7 @@ const initialState = {
         password: ''
     },
     loggedIn: false,
+    isAdmin: false,
     currentlySending: false,
     errorMessage: ''
 };
@@ -19,7 +20,8 @@ export default function (state = initialState, action) {
         case CHANGE_FORM:
             return {...state, formState: action.newState};
         case SET_AUTH:
-            return {...state, errorMessage: '', formState: {username: '', password: ''}, loggedIn: true};
+            console.log("In set auth with " + action.isAdmin);
+            return {...state, errorMessage: '', formState: {username: '', password: ''}, loggedIn: true, isAdmin: action.isAdmin};
         case UNAUTH_USER:
             return {...state, loggedIn: false};
         case SENDING_REQUEST:

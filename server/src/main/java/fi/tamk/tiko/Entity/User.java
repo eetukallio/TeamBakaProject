@@ -41,15 +41,16 @@ public class User implements UserDetails {
 
     private Date lastPasswordResetDate;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
-    private Set<Role> roles;
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
+//    private Set<Role> roles;
+
+    private String role;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
     private ShippingAddress address;
-
     /**
      * Default constructor
      */
@@ -63,13 +64,14 @@ public class User implements UserDetails {
      * @param password The user's password
      * @param email The user's email
      */
-    public User(long id, String username, String password, String email, Set<Role> roles, Date lastPasswordResetDate) {
+    public User(long id, String username, String password, String email, String role, Date lastPasswordResetDate, ShippingAddress shippingAddress) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roles = roles;
+        this.role = role;
         this.lastPasswordResetDate = lastPasswordResetDate;
+        this.address = shippingAddress;
     }
 
     /**
@@ -170,13 +172,13 @@ public class User implements UserDetails {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<Role> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<Role> roles) {
+//        this.roles = roles;
+//    }
 
     public Date getLastPasswordResetDate() {
         return lastPasswordResetDate;
@@ -184,6 +186,14 @@ public class User implements UserDetails {
 
     public void setLastPasswordResetDate(Date lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public ShippingAddress getAddress() {
