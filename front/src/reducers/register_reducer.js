@@ -4,11 +4,13 @@ const assign = Object.assign;
 
 // The initial application state
 const initialState = {
-    formState: {
+    registerFormState: {
         password: '',
+        confirmPassword: '',
         username: '',
+        email: ''
     },
-    currentlySending: false,
+    registerCurrentlySending: false,
     errorMessage: ''
 };
 
@@ -16,11 +18,11 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case CHANGE_REGISTER_FORM:
-            return {...state, formState: action.newState};
+            return {...state, registerFormState: action.newState};
         case REGISTER_SENT:
             return {...state, initialState};
         case SENDING_REQUEST:
-            return {...state, currentlySending: action.sending };
+            return {...state, registerCurrentlySending: action.sending };
         case SET_ERROR_MESSAGE:
             return assign({}, state, {
                 errorMessage: action.message
