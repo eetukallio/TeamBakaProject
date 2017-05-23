@@ -43,8 +43,6 @@ class SingleOrder extends Component {
                     totalPrice += response.data.price;
                 });
 
-
-
                 this.setState({
                     products: productObjects,
                     fetchDone: true,
@@ -78,7 +76,7 @@ class SingleOrder extends Component {
                 key++;
                 return <div key={key} className="singleProductContainer">
                     <span>{product.name}</span>
-                    <span>{product.price}</span>
+                    <span>{product.price}€</span>
                 </div>
             })
         } else return null;

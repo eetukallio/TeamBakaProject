@@ -50,7 +50,7 @@ class Orders extends Component {
             let key = 1;
             return orders.map(obj => {
                 key++;
-                return <SingleOrder order = {obj}/>;
+                return <SingleOrder key={key} order = {obj}/>;
             })
         } else return <span>Loading...</span>;
     }
