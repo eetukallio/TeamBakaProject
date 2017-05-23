@@ -85,26 +85,28 @@ class Nav extends Component {
                             </div>
                         </li>
                         <div className="logInOut" >
-                            {this.props.isAdmin ? (<Link to="/config" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link>
+                            {this.props.isAdmin ? (<li><Link to="/config" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link></li>
                             ) : null}
-                            <Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link>
+                            <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link></li>
 
 
                         {this.props.loggedIn ? (
 
-                                <div className="user-dropdown" id="user-dropdown">
-                                    <span className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} />
+                                <li>
+                                    <div className="user-dropdown" id="user-dropdown">
+                                        <span className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} />
 
-                                    <div className="dropdown-content" id="dropdown-content" style={{display: "none"}}>
+                                        <div className="dropdown-content" id="dropdown-content" style={{display: "none"}}>
 
-                                        <Link to="orders" activeClassName="active">MY ORDERS</Link>
-                                        <a className="logout-button" href="#" onClick={this.props.logout}>LOG OUT</a>
+                                            <Link to="orders" activeClassName="active">MY ORDERS</Link>
+                                            <a className="logout-button" href="#" onClick={this.props.logout}>LOG OUT</a>
+
+                                        </div>
 
                                     </div>
-
-                                </div>
+                                </li>
                             ) : (
-                                <Link activeClassName="active" to="/login"><span className="login-button">LOG IN</span></Link>
+                                <li><Link activeClassName="active" to="/login"><span className="login-button">LOG IN</span></Link></li>
                             )}
                         </div>
 

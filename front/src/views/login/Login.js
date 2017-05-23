@@ -14,13 +14,13 @@ class Login extends React.Component {
         const { formState, currentlySending } = this.props.data;
         return <div className="loginContainer">
             <div className="loginHeader">
-                <h3>Kirjaudu sisään</h3>
+                <h3>Log In</h3>
             </div>
             <div className="loginFormContainer">
                 <LoginForm
                     data={formState}                    onChange={this.props.changeForm}
                     location={location}                 history={this.props.history}
-                    onSubmit={this.login.bind(this)}    btnText={"Kirjaudu"}
+                    onSubmit={this.login.bind(this)}    btnText={"Submit"}
                     currentlySending={currentlySending} errorMessage={this.props.data.errorMessage}
                 />
             </div>
@@ -28,7 +28,7 @@ class Login extends React.Component {
             <div className="alertContainer">
                 {this.props.data.errorMessage === '' ? null :
                     <Alert bsStyle="warning">
-                        Käyttäjätunnus tai salasana on virheellinen
+                        Incorrect username or password
                     </Alert>}
             </div>
 
