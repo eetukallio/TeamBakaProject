@@ -18,6 +18,7 @@ class Nav extends Component {
 
         this.handleSearch = this.handleSearch.bind(this);
         this.showMenu = this.showMenu.bind(this);
+        this.openClick = this.openClick.bind(this);
     }
 
     /**
@@ -47,6 +48,22 @@ class Nav extends Component {
         console.log(menu);
     }
 
+    openClick() {
+        const burgerMenu = document.getElementsByClassName("header-burger");
+        const icon = document.getElementById("nav-icon3");
+        const content = document.getElementsByClassName("content");
+        if (icon.className !== "open") {
+            icon.className = "open";
+            burgerMenu[0].style.top = '65px';
+            content[0].style.top = '165px';
+        } else if (icon.className === "open") {
+            burgerMenu[0].style.top = '-200px';
+            content[0].style.top = '0px';
+            icon.className = "";
+        }
+
+    }
+
     /**
      * React render(). Represents the navigation part of the application.
      *
@@ -54,7 +71,7 @@ class Nav extends Component {
      */
     render() {
         return (
-            <div className="Nav">
+            <div className="Nav" id="Nav">
                 <header className="header">
                     {/*<img src={logo} className="App-logo" alt="logo" />*/}
                     <div className="headerContent">
@@ -62,33 +79,32 @@ class Nav extends Component {
                     <ul className="header-subnav">
                         <li className="browse"><Link to="/browse" activeClassName="active">BROWSE PRODUCTS</Link></li>
                         <li>
-                            <div className="searchBar">
+                            <div className="searchBar" >
                                 <span className="glyphicon glyphicon-search" />
-                                <input id="input" onKeyDown={this.handleSearch} />
+                                <input id="search-input" onKeyDown={this.handleSearch}/>
                             </div>
                         </li>
                         <div className="logInOut" >
-                            {this.props.isAdmin ? (<li><Link to="/config" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link></li>
+                            {this.props.isAdmin ? (<Link to="/config" activeClassName="active"> <span className="glyphicon glyphicon-cog" /> </Link>
                             ) : null}
-                            <li><Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link> </li>
+                            <Link to="/cart" activeClassName="active"><span className="glyphicon glyphicon-shopping-cart"/> </Link>
 
 
                         {this.props.loggedIn ? (
-                            <div className="user-dropdown" id="user-dropdown">
-                                <li><a className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} /></li>
 
-                                <div className="dropdown-content" id="dropdown-content">
-                                    <ul>
-                                        <li><Link to="orders" activeClassName="active">MY ORDERS</Link></li>
-                                        <li><a href="#" onClick={this.props.logout}>LOG OUT</a></li>
-                                    </ul>
+                                <div className="user-dropdown" id="user-dropdown">
+                                    <span className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} />
+
+                                    <div className="dropdown-content" id="dropdown-content">
+
+                                        <Link to="orders" activeClassName="active">MY ORDERS</Link>
+                                        <a className="logout-button" href="#" onClick={this.props.logout}>LOG OUT</a>
+
+                                    </div>
 
                                 </div>
-
-                            </div>
-
                             ) : (
-                                <li><Link to="/login">LOG IN</Link></li>
+                                <Link activeClassName="active" to="/login"><span className="login-button">LOG IN</span></Link>
                             )}
                         </div>
 
@@ -105,6 +121,24 @@ class Nav extends Component {
 
                     </div>
                 </header>
+
+                <ul className="header-burger" style={{top: '-200px'}}>
+                    <li><Link to="/browse" activeClassName="active">Browse Products</Link></li>
+                    <li><Link to="/cart" activeClassName="active">Shopping Cart</Link> </li>
+                    <div className="logInOut" ></div>
+                    {this.props.loggedIn ? (
+                        <div className="burger-logged-in">
+                            {this.props.isAdmin ?
+                                <li><Link to="/config" activeClassName="active">Admin Panel</Link></li>
+                                : null}
+                            <li> <Link to="orders" activeClassName="active">My Orders</Link></li>
+                            <li><a href="#" onClick={this.props.logout}>Log Out</a></li>
+                        </div>
+                    ) : (
+                        <li><Link to="/login">Log In</Link></li>
+                    )}
+                </ul>
+
             </div>
 
         );

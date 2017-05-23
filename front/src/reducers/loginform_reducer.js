@@ -23,7 +23,7 @@ export default function (state = initialState, action) {
             console.log("In set auth with " + action.isAdmin);
             return {...state, errorMessage: '', formState: {username: '', password: ''}, loggedIn: true, isAdmin: action.isAdmin};
         case UNAUTH_USER:
-            return {...state, loggedIn: false};
+            return {...state, loggedIn: false, isAdmin: false};
         case SENDING_REQUEST:
             return {...state, currentlySending: action.sending };
         case SET_ERROR_MESSAGE:

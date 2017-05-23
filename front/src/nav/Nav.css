@@ -38,10 +38,10 @@
     float: left;
 }
 
-.header-subnav li a {
-    color: white;
-    margin-top: 1em;
-    padding: 2em 0.5em 1.5em 0.5em;
+.header-subnav li a, .header-subnav .glyphicon-shopping-cart, .glyphicon-cog, .glyphicon-user {
+    /*color: white;*/
+    /*margin-top: 1em;*/
+    padding: 1.75em 0.5em 1.75em 0.5em;
     font-size: 1.5rem;
     letter-spacing: 1px;
     text-decoration: none;
@@ -51,8 +51,9 @@
     background: rgba(250, 250, 250, 0.15);
 }
 
-.user-menu {
-
+.user-menu, .header .glyphicon , .browse a, .login-button {
+    color: #ffe;
+    cursor: pointer;
 }
 
 .user-dropdown {
@@ -61,19 +62,33 @@
 }
 
 .dropdown-content {
+    top: 3em;
     display: none;
     position: absolute;
     z-index: 3;
     right: 0;
     min-width: 160px;
+    border-radius: 5px;
+    border: 1px solid #cccccc;
+    background: white;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 }
 
-.dropdown-content a {
-    color: black;
-    background: white;
-    padding: 12px 16px;
+.dropdown-content Link, .dropdown-content a {
+    color: #555555;
+    padding: 1em;
+    margin: 0;
     text-decoration: none;
     display: block;
+}
+
+.dropdown-content .logout-button {
+    border-top: 1px dotted #dddddd;
+}
+
+.dropdown-content a:hover, .dropdown-content Link:hover {
+    background: #eeeeee;
+    transition: all 0.35s ease-in-out;
 }
 
 .header-subnav li a:hover {
@@ -205,11 +220,36 @@
     left: 50%;
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 1060px) {
+    .searchBar input {
+        visibility: hidden;
+        display: inline-block;
+        position: absolute;
+        max-width: 0;
+        transition: max-width 0.25s, visibility 0.25s ease-in-out;
+
+    }
+
+    .searchBar:hover #search-input {
+        visibility: visible;
+        z-index: 5;
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 870px) {
     .headerContent {
         width: 100%;
         padding-left: 1em;
     }
+
+    .logInOut {
+        float: none;
+    }
+}
+
+@media screen and (max-width: 720px) {
+
 
     .header-subnav {
         display: none;
@@ -226,4 +266,31 @@
 
 .logInOut {
     float: right;
+}
+
+.logInOut Link  {
+    color: #ffe;
+}
+
+.searchBar {
+    position: relative;
+    bottom: 0.1em;
+    padding: 0 1em;
+    transition: right 0.25s ease-in-out;
+}
+
+.searchBar input {
+    margin-left: 0.5em;
+    border-radius: 3px;
+    background: white;
+    border: hidden;
+}
+
+.user-menu:hover, .glyphicon-shopping-cart:hover, .glyphicon-cog:hover {
+    background: rgba(250, 250, 250, 0.15);
+    transition: all 0.35s ease-in-out;
+}
+
+.header-subnav .glyphicon {
+    display: inline;
 }

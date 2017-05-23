@@ -59,7 +59,7 @@ export function register(formData) {
 
 /**
  * Sets the authentication state of the application
- * @param {boolean} newState True means a user is logged in, false means no user is logged in
+ * @param {boolean} isAdmin True means a user is logged in, false means no user is logged in
  */
 export function setAuthState(isAdmin) {
     return { type: SET_AUTH, isAdmin };

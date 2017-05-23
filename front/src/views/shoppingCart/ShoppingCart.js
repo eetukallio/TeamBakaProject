@@ -17,11 +17,20 @@ class ShoppingCart extends Component {
 
     render() {
         return (
-            <div  className="shoppingCart">
-                <ShoppingCartTable  onRemove={this.removeItem.bind(this)}
-                                    onClear={this.props.clearItems.bind(this)}
-                                    data={this.props.data} />
-                <Link to="checkout"><button>Proceed to checkout</button></Link>
+            <div className="shoppingCart">
+                {this.props.data.items.length !== 0 ? (
+                    <div className="shoppingcart-content">
+                        <ShoppingCartTable  onRemove={this.removeItem.bind(this)}
+                                            onClear={this.props.clearItems.bind(this)}
+                                            data={this.props.data} />
+                        <Link to="checkout"><button>Proceed to checkout</button></Link>
+                    </div>
+                ) :
+                    (
+                        <h1>Your shopping cart is empty</h1>
+                    )}
+
+
             </div>
         );
     }
