@@ -3,6 +3,7 @@ package fi.tamk.tiko.Controller;
 import fi.tamk.tiko.Entity.Purchases;
 import fi.tamk.tiko.Repository.PurchasesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  *  @version 1.0
  *  @since 1.0
  */
-@RestController
+@RepositoryRestController
 public class PurchasesController {
 
     @Autowired

@@ -2,10 +2,6 @@ package fi.tamk.tiko;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * The actual Spring Boot application
@@ -17,6 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @SpringBootApplication
 public class Application {
+
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
@@ -33,6 +30,9 @@ public class Application {
                 "'http://localhost:8080/orders'\n" +
                 "'http://localhost:8080/config'\n" +
                 "'http://localhost:8080/cart'\n" +
-                "'http://localhost:8080/login'\n");
+                "'http://localhost:8080/login'\n" +
+                "\n" +
+                "To log in you can use username: 'admin' and password 'admin' for admin experience\n" +
+                "and username: 'user' and password 'user' for user level experience");
     }
 }
