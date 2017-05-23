@@ -80,7 +80,7 @@ export function changeForm(newState) {
     return { type: CHANGE_FORM, newState };
 }
 
-export function changeRegisterForm(newState) {
+export function changeRegistrationForm(newState) {
     return { type: CHANGE_REGISTER_FORM, newState}
 }
 
