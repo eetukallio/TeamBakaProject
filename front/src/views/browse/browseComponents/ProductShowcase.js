@@ -29,13 +29,16 @@ class ProductShowcase extends Component {
 
         this.state = {
             data: {},
-            isAdmin: cookie.load('user').role === 'admin'
+            isAdmin: cookie.load('user').role === 'admin',
+            updatedStock:0
         };
 
         this.setProduct = this.setProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.fetchData = this.fetchData.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
     }
 
     /**
@@ -81,6 +84,31 @@ class ProductShowcase extends Component {
 
     }
 
+    onSubmit() {
+        const updatedStock = {
+            stock:this.state.updatedStock
+        };
+
+        axios.patch('/products/'+ this.state.data.productId, updatedStock)
+            .then( response => {
+                console.log(response)
+                browserHistory.push({
+                    pathname: '/item?id='+this.state.data.productId
+                });
+            }).catch(err => {
+                console.log(err);
+        });
+        return false;
+    }
+
+    handleChange(e) {
+        const stock = e.target.value;
+        this.setState({
+            updatedStock: stock
+        })
+        console.log(this.state.updatedStock)
+    }
+
     /**
      * Used to craft a <div> element representing the product that is showcased in the view.
      *
@@ -123,11 +151,15 @@ class ProductShowcase extends Component {
                             className="stockInput"
                             onClick={this.deleteProduct}>DELETE
                         </button>
-                        Update stock value:
-                        <input
-                            className="stockInput"
-                            placeholder="Stock"
-                            type="number"/>
+                        {/*Update stock value:*/}
+                        {/*<form onSubmit={this.onSubmit}>*/}
+                            {/*<input*/}
+                                {/*onChange={this.handleChange}*/}
+                                {/*className="stockInput"*/}
+                                {/*placeholder="Stock"*/}
+                                {/*type="number"/>*/}
+                            {/*<button type="submit" >Update</button>*/}
+                        {/*</form>*/}
                     </div>
                     : null
             }

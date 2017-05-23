@@ -58,10 +58,9 @@ class Nav extends Component {
                 <header className="header">
                     {/*<img src={logo} className="App-logo" alt="logo" />*/}
                     <div className="headerContent">
-                    <h1 className="headline"> BAKA STORE</h1>
+                    <h1 className="headline">BAKA STORE</h1>
                     <ul className="header-subnav">
                         <li className="browse"><Link to="/browse" activeClassName="active">BROWSE PRODUCTS</Link></li>
-
                         <li>
                             <div className="searchBar">
                                 <span className="glyphicon glyphicon-search" />

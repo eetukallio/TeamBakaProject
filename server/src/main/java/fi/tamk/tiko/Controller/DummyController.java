@@ -74,10 +74,9 @@ public class DummyController {
         }
 
         List<Long> purchases = new ArrayList<>();
-        purchases.add(new Long(1));
-        purchases.add(new Long(4));
-        purchases.add(new Long(10));
-        purchases.add(new Long(10));
+        purchases.add(new Long(300));
+        purchases.add(new Long(250));
+        purchases.add(new Long(400));
 
         for (int i = 0; i < 20; i++) {
             purchasesRepository.save(new Purchases(purchases, 1));
