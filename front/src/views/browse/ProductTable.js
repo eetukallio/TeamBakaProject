@@ -193,11 +193,14 @@ class DataTable extends Component {
 
                                  <div className="priceTag1">
                                     <span className="price1">
-                                        {Number(obj.price).toFixed(2)}€
+                                        {obj.price > 0 ? Number(obj.price).toFixed(2) + '€' : 'FREE'}
+
                                     </span>
                                  </div>
                                  <span className="productMeasurements1">{obj.measurements}</span>
-                                 <span className={obj.stock > 1 ? "productStock1" : "productStockLow1"}>In stock: {obj.stock}</span>
+                                 <span className={obj.stock > 0 ? "productStock1" : "productStockLow1"}>
+                                     {obj.stock === 0 ? 'OUT OF STOCK' : 'In stock: ' + obj.stock}
+                                     </span>
                                  <span className="additionalInfo1">{obj.info}</span>
 
                              </Link>
@@ -205,7 +208,10 @@ class DataTable extends Component {
                         <img className="productImage1" src={obj.imgUrl} alt="Not available" title="Product image" />
                      </div>
                      <button className="cartButton1" onClick={ () => this.addToCart(obj)} >
-                         <span className="glyphicon glyphicon-shopping-cart "/>
+                         {
+                             obj.stock === 0 ? 'OUT OF STOCK' : <span className="glyphicon glyphicon-shopping-cart "/>
+                         }
+
                      </button>
                  </div>;
         });
