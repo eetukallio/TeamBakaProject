@@ -45,13 +45,7 @@ public class ProductController {
     @ResponseBody
     public Iterable<Product> fetchProducts() {
 
-        List<Product> products = (List<Product>) db.findAll();
-
-        for (Product p: products) {
-            p.add(linkTo(ProductController.class).slash(p.getProductId()).withSelfRel());
-        }
-
-        return products;
+        return db.findAll();
     }
 
     /**
