@@ -9,6 +9,7 @@ import './ProductShowcase.css'
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
 import Review from './reviews/Review'
+import ReviewForm from "./reviews/ReviewFrom";
 
 /**
  * A component representing a single product in the product showcase view.
@@ -43,6 +44,7 @@ class ProductShowcase extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         this.setReviews = this.setReviews.bind(this);
+        this.setReviewForm = this.setReviewForm.bind(this);
     }
 
     /**
@@ -117,8 +119,15 @@ class ProductShowcase extends Component {
             reviewsFetched ?
                 this.state.reviews.map(review => {
                     return <Review key={review.reviewId} data={review} />;
-                }) : <span>No reviews</span>
+                })
+                : <span>No reviews</span>
         );
+    }
+
+    setReviewForm() {
+        return(
+            <ReviewForm />
+        )
     }
 
     handleChange(e) {
@@ -195,6 +204,7 @@ class ProductShowcase extends Component {
         return (
             <div>
                 {this.setProduct()}
+                {this.setReviewForm()}
                 {this.setReviews()}
             </div>
         )
