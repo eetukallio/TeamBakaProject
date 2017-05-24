@@ -4,6 +4,8 @@ import fi.tamk.tiko.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mobile.device.Device;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,6 +30,8 @@ public class JwtTokenUtil implements Serializable {
     private static final String AUDIENCE_MOBILE = "mobile";
     private static final String AUDIENCE_TABLET = "tablet";
 
+    private final Log logger = LogFactory.getLog(this.getClass());
+
     @Value("${jwt.secret}")
     private String secret;
 
@@ -40,6 +44,7 @@ public class JwtTokenUtil implements Serializable {
             final Claims claims = getClaimsFromToken(token);
             username = claims.getSubject();
         } catch (Exception e) {
+            logger.info(e.getMessage());
             username = null;
         }
         return username;

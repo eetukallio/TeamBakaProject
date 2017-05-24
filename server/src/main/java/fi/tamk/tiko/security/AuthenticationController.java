@@ -35,7 +35,7 @@ public class AuthenticationController {
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 
         // Perform the security

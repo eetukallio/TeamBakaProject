@@ -36,14 +36,14 @@ const store = createStoreWithMiddleware(rootReducer, window.__REDUX_DEVTOOLS_EXT
  * JSON Web Token and user role from the cookie.
  */
 const token = cookie.load('token');
-const isAdmin = cookie.load(('user')).role;
+const user = cookie.load(('user'));
 
 
 /**
  * Setting the authentication state if an existing token was found.
  */
-if (token) {
-    store.dispatch({type: SET_AUTH, isAdmin: isAdmin === "admin"});
+if (token && user) {
+    store.dispatch({type: SET_AUTH, isAdmin: user.isAdmin === "admin"});
     axios.defaults.headers.common['Authorization'] = token;
 }
 

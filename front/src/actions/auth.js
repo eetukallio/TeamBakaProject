@@ -34,6 +34,7 @@ export function logout() {
     return function (dispatch) {
         dispatch({type: UNAUTH_USER});
         cookie.remove('token', {path: '/'});
+        cookie.remove('user', {path: '/'});
         browserHistory.push("/login");
     }
 }
@@ -43,7 +44,7 @@ export function register(formData) {
     return function(dispatch) {
         dispatch(sendingRequest(true));
 
-        axios.post("/register", JSON.stringify(formData), {headers: {'Content-Type': 'application/json'}})
+        axios.post("/users", JSON.stringify(formData), {headers: {'Content-Type': 'application/json'}})
             .then(res => {
                 console.log("REGISTRATION FORM SENT " + res);
                 dispatch(sendingRequest(false));
