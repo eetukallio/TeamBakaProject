@@ -42,6 +42,7 @@ class ProductShowcase extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         this.setReviews = this.setReviews.bind(this);
         this.setReviewForm = this.setReviewForm.bind(this);
+        this.fetchReviews = this.fetchReviews.bind(this);
     }
 
     /**
@@ -54,14 +55,18 @@ class ProductShowcase extends Component {
             .then( (response) => {
                 console.log(response);
                 this.setState({data: response.data});
-                axios.get('/products/' + this.props.location.query.id +'/reviews')
-                    .then(response => {
-                        this.setState({
-                            reviews: response.data._embedded.reviews,
-                            reviewsFetched: true
-                        })
-                    }).catch(err => {console.log(err)});
+                this.fetchReviews();
             }).catch(err => console.log(err));
+    }
+
+    fetchReviews() {
+        axios.get('/products/' + this.props.location.query.id +'/reviews')
+            .then(response => {
+                this.setState({
+                    reviews: response.data._embedded.reviews,
+                    reviewsFetched: true
+                })
+            }).catch(err => {console.log(err)});
     }
 
     /**
@@ -114,7 +119,7 @@ class ProductShowcase extends Component {
         const {reviewsFetched} =  this.state;
         return (
             reviewsFetched ?
-                this.state.reviews.map(review => {
+                this.state.reviews.reverse().map(review => {
                     return <Review key={review.reviewId} data={review} />;
                 })
                 : <span>No reviews</span>
@@ -123,7 +128,7 @@ class ProductShowcase extends Component {
 
     setReviewForm() {
         return(
-            <ReviewForm product={this.props.location.query.id} />
+            <ReviewForm fetchReviews={this.fetchReviews} product={this.props.location.query.id} />
         )
     }
 

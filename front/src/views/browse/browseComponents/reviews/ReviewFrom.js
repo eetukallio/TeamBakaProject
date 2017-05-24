@@ -15,8 +15,9 @@ class ReviewForm extends Component {
         this.state = {
             reviewBody: "",
             user: cookie.load('user'),
-            rating: 1
-        }
+            rating: 1,
+            ratingArray: [1,2,3,4,5]
+        };
 
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -46,12 +47,18 @@ class ReviewForm extends Component {
         axios.post('/reviews', review)
             .then(response => {
                 console.log(response)
+                this.setState({
+                    reviewBody: "",
+                    rating: 1
+                });
+                this.props.fetchReviews();
             }).catch(err => {
                 console.log(err)
         })
     }
 
     render() {
+        const {ratingArray} = this.state;
         return(
             <form className="reviewForm" onSubmit={this.onSubmit}>
                 <h3>Review this product:</h3>
@@ -62,18 +69,23 @@ class ReviewForm extends Component {
                     <div className="textArea">
                         <FormControl
                             componentClass="textarea"
-                            placeholder="Review"
+                            placeholder="Write your review here..."
+                            value={this.state.reviewBody}
                             onChange={this.handleChange}
                         />
                     </div>
                     <FormControl.Feedback />
                     <ControlLabel><span className="glyphicon glyphicon-star" /></ControlLabel>
                     <select onChange={this.handleRatingChange} value={this.state.rating}>
-                        <option value={5}>5</option>
-                        <option value={4}>4</option>
-                        <option value={3}>3</option>
-                        <option value={2}>2</option>
-                        <option value={1}>1</option>
+                        <option value={ratingArray[0]}>1</option>
+                        <option value={ratingArray[1]}>2</option>
+                        <option value={ratingArray[2]}>3</option>
+                        <option value={ratingArray[3]}>4</option>
+                        <option value={ratingArray[4]}>5</option>
+
+
+
+
                     </select>
                 </FormGroup>
                 <Button type="submit">
