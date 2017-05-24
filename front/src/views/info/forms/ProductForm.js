@@ -45,7 +45,7 @@ class ProductForm extends Component {
         axios.get('/categories')
             .then(response => {
                 this.setState({
-                    categories: response.data,
+                    categories: response.data._embedded.categories,
                     fetchDone:true
                 })
             }).catch(err => {
