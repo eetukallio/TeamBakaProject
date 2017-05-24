@@ -35,7 +35,7 @@ class Review extends Component {
         const review = this.props.data;
         let stars = [];
         for (let i = 0; i < review.rating; i++ ) {
-            stars.push(<span className="glyphicon glyphicon-star" />)
+            stars.push(<span key={i} className="glyphicon glyphicon-star" />)
         }
         return stars;
     }

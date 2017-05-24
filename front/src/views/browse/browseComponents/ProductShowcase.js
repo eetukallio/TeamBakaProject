@@ -26,12 +26,9 @@ class ProductShowcase extends Component {
     constructor(props) {
         super(props);
 
-
-        console.log(cookie.load('user').role === 'admin');
-
         this.state = {
             data: {},
-            isAdmin: cookie.load('user').role === 'admin',
+            isAdmin: cookie.load('user') ? cookie.load('user').role === 'admin' : false,
             updatedStock:0,
             reviews:[],
             reviewsFetched: false
@@ -126,7 +123,7 @@ class ProductShowcase extends Component {
 
     setReviewForm() {
         return(
-            <ReviewForm />
+            <ReviewForm product={this.props.location.query.id} />
         )
     }
 
@@ -204,7 +201,7 @@ class ProductShowcase extends Component {
         return (
             <div>
                 {this.setProduct()}
-                {this.setReviewForm()}
+                {cookie.load('user') ? this.setReviewForm() : null}
                 {this.setReviews()}
             </div>
         )
