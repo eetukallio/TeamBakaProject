@@ -25,7 +25,6 @@ class Sidebar extends Component {
                           key={category.id}
                           onClick={() => handleCategoryChange(category.id)}>{category.name}</a>;
             }
-
         } )
     }
 
