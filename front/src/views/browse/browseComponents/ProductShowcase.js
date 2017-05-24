@@ -2,6 +2,7 @@
  * Created by Eetu Kallio on 11.5.2017.
  */
 import React, { Component } from 'react';
+import { OverlayTrigger, Popover } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import {addItem} from '../../../actions/shoppingcart_actions';
 import axios from 'axios';
@@ -172,14 +173,19 @@ class ProductShowcase extends Component {
                 </div>
                 <img className="productImage2" src={product.imgUrl} alt="Not available" title="Product image" />
             </div>
-            <button className="cartButton2" onClick={ () => this.addToCart(product)} >
-                <span className="glyphicon glyphicon-shopping-cart "/>
-            </button>
+            <OverlayTrigger trigger="click" placement="top" overlay={this.popoverTop} rootClose={true}>
+                <button className="cartButton1 btn btn-primary" disabled={product.stock === 0} onClick={ () => this.addToCart(product)} >
+                    {
+                        product.stock === 0 ? 'OUT OF STOCK' : <span className="glyphicon glyphicon-shopping-cart "/>
+                    }
+
+                </button>
+            </OverlayTrigger>
             {
                 isAdmin ?
                     <div className="adminSet">
                         <button
-                            className="stockInput"
+                            className="stockInput btn btn-danger"
                             onClick={this.deleteProduct}>DELETE
                         </button>
                         {/*Update stock value:*/}
@@ -196,6 +202,11 @@ class ProductShowcase extends Component {
             }
         </div>
     }
+
+    popoverTop = (
+        <Popover id="popover-positioned-top">
+            Added to shopping cart!
+        </Popover> );
 
     /**
      * The React render(). Calls setProduct() to render the entire component's layout.
