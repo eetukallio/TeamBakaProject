@@ -8,6 +8,7 @@ import axios from 'axios';
 import './ProductShowcase.css'
 import cookie from 'react-cookie';
 import { browserHistory } from 'react-router';
+import Review from './reviews/Review'
 
 /**
  * A component representing a single product in the product showcase view.
@@ -30,7 +31,9 @@ class ProductShowcase extends Component {
         this.state = {
             data: {},
             isAdmin: cookie.load('user').role === 'admin',
-            updatedStock:0
+            updatedStock:0,
+            reviews:[],
+            reviewsFetched: false
         };
 
         this.setProduct = this.setProduct.bind(this);
@@ -39,6 +42,7 @@ class ProductShowcase extends Component {
         this.deleteProduct = this.deleteProduct.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.setReviews = this.setReviews.bind(this);
     }
 
     /**
@@ -51,7 +55,13 @@ class ProductShowcase extends Component {
             .then( (response) => {
                 console.log(response);
                 this.setState({data: response.data});
-
+                axios.get('/products/' + this.props.location.query.id +'/reviews')
+                    .then(response => {
+                        this.setState({
+                            reviews: response.data._embedded.reviews,
+                            reviewsFetched: true
+                        })
+                    }).catch(err => {console.log(err)});
             }).catch(err => console.log(err));
     }
 
@@ -101,11 +111,21 @@ class ProductShowcase extends Component {
         return false;
     }
 
+    setReviews() {
+        const {reviewsFetched} =  this.state;
+        return (
+            reviewsFetched ?
+                this.state.reviews.map(review => {
+                    return <Review key={review.reviewId} data={review} />;
+                }) : <span>No reviews</span>
+        );
+    }
+
     handleChange(e) {
         const stock = e.target.value;
         this.setState({
             updatedStock: stock
-        })
+        });
         console.log(this.state.updatedStock)
     }
 
@@ -175,6 +195,7 @@ class ProductShowcase extends Component {
         return (
             <div>
                 {this.setProduct()}
+                {this.setReviews()}
             </div>
         )
     }

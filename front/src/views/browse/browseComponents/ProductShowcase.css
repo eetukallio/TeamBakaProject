@@ -105,6 +105,30 @@
     justify-content: center;
 }
 
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    width: 40%;
+    margin: auto;
+    align-items: flex-start;
+    padding:15px;
+}
+
+.userName {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.rating {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    color: gold;
+}
+
 @media screen and (max-width: 900px){
     .top2 {
         flex-direction: column;
