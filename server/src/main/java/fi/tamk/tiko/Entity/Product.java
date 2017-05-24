@@ -1,8 +1,7 @@
 package fi.tamk.tiko.Entity;
 
-import org.springframework.hateoas.ResourceSupport;
-
 import javax.persistence.*;
+import java.util.List;
 
 /**
  *
@@ -14,12 +13,12 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="products")
-public class Product extends ResourceSupport {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private long productId;
+    private long id;
     @Column(name="price")
     private double price;
     @Column(name="name")
@@ -34,8 +33,10 @@ public class Product extends ResourceSupport {
     private String info;
     @Column(name = "tags")
     private String tags;
-    @Column(name = "categoryId")
-    private long categoryId;
+    @Column(name = "category")
+    private long category;
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
 
 
@@ -55,7 +56,7 @@ public class Product extends ResourceSupport {
      * @param stock Stock of the product.
      */
     public Product(double price, String name, String measurements,
-                   String imgUrl, int stock, String info, String tags, long categoryId) {
+                   String imgUrl, int stock, String info, String tags, long category) {
         this.price = price;
         this.name = name;
         this.measurements = measurements;
@@ -63,25 +64,25 @@ public class Product extends ResourceSupport {
         this.stock = stock;
         this.info = info;
         this.tags = tags;
-        this.categoryId = categoryId;
+        this.category = category;
     }
 
     /**
-     * Getter for the product's productId.
+     * Getter for the product's id.
      *
      * @return Id of the product.
      */
-    public long getProductId() {
-        return this.productId;
+    public long getId() {
+        return this.id;
     }
 
     /**
-     * Setter for the product's productId.
+     * Setter for the product's id.
      *
-     * @param productId Id of the product.
+     * @param id Id of the product.
      */
-    public void setProductId(long productId) {
-        this.productId = productId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     /**
@@ -208,11 +209,19 @@ public class Product extends ResourceSupport {
         this.tags = tags;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public long getCategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setCategory(long category) {
+        this.category = category;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
