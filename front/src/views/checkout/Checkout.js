@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router';
 import './Checkout.css';
 import CheckoutList from './components/CheckoutList';
 import CheckoutForm from './components/CheckoutForm';
-import { removeItem, clearItems } from '../../actions/shoppingcart_actions';
 
 
 class Checkout extends Component {

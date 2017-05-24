@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Alert, Button, Modal } from 'react-bootstrap';
+import { Alert, Modal } from 'react-bootstrap';
 import {login, register, changeForm, changeRegistrationForm} from '../../actions/auth';
 import LoginForm from './form/LoginForm';
 import './Login.css'

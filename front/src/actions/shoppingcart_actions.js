@@ -6,7 +6,8 @@ export function addItem(newItem) {
 }
 
 export function removeItem(payload) {
-    console.log("IN REMOVE ITEM ACTION" + payload);
+    console.log("IN REMOVE ITEM ACTION");
+    console.log(payload);
     return { type: REMOVE_ITEM, payload }
 }
 
