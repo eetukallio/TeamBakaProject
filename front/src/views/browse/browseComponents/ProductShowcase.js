@@ -74,7 +74,7 @@ class ProductShowcase extends Component {
     }
 
     deleteProduct() {
-        axios.delete("/products/" + this.state.data.productId)
+        axios.delete("/products/" + this.state.data.id)
             .then( (response) => {
                 console.log(response);
                 browserHistory.push({
@@ -89,11 +89,11 @@ class ProductShowcase extends Component {
             stock:this.state.updatedStock
         };
 
-        axios.patch('/products/'+ this.state.data.productId, updatedStock)
+        axios.patch('/products/'+ this.state.data.id, updatedStock)
             .then( response => {
-                console.log(response)
+                console.log(response);
                 browserHistory.push({
-                    pathname: '/item?id='+this.state.data.productId
+                    pathname: '/item?id='+this.state.data.id
                 });
             }).catch(err => {
                 console.log(err);

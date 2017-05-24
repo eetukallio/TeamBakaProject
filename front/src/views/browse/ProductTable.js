@@ -185,10 +185,10 @@ class DataTable extends Component {
 
         console.log(page);
         return page.map(obj => {
-                 return <div key={obj.productId} className="productRowContainer">
+                 return <div key={obj.id} className="productRowContainer">
                      <div className="top1">
                          <div className="productInfoContainer1">
-                             <Link to={{ pathname: '/item', query: { id: obj.productId } }}>
+                             <Link to={{ pathname: '/item', query: { id: obj.id } }}>
                                  <span className="productName1">{obj.name}</span>
 
                                  <div className="priceTag1">
