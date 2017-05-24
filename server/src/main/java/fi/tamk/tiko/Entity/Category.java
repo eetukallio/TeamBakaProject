@@ -1,7 +1,5 @@
 package fi.tamk.tiko.Entity;
 
-import org.springframework.hateoas.ResourceSupport;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -11,15 +9,15 @@ import java.util.List;
 
 @Entity
 @Table(name = "categories")
-public class Category extends ResourceSupport {
+public class Category {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private long categoryId;
+    private long id;
     @Column(name = "name")
     private String name;
-    @OneToMany(mappedBy = "categoryId",cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
     private List<Product> products;
 
     public Category() {
@@ -30,12 +28,12 @@ public class Category extends ResourceSupport {
         this.products = products;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public long getId() {
+        return id;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {

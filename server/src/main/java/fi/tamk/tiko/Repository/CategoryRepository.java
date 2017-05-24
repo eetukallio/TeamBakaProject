@@ -13,7 +13,7 @@ public interface CategoryRepository extends CrudRepository<Category, Long> {
 
     public List<Category> findAll();
 
-    public List<Category> findAllByCategoryId(Long categoryId);
+    public List<Category> findAllById(Long id);
 
-    public void deleteByCategoryId(Long categoryId);
+    public void deleteById(Long id);
 }

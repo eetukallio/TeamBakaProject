@@ -45,7 +45,7 @@ class ProductForm extends Component {
         axios.get('/categories')
             .then(response => {
                 this.setState({
-                    categories: response.data,
+                    categories: response.data._embedded.categories,
                     fetchDone:true
                 })
             }).catch(err => {
@@ -87,7 +87,7 @@ class ProductForm extends Component {
             const {categories} = this.state;
             return categories.map(obj => {
                 return (
-                    <option key={obj.categoryId} value={obj.categoryId} name={obj.name}>{obj.name}</option>
+                    <option key={obj.id} value={obj.id} name={obj.name}>{obj.name}</option>
                 )
             })
         }

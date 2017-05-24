@@ -48,6 +48,9 @@ public class User implements UserDetails {
 
     private String role;
 
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<Purchase> purchases;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
     private ShippingAddress address;
@@ -202,5 +205,13 @@ public class User implements UserDetails {
 
     public void setAddress(ShippingAddress address) {
         this.address = address;
+    }
+
+    public List<Purchase> getPurchases() {
+        return purchases;
+    }
+
+    public void setPurchases(List<Purchase> purchases) {
+        this.purchases = purchases;
     }
 }
