@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {DropdownButton, MenuItem} from 'react-bootstrap';
+import {DropdownButton, MenuItem, Popover, OverlayTrigger} from 'react-bootstrap';
 import {addItem} from '../../actions/shoppingcart_actions';
 import './ProductTable.css';
 import {Pagination} from 'react-bootstrap';
@@ -207,15 +207,23 @@ class DataTable extends Component {
                         </div>
                         <img className="productImage1" src={obj.imgUrl} alt="Not available" title="Product image" />
                      </div>
-                     <button className="cartButton1" onClick={ () => this.addToCart(obj)} >
-                         {
-                             obj.stock === 0 ? 'OUT OF STOCK' : <span className="glyphicon glyphicon-shopping-cart "/>
-                         }
+                     <OverlayTrigger trigger="click" placement="top" overlay={this.popoverTop} rootClose={true}>
+                         <button className="cartButton1 btn btn-primary" disabled={obj.stock === 0} onClick={ () => this.addToCart(obj)} >
+                             {
+                                 obj.stock === 0 ? 'OUT OF STOCK' : <span className="glyphicon glyphicon-shopping-cart "/>
+                             }
 
-                     </button>
+                         </button>
+                     </OverlayTrigger>
+
                  </div>;
         });
     }
+
+    popoverTop = (
+    <Popover id="popover-positioned-top">
+        Added to shopping cart!
+    </Popover> );
 
     /**
      * The React render(). Calls various functions in this class to render the entire component's layout.

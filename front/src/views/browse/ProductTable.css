@@ -99,8 +99,8 @@
 }
 
 .sort {
-    display: flex;
-    justify-content: flex-end;
+    display: block;
+    float: left;
     margin-top: 20px;
     width: 90%;
     flex-direction: row;

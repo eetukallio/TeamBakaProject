@@ -42,8 +42,8 @@ const user = cookie.load(('user'));
 /**
  * Setting the authentication state if an existing token was found.
  */
-if (token && user) {
-    store.dispatch({type: SET_AUTH, isAdmin: user.isAdmin === "admin"});
+if (token || user) {
+    store.dispatch({type: SET_AUTH, isAdmin: user.role === "admin"});
     axios.defaults.headers.common['Authorization'] = token;
 }
 

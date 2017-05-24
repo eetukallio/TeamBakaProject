@@ -116,7 +116,7 @@
     list-style: none;
 }
 
-.header-burger li a {
+.header-burger li a, .mobile-searchbar {
     display: table;
     width: 100%;
     font-size: 2rem;
@@ -125,6 +125,15 @@
     text-decoration: none;
     padding: 0.2em 0.9em 0.25em 0.9em;
     overflow-x: hidden;
+}
+
+.mobile-searchbar input {
+    margin-left: 8px;
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: none;
+    width: 90%;
+    color: black;
 }
 
 .header-burger li a:hover {
@@ -225,6 +234,7 @@
         display: inline-block;
         position: absolute;
         max-width: 0;
+        bottom: 1px;
         transition: max-width 0.25s, visibility 0.25s ease-in-out;
 
     }
@@ -273,7 +283,6 @@
 
 .searchBar {
     position: relative;
-    bottom: 0.1em;
     padding: 0 1em;
     transition: right 0.25s ease-in-out;
 }

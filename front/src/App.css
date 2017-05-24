@@ -22,7 +22,15 @@
   to { transform: rotate(360deg); }
 }
 
-.content{
+.site-content{
   margin: auto;
   text-align: center;
+  min-width: 100%;
+  min-height: 100%;
+  position: relative;
+  top: 0;
+  bottom: 100%;
+  left: 0;
+  z-index: 0;
+  transition: top 0.5s;
 }

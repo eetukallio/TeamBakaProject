@@ -51,7 +51,7 @@ class Nav extends Component {
     openClick() {
         const burgerMenu = document.getElementsByClassName("header-burger");
         const icon = document.getElementById("nav-icon3");
-        const content = document.getElementsByClassName("content");
+        const content = document.getElementsByClassName("site-content");
         if (icon.className !== "open") {
             icon.className = "open";
             burgerMenu[0].style.top = '65px';
@@ -125,19 +125,26 @@ class Nav extends Component {
                 </header>
 
                 <ul className="header-burger" style={{top: '-200px'}}>
-                    <li><Link to="/browse" activeClassName="active">Browse Products</Link></li>
-                    <li><Link to="/cart" activeClassName="active">Shopping Cart</Link> </li>
+                    <li>
+                        <div className="mobile-searchbar" >
+                            <span className="glyphicon glyphicon-search" />
+                            <input id="mobile-search-input" onKeyDown={this.handleSearch}/>
+                        </div>
+                    </li>
+
+                    <li onClick={this.openClick}><Link to="/browse" activeClassName="active">Browse Products</Link></li>
+                    <li onClick={this.openClick}><Link to="/cart" activeClassName="active">Shopping Cart</Link> </li>
                     <div className="logInOut" ></div>
                     {this.props.loggedIn ? (
                         <div className="burger-logged-in">
                             {this.props.isAdmin ?
-                                <li><Link to="/config" activeClassName="active">Admin Panel</Link></li>
+                                <li onClick={this.openClick}><Link to="/config" activeClassName="active">Admin Panel</Link></li>
                                 : null}
-                            <li> <Link to="orders" activeClassName="active">My Orders</Link></li>
-                            <li><a href="#" onClick={this.props.logout}>Log Out</a></li>
+                            <li onClick={this.openClick}> <Link to="orders" activeClassName="active">My Orders</Link></li>
+                            <li onClick={this.openClick}><a href="#" onClick={this.props.logout}>Log Out</a></li>
                         </div>
                     ) : (
-                        <li><Link to="/login">Log In</Link></li>
+                        <li onClick={this.openClick}><Link to="/login">Log In</Link></li>
                     )}
                 </ul>
 

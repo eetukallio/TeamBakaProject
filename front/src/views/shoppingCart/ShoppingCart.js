@@ -23,11 +23,11 @@ class ShoppingCart extends Component {
                         <ShoppingCartTable  onRemove={this.removeItem.bind(this)}
                                             onClear={this.props.clearItems.bind(this)}
                                             data={this.props.data} />
-                        <Link to="checkout"><button>Proceed to checkout</button></Link>
+                        <Link to="checkout"><button className="btn btn-default">Proceed to checkout</button></Link>
                     </div>
                 ) :
                     (
-                        <h1>Your shopping cart is empty</h1>
+                        <h1 style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}>Nothing here but us fishes  ¯\_(ツ)_/¯</h1>
                     )}
 
 

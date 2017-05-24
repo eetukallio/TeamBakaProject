@@ -16,7 +16,7 @@ class App extends Component {
         return (
             <div>
                 <Nav />
-                <div  className="content">
+                <div  className="site-content" id="site-content">
                     {this.props.children}
                 </div>
             </div>
