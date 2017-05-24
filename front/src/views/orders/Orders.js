@@ -26,11 +26,11 @@ class Orders extends Component {
 
         const {user} = this.state;
 
-        axios.get("/purchases/user/" + user)
+        axios.get("/users/" + user + "/purchases")
             .then( (response) => {
                 console.log('fetching orders');
                 this.setState({
-                    orders: response.data,
+                    orders: response.data._embedded.purchases,
                     fetchDone: true
                 });
 
