@@ -21,12 +21,14 @@ class Products extends Component {
         this.state = {
             categories: [],
             categoryId: 1,
+            products:[],
             fetchDone: false
         };
 
         this.fetchData = this.fetchData.bind(this);
         this.setDisplayedContent = this.setDisplayedContent.bind(this);
         this.handleCategoryChange = this.handleCategoryChange.bind(this);
+        this.fetchProducts = this.fetchProducts.bind(this);
     }
 
     /**
@@ -35,18 +37,31 @@ class Products extends Component {
     fetchData() {
         axios.get("/categories")
             .then( (response) => {
+                console.log(response.data._embedded.categories);
+                this.setState({
+                    categories: response.data._embedded.categories
+                });
+
+            }).catch(err => console.log(err));
+    }
+
+    fetchProducts(id) {
+        axios.get('/categories/'+ id +'/products/')
+            .then(response => {
                 console.log(response);
                 this.setState({
-                    categories: response.data,
+                    products:response.data._embedded.products,
                     fetchDone: true
-                })
-            }).catch(err => console.log(err));
+                });
+            }).catch(err => {console.log(err)})
     }
 
     handleCategoryChange(categoryId) {
         this.setState({
-            categoryId:categoryId
-        })
+            categoryId:categoryId,
+            fetchDone: false
+        });
+        this.fetchProducts(categoryId);
     }
 
     /**
@@ -54,18 +69,17 @@ class Products extends Component {
      */
     componentDidMount() {
         this.fetchData();
+        this.fetchProducts(this.state.categoryId);
     }
 
     setDisplayedContent() {
-        const {categories} = this.state;
+        const {products} = this.state;
         const search = this.props.search;
         let displayedContent =<div className="noContentMsg">No content</div>;
-        categories.forEach(category => {
-            if (this.state.categoryId === category.categoryId && category.products.length > 0) {
-                displayedContent = <ProductTable data={category.products}
-                                                 search={search}/>;
-            }
-        });
+        if (products.length > 0) {
+            displayedContent = <ProductTable data={products}
+                                             search={search}/>;
+        }
         return displayedContent;
     }
 
@@ -75,20 +89,16 @@ class Products extends Component {
      * @returns {XML} Returns the component as a HTML <div> element.
      */
     render() {
-
+        const {fetchDone} = this.state;
         console.log(this.state.categoryId)
-        if (this.state.fetchDone) {
-            return (
-                <div className="layoutContainer">
-                    <Sidebar data={this.state.categories}
-                             handleCategoryChange = {this.handleCategoryChange}
-                             activeCategory={this.state.categoryId}/>
-                    {this.setDisplayedContent()}
-                </div>
-            );
-        } else {
-            return <span>LOADING...</span>
-        }
+        return (
+            <div className="layoutContainer">
+                <Sidebar data={this.state.categories}
+                         handleCategoryChange = {this.handleCategoryChange}
+                         activeCategory={this.state.categoryId}/>
+                {fetchDone ? this.setDisplayedContent() : 'Loading'}
+            </div>
+        );
 
     }
 }

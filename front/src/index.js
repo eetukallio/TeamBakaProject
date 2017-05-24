@@ -52,7 +52,7 @@ if (token) {
  *
  * @type {string} URL of the REST API.
  */
-axios.defaults.baseURL = 'http://localhost:8080';
+axios.defaults.baseURL = 'http://localhost:8080/api';
 
 /**
  * Entry point of the react application.
