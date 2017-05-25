@@ -3,7 +3,11 @@ package fi.tamk.tiko.Controller;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 
 /**
- * Created by Eetu Kallio on 25.5.2017.
+ * Controller for ShippingAddress Entity
+ *
+ *  @author eetukallio
+ *  @version 3.0
+ *  @since 3.0
  */
 @RepositoryRestController
 public class ShippingAddressController {

@@ -6,11 +6,16 @@ import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
 import org.springframework.data.rest.webmvc.config.RepositoryRestConfigurerAdapter;
 
 /**
- * Created by Eetu Kallio on 24.5.2017
+ * Config to expose ids.
  */
 @Configuration
 public class EntityIdConfiguration extends RepositoryRestConfigurerAdapter {
 
+    /**
+     * Exposes ids to API calls.
+     *
+     * @param config Configuration used.
+     */
     @Override
     public void configureRepositoryRestConfiguration(RepositoryRestConfiguration config) {
         config.exposeIdsFor(Category.class);
