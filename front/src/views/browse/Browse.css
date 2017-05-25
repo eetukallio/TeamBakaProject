@@ -18,5 +18,9 @@
     .searchBar {
         visibility: hidden;
     }
+
+    .categoryTitle, .activeCategoryTitle {
+        display: inline;
+    }
 }
 

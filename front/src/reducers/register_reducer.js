@@ -10,14 +10,12 @@ const initialState = {
         username: '',
         email: '',
         role: 'user',
-        address: {
-            first_name: '',
-            last_name: '',
-            street_address: '',
-            city: '',
-            zip_code: '',
-            country: ''
-        }
+        firstName: '',
+        lastName: '',
+        streetAddress: '',
+        city: '',
+        zipCode: '',
+        country: ''
     },
     registerCurrentlySending: false,
     errorMessage: ''
@@ -33,9 +31,7 @@ export default function (state = initialState, action) {
         case SENDING_REQUEST:
             return {...state, registerCurrentlySending: action.sending };
         case SET_ERROR_MESSAGE:
-            return assign({}, state, {
-                errorMessage: action.message
-            });
+            return {...state, errorMessage: action.message};
         default:
             return state;
     }

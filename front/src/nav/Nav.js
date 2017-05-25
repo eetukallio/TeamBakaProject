@@ -4,7 +4,6 @@ import {Link} from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/auth';
 import { browserHistory } from 'react-router';
-import cookie from 'react-cookie';
 
 /**
  * The navigation component.
@@ -16,12 +15,6 @@ class Nav extends Component {
      */
     constructor(props) {
         super(props);
-
-
-        this.state = {
-            username: this.props.username
-        };
-
 
         this.handleSearch = this.handleSearch.bind(this);
         this.showMenu = this.showMenu.bind(this);
@@ -101,7 +94,7 @@ class Nav extends Component {
                                 <li>
                                     <div className="user-dropdown" id="user-dropdown">
                                         <span className="glyphicon glyphicon-user user-menu" onClick={this.showMenu} />
-                                        <span className="userName">{this.state.username}</span>
+                                        <span className="userName">{this.props.username}</span>
                                         <div className="dropdown-content" id="dropdown-content" style={{display: "none"}}>
 
                                             <Link to="orders" activeClassName="active">MY ORDERS</Link>
