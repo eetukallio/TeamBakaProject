@@ -35,6 +35,8 @@ class ProductShowcase extends Component {
             reviewsFetched: false
         };
 
+        console.log(cookie.load('user'))
+
         this.setProduct = this.setProduct.bind(this);
         this.addToCart = this.addToCart.bind(this);
         this.fetchData = this.fetchData.bind(this);
