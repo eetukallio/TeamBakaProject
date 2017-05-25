@@ -16,6 +16,7 @@
 }
 
 .shoppingcart-items {
+    width: 60%;
     display: inline-block;
     float: left;
     margin-right: 1em;
@@ -48,4 +49,22 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+}
+
+@media screen and (max-width: 720px) {
+    .shoppingCart {
+        width: 100%;
+    }
+
+    .shoppingcart-content {
+        flex-direction: column;
+    }
+
+    .shoppingcart-items {
+        width: 100%;
+    }
+
+    .shoppingcart-info {
+        width: 100%;
+    }
 }

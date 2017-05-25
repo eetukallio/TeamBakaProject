@@ -51,3 +51,22 @@ tr, td {
     padding-left: 0.5em;
 }
 
+@media screen and (max-width: 720px) {
+    .checkout {
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .listContainer {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+

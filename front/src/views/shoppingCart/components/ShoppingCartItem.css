@@ -1,6 +1,6 @@
 .shopping-cart-item {
     display: flex;
-    min-width: 500px;
+    width: 100%;
     border: 1px solid #cccccc;
     border-radius: 3px;
     padding: 0.5em;
@@ -10,7 +10,7 @@
 }
 
 .item-picture-container {
-    width: 20%;
+    width: auto;
 }
 
 .item-picture {
@@ -41,6 +41,6 @@
 
 .remove-item-button {
     position: absolute;
-    top: 0;
+    bottom: 0;
     right: 0;
 }
