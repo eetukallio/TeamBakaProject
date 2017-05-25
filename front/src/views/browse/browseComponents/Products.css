@@ -76,6 +76,10 @@
         width: 100vw;
     }
 
+    .categoryTitle {
+        width: 90vw;
+    }
+
     .sort {
         width:200px;
     }

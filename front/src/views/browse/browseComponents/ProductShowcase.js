@@ -160,7 +160,7 @@ class ProductShowcase extends Component {
                     </span>
                     <div className="priceTag2">
                         <span className="price2">
-                            {Number(product.price).toFixed(2)}€
+                            {product.price > 0 ? Number(product.price).toFixed(2) + '€' : 'FREE'}
                         </span>
                     </div>
                     <span className="productMeasurements2">

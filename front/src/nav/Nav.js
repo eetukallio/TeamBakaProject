@@ -68,7 +68,6 @@ class Nav extends Component {
             content[0].style.top = '0px';
             icon.className = "";
         }
-
     }
 
     /**
