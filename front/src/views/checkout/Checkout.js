@@ -8,21 +8,23 @@ import cookie from 'react-cookie';
 
 
 class Checkout extends Component {
-    sendPurchase(data) {
+    send(data) {
         let sendData = {};
         const formData = data;
         const items = this.props.shoppingData.items;
         const userInfo = cookie.load('user');
 
         if (userInfo) {
-            sendData = Object.assign({user: userInfo.id}, items, formData);
+            sendData = Object.assign({user: userInfo.id}, {purchases: items.map(function (object) {
+                return object.id;
+            })}, {address: formData});
             console.log(sendData);
         } else {
             sendData = Object.assign({user: 4}, items, formData);
         }
         console.log(sendData);
 
-        // this.props.sendPurchase(sendData);
+        this.props.sendPurchase(sendData);
     }
 
     removeItem(item) {
@@ -43,7 +45,7 @@ class Checkout extends Component {
                 </div>
                 <div className="formContainer">
                     <h3>Shipping information</h3>
-                    <CheckoutForm onSubmit={this.sendPurchase.bind(this)} onChange={this.props.changeCheckoutForm.bind(this)} data={formState} currentlySending={currentlySending} btnText={"Place order"} />
+                    <CheckoutForm onSubmit={this.send.bind(this)} onChange={this.props.changeCheckoutForm.bind(this)} data={formState} currentlySending={currentlySending} btnText={"Place order"} />
                 </div>
             </div>
         );

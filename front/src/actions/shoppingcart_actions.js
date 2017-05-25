@@ -1,14 +1,21 @@
-import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART, CHANGE_CHECKOUT_FORM } from '../constants/AppConstants';
+import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART, CHANGE_CHECKOUT_FORM, SENDING_REQUEST, CHECKOUT_SENT } from '../constants/AppConstants';
 import axios from 'axios';
 
 export function sendPurchase(data) {
-    axios.post('/purchases', data, {headers: {'Content-Type': 'Application/Json'}})
-        .then((res) => {
-            console.log(res);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+    return function(dispatch) {
+        dispatch(sendingRequest(true));
+        axios.post('/purchases', data, {headers: {'Content-Type': 'Application/Json'}})
+            .then((res) => {
+                console.log(res);
+                console.log("PURCHASE SENT");
+                dispatch(sendingRequest(false));
+                dispatch(checkoutSent());
+            })
+            .catch((err) => {
+                console.log(err);
+                dispatch(sendingRequest(false));
+            });
+    }
 }
 
 export function addItem(newItem) {
@@ -28,4 +35,17 @@ export function clearItems() {
 
 export function changeCheckoutForm(newState) {
     return {type: CHANGE_CHECKOUT_FORM, newState}
+}
+
+/**
+ * Sets the requestSending state, which displays a loading indicator during requests
+ * @param  {boolean} sending The new state the app should have
+ * @return {object}          Formatted action for the reducer to handle
+ */
+export function sendingRequest(sending) {
+    return { type: SENDING_REQUEST, sending };
+}
+
+export function checkoutSent() {
+    return { type: CHECKOUT_SENT };
 }

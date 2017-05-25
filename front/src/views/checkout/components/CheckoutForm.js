@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button, Col, Grid, Row, Form, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 import cookie from 'react-cookie';
+import LoadingButton from '../../login/form/LoadingButton';
 
 class CheckoutForm extends React.Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class CheckoutForm extends React.Component {
                 streetAddress: user.address[0].streetAddress,
                 zipCode: user.address[0].zipCode.toString(),
                 city: user.address[0].city,
-                country: [user.address[0].country === "Finland" ? "FI" : user.address[0].country]
+                country: user.address[0].country === "Finland" ? "FI" : user.address[0].country
             };
             this.emitChange(userinfo);
         }
@@ -340,7 +341,11 @@ class CheckoutForm extends React.Component {
                             <Col >
                                 <FormGroup controlId="submitButton">
                                     <div className="submitButtonDiv">
+                                        {this.props.currentlySending ? (
+                                            <LoadingButton />
+                                        ) : (
                                         <Button bsStyle="primary" type="submit" disabled={this.enableButton()}>{this.props.btnText}</Button>
+                                        )}
                                     </div>
                                 </FormGroup>
                             </Col>
