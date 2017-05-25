@@ -1,7 +1,5 @@
 package fi.tamk.tiko.Entity;
 
-import org.springframework.hateoas.ResourceSupport;
-
 import javax.persistence.*;
 
 /**
@@ -10,12 +8,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name="shippingAddress")
-public class ShippingAddress extends ResourceSupport {
+public class ShippingAddress {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="id")
-    private long addressId;
+    private long id;
     @Column(name="streetAddress")
     private String streetAddress;
     @Column(name="city")
@@ -28,16 +26,18 @@ public class ShippingAddress extends ResourceSupport {
     private String firstName;
     @Column(name="lastName")
     private String lastName;
+    @Column(name="user")
+    private long user;
 
     public ShippingAddress() {
     }
 
-    public long getAddressId() {
-        return addressId;
+    public long getId() {
+        return id;
     }
 
-    public void setAddressId(long addressId) {
-        this.addressId = addressId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getStreetAddress() {
@@ -87,4 +87,14 @@ public class ShippingAddress extends ResourceSupport {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
+    public long getUser() {
+        return user;
+    }
+
+    public void setUser(long user) {
+        this.user = user;
+    }
+
+
 }

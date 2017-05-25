@@ -51,7 +51,7 @@ public class DummyController {
             System.out.println("addin products in category 1");
             random = (int) Math.floor((Math.random()*5));
             Product product = new Product(i, names[random] + " body pillow", i + "cm x " + i + "cm x " + i +"cm",
-                    "http://bit.ly/2r0t4t6", i,
+                    "http://i.ebayimg.com/images/g/ifgAAOSwY0lXRc7o/s-l300.jpg", i,
                     "Quality bodypillow made out of all natural materials. No child labor involved either.",
                     "comfy,cotton,natural,soft,body pillow", 1);
             productRepository.save(product);
@@ -59,7 +59,7 @@ public class DummyController {
         for (int i = 0; i < 100; i++) {
             random = (int) Math.floor((Math.random()*5));
             Product product = new Product(i, names[random] + " pillow cover", i + "cm x " + i + "cm x " + i +"cm",
-                    "http://bit.ly/2r0t4t6", i,
+                    "https://n4.sdlcdn.com/imgs/a/k/m/Pikachu-Pokemon-Cushion-Cover-SDL374936898-1-2c4e8.jpg", i,
                     "Quality pillow cover made out of all natural materials. No child labor involved either.",
                     "comfy,cotton,natural,soft,cover", 3);
             productRepository.save(product);

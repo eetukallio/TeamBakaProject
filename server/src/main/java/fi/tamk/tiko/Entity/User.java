@@ -10,7 +10,6 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User entity class
@@ -51,9 +50,8 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Purchase> purchases;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "addressId")
-    private ShippingAddress address;
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    private List<ShippingAddress> address;
     /**
      * Default constructor
      */
@@ -67,7 +65,7 @@ public class User implements UserDetails {
      * @param password The user's password
      * @param email The user's email
      */
-    public User(long id, String username, String password, String email, String role, Date lastPasswordResetDate, ShippingAddress shippingAddress) {
+    public User(long id, String username, String password, String email, String role, Date lastPasswordResetDate, List<ShippingAddress> shippingAddress) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -199,11 +197,11 @@ public class User implements UserDetails {
         this.role = role;
     }
 
-    public ShippingAddress getAddress() {
+    public List<ShippingAddress> getAddress() {
         return address;
     }
 
-    public void setAddress(ShippingAddress address) {
+    public void setAddress(List<ShippingAddress> address) {
         this.address = address;
     }
 
@@ -214,4 +212,6 @@ public class User implements UserDetails {
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
+
+
 }

@@ -33,6 +33,9 @@ public class Application {
                 "'http://localhost:8080/cart'\n" +
                 "'http://localhost:8080/login'\n" +
                 "\n" +
+                "The API can be accessed at 'http://localhost:8080/api' and a HTTP GET to the API root" +
+                "will provide a list of links in the response" +
+                "\n" +
                 "To log in you can use username: 'admin' and password 'admin' for admin experience\n" +
                 "and username: 'user' and password 'user' for user level experience");
     }
