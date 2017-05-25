@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Col, Grid, Row, Form, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Alert, Button, Col, Grid, Row, Form, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import LoadingButton from './LoadingButton';
 
 class RegisterForm extends React.Component {
     constructor(props) {
@@ -62,14 +63,14 @@ class RegisterForm extends React.Component {
                             <Col xs={12} sm={4}>
                                 <FormGroup controlId="firstNameField" validationState={this.getFirstNameValidationState()}>
                                     <ControlLabel>First Name</ControlLabel>
-                                    <FormControl type="text" name="first_name" value={this.props.data.address.first_name} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                    <FormControl type="text" name="firstName" value={this.props.data.firstName} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={4}>
                                 <FormGroup controlId="lastNameField" validationState={this.getLastNameValidationState()}>
                                     <ControlLabel>Last Name</ControlLabel>
-                                    <FormControl type="text" name="last_name" value={this.props.data.address.last_name} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                    <FormControl type="text" name="lastName" value={this.props.data.lastName} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
@@ -79,7 +80,7 @@ class RegisterForm extends React.Component {
                             <Col xs={12} sm={8}>
                                 <FormGroup controlId="streetAddressField" validationState={this.getStreetAddressValidationState()}>
                                     <ControlLabel>Street Address</ControlLabel>
-                                    <FormControl type="text" name="street_address" value={this.props.data.address.street_address} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                    <FormControl type="text" name="streetAddress" value={this.props.data.streetAddress} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
@@ -89,14 +90,14 @@ class RegisterForm extends React.Component {
                             <Col xs={12} sm={4}>
                                 <FormGroup controlId="cityField" validationState={this.getCityValidationState()}>
                                     <ControlLabel>City</ControlLabel>
-                                    <FormControl type="text" name="city" value={this.props.data.address.city} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                    <FormControl type="text" name="city" value={this.props.data.city} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
                             <Col xs={12} sm={4}>
                                 <FormGroup controlId="zipCodeField" validationState={this.getZipCodeValidationState()}>
                                     <ControlLabel>Zip Code</ControlLabel>
-                                    <FormControl type="text" name="zip_code" value={this.props.data.address.zip_code} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                    <FormControl type="text" name="zipCode" value={this.props.data.zipCode} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
@@ -106,7 +107,7 @@ class RegisterForm extends React.Component {
                             <Col xs={12} sm={8}>
                                 <FormGroup controlId="streetAddressField" validationState={this.getCountryValidationState()}>
                                     <ControlLabel>Country</ControlLabel>
-                                    <FormControl componentClass="select" placeholder="Select Country" name="country" value={this.props.data.address.country} onChange={this.changeForm.bind(this)} required >
+                                    <FormControl componentClass="select" placeholder="Select Country" name="country" value={this.props.country} onChange={this.changeForm.bind(this)} required >
                                         <option value="select">Select Country</option>
                                         <option value="AF">Afghanistan</option>
                                         <option value="AX">Åland Islands</option>
@@ -367,10 +368,29 @@ class RegisterForm extends React.Component {
                             <Col xs={12} sm={4}>
                                 <FormGroup controlId="submitButton">
                                     <div className="submitButtonDiv">
-                                        <Button bsStyle="primary" type="submit" disabled={this.enableButton()}>{this.props.btnText}</Button>
+                                        {this.props.currentlySending ? (
+                                            <LoadingButton />
+                                        ) : (
+                                            <Button bsStyle="primary" disabled={this.enableButton()} type="submit">{this.props.btnText}</Button>
+                                        )}
                                     </div>
                                 </FormGroup>
                             </Col>
+                        </Row>
+                        <Row>
+                            <div className="alertContainer">
+                                {this.props.data.errorMessage === 'error' ?
+                                    <Alert bsStyle="warning">
+                                        Registration failed, check your info.
+                                    </Alert>
+                                    : null }
+                                {this.props.data.errorMessage === 'success' ?
+                                    <Alert bsStyle="warning">
+                                        Success! You can sign in using your login info now.
+                                    </Alert>
+                                    : null }
+
+                            </div>
                         </Row>
                     </Grid>
                 </Form>
@@ -383,15 +403,9 @@ class RegisterForm extends React.Component {
         const name = e.target.name;
         let newState;
         console.log(name);
-        if (name === "first_name" || name === "last_name" || name === "zip_code" || name === "country" || name === "city" || name === "street_address") {
-            newState = this.mergeWithCurrentState({
-                address: {[name]: e.target.value}
-            });
-        } else {
-            newState = this.mergeWithCurrentState({
-                [name]: e.target.value
-            });
-        }
+        newState = this.mergeWithCurrentState({
+            [name]: e.target.value
+        });
         console.log(newState);
         this.emitChange(newState);
     }
@@ -417,15 +431,12 @@ class RegisterForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
 
-        if (this.getUsernameValidationState() === 'success' &&
-            this.getConfirmPasswordValidationState() === 'success' &&
-            this.getEmailValidationState() === 'success') {
-            const sendData = Object.assign(this.props.data);
+        const sendData = Object.assign(this.props.data);
 
-            this.props.onSubmit(sendData);
+        this.props.onSubmit(sendData);
 
-            this.setState({confirmedPassword: ''});
-        }
+        this.setState({confirmedPassword: ''});
+
     }
 
     getPasswordValidationState() {
@@ -453,55 +464,55 @@ class RegisterForm extends React.Component {
     }
 
     getFirstNameValidationState() {
-        if (this.props.data.address.first_name.length > 0 && !isNaN(this.props.data.address.first_name)) {
+        if (this.props.data.firstName.length > 0 && !isNaN(this.props.data.firstName)) {
             return 'error';
-        } else if (this.props.data.address.first_name.length > 0) {
+        } else if (this.props.data.firstName.length > 0) {
             return 'success';
         }
     }
 
     getLastNameValidationState() {
-        if (this.props.data.address.last_name.length > 0) {
+        if (this.props.data.lastName.length > 0) {
             return 'success';
         }
     }
 
     getStreetAddressValidationState() {
-        if (this.props.data.address.street_address.length > 0) {
+        if (this.props.data.streetAddress.length > 0) {
             return 'success';
         }
     }
 
     getCityValidationState() {
-        if (this.props.data.address.city.length > 0) {
+        if (this.props.data.city.length > 0) {
             return 'success';
         }
     }
 
     getZipCodeValidationState() {
-        if (this.props.data.address.zip_code.length > 4 && !isNaN(this.props.data.address.zip_code)) {
+        if (this.props.data.zipCode.length > 4 && !isNaN(this.props.data.zipCode)) {
             return 'success';
-        } else if (this.props.data.address.zip_code.length > 0)  {
+        } else if (this.props.data.zipCode.length > 0)  {
             return 'warning';
         }
     }
 
     getCountryValidationState() {
-        if (this.props.data.address.country.length > 0 && this.props.data.address.country !== "seleect") {
+        if (this.props.data.country.length > 0 && this.props.data.country !== "select") {
             return 'success';
         }
     }
 
     enableButton() {
-        return this.getUsernameValidationState() === 'success' &&
-            this.getConfirmPasswordValidationState() === 'success' &&
-            this.getEmailValidationState() === 'success' &&
-                this.getFirstNameValidationState() === 'success' &&
-                this.getLastNameValidationState() === 'success' &&
-                this.getCityValidationState() === 'success' &&
-                this.getCountryValidationState() === 'success' &&
-                this.getStreetAddressValidationState() === 'success' &&
-                this.getZipCodeValidationState() === 'success'
+        return  !(this.getUsernameValidationState()        === 'success' &&
+        this.getConfirmPasswordValidationState() === 'success' &&
+        this.getEmailValidationState()           === 'success' &&
+        this.getFirstNameValidationState()       === 'success' &&
+        this.getLastNameValidationState()        === 'success' &&
+        this.getCityValidationState()            === 'success' &&
+        this.getCountryValidationState()         === 'success' &&
+        this.getStreetAddressValidationState()   === 'success' &&
+        this.getZipCodeValidationState()         === 'success')
     }
 }
 
@@ -509,7 +520,8 @@ RegisterForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     onChange: React.PropTypes.func.isRequired,
     btnText: React.PropTypes.string.isRequired,
-    data: React.PropTypes.object.isRequired
+    data: React.PropTypes.object.isRequired,
+    errorMessage: React.PropTypes.string.isRequired
 };
 
 export default RegisterForm;

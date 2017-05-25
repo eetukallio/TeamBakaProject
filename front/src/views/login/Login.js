@@ -62,11 +62,7 @@ class Login extends React.Component {
                             data={registerFormState}                    onChange={this.props.changeRegistrationForm}
                             location={location}                         history={this.props.history}
                             onSubmit={this.register.bind(this)}         btnText={"Submit"}
-                            currentlySending={registerCurrentlySending} errorMessage={this.props.data.errorMessage} />
-                        {this.props.data.errorMessage === '' ? null :
-                            <Alert bsStyle="warning">
-                                Virhe, tarkista tiedot uudelleen.
-                            </Alert>}
+                            currentlySending={registerCurrentlySending} errorMessage={this.props.registerData.errorMessage} />
                     </div>
                 </Modal.Body>
             </Modal>

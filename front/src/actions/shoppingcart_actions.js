@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART } from '../constants/AppConstants';
+import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART, CHANGE_CHECKOUT_FORM } from '../constants/AppConstants';
 
 export function addItem(newItem) {
     console.log("IN ACTION: " + newItem);
@@ -13,4 +13,8 @@ export function removeItem(payload) {
 
 export function clearItems() {
     return { type: CLEAR_SHOPPINGCART }
+}
+
+export function changeCheckoutForm(newState) {
+    return {type: CHANGE_CHECKOUT_FORM, newState}
 }

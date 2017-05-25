@@ -142,4 +142,9 @@
         flex-direction: column;
         justify-content: flex-start;
     }
+
+    .pagination {
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

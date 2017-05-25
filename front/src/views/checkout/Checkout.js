@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {changeCheckoutForm} from '../../actions/shoppingcart_actions';
 import './Checkout.css';
 import CheckoutList from './components/CheckoutList';
 import CheckoutForm from './components/CheckoutForm';
@@ -24,7 +25,7 @@ class Checkout extends Component {
                 </div>
                 <div className="formContainer">
                     <h3>Shipping information</h3>
-                    <CheckoutForm data={formState} currentlySending={currentlySending} btnText={"Place order"} />
+                    <CheckoutForm onChange={this.props.changeCheckoutForm.bind(this)} data={formState} currentlySending={currentlySending} btnText={"Place order"} />
                 </div>
             </div>
         );
@@ -38,4 +39,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, {changeCheckoutForm})(Checkout);

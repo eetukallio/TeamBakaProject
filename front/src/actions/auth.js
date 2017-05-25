@@ -1,4 +1,4 @@
-import { SET_AUTH, SET_USER, SET_USERNAME, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { SET_AUTH, CHECKOUT_SENT, SET_USERNAME, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookie';
@@ -35,6 +35,7 @@ export function login(data) {
 export function logout() {
     return function (dispatch) {
         dispatch({type: UNAUTH_USER});
+        dispatch({type: CHECKOUT_SENT});
         cookie.remove('token', {path: '/'});
         cookie.remove('user', {path: '/'});
         browserHistory.push("/login");
@@ -43,14 +44,45 @@ export function logout() {
 
 export function register(formData) {
     console.log(formData);
+
+    const userData = {  username: formData.username,
+                        password: formData.password,
+                        email: formData.email,
+                        role: formData.role
+                        };
+
+    const addressData = {   firstName: formData.firstName,
+                            lastName: formData.lastName,
+                            streetAddress: formData.streetAddress,
+                            city: formData.city,
+                            zipCode: formData.zipCode,
+                            country: formData.country,
+                            user: 0
+                            };
+
+    console.log(userData);
+    console.log(addressData);
+
+
     return function(dispatch) {
         dispatch(sendingRequest(true));
 
-        axios.post("/users", JSON.stringify(formData), {headers: {'Content-Type': 'application/json'}})
-            .then(res => {
-                console.log("REGISTRATION FORM SENT " + res);
-                dispatch(sendingRequest(false));
-                dispatch(registerFormSent());
+        axios.post("/users", userData, {headers: {'Content-Type': 'application/json'}})
+            .then((res) => {
+                console.log("USER WAS SENT");
+                const addressWithUser = Object.assign(addressData, {user: res.data.id});
+                axios.post("/shippingAddresses", addressWithUser, {headers: {'Content-Type': 'application/json'}})
+                    .then((res) => {
+                        console.log("ADDRESS WAS SENT");
+                        dispatch(sendingRequest(false));
+                        dispatch(registerFormSent());
+                        dispatch(setErrorMessage("success"))
+                })
+                    .catch((err) => {
+                        dispatch(sendingRequest(false));
+                        dispatch(setErrorMessage("error"))
+                        console.log(err.message);
+                    });
             })
             .catch((err) => {
                 dispatch(sendingRequest(false));
