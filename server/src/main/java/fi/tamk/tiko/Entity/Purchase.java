@@ -23,7 +23,7 @@ public class Purchase {
     @Column(name="user")
     private long user;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "addressId")
+    @JoinColumn(name = "address", referencedColumnName = "id")
     private ShippingAddress address;
     @ElementCollection
     @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
