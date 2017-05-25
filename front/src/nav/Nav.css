@@ -153,6 +153,12 @@
     z-index: 1;
 }
 
+.userName{
+    font-weight: bold;
+    color: white;
+    margin-left: 10px;
+}
+
 #nav-icon3 {
     display: none;
     float: right;

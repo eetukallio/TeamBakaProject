@@ -6,15 +6,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import SingleOrder from './ordersComponents/SingleOrder';
 import './Orders.css';
+import cookie from 'react-cookie';
 
 class Orders extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             orders: [],
-            user: 1,
+            user: cookie.load('user').id,
             fetchDone: false
         };
 

@@ -54,7 +54,7 @@ class ReviewForm extends Component {
                 this.props.fetchReviews();
             }).catch(err => {
                 console.log(err)
-        })
+        });
     }
 
     render() {
@@ -82,10 +82,6 @@ class ReviewForm extends Component {
                         <option value={ratingArray[2]}>3</option>
                         <option value={ratingArray[3]}>4</option>
                         <option value={ratingArray[4]}>5</option>
-
-
-
-
                     </select>
                 </FormGroup>
                 <Button type="submit">
@@ -97,3 +93,4 @@ class ReviewForm extends Component {
 }
 
 export default ReviewForm;
+

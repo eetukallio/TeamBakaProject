@@ -75,8 +75,8 @@ class SingleOrder extends Component {
             return products.map(product => {
                 key++;
                 return <div key={key} className="singleProductContainer">
-                    <span>{product.name}</span>
-                    <span>{product.price}€</span>
+                    <span className="productName">{product.name} </span>
+                    <span className="productPrice">{Number(product.price).toFixed(2)}€</span>
                 </div>
             })
         } else return null;
@@ -85,15 +85,17 @@ class SingleOrder extends Component {
     render() {
         const order = this.props.order;
 
-        return <div className="singleOrderContainer">
-            <a className="orderHeader" onClick={this.toggleInfo}>
-                <span>Order ID: {order.purchaseId}</span>
-                <span className="totalPrice">Total: {this.state.totalPrice} €</span>
-            </a>
-            <div className="orderInfo">
-                {this.setDisplayedOrder()}
+        return (
+            <div className="singleOrderContainer">
+                <a className="orderHeader" onClick={this.toggleInfo}>
+                    <span>Order ID: {order.purchaseId}</span>
+                    <span className="totalPrice">Total: {this.state.totalPrice} €</span>
+                </a>
+                <div className="orderInfo">
+                    {this.setDisplayedOrder()}
+                </div>
             </div>
-        </div> ;
+        ) ;
     }
 }
 
