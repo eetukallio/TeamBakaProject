@@ -17,9 +17,14 @@ class Nav extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            username: cookie.load('user').username
-        };
+        const user = cookie.load('user');
+
+        if (user) {
+            this.state = {
+                username: user.username
+            };
+        }
+
 
         this.handleSearch = this.handleSearch.bind(this);
         this.showMenu = this.showMenu.bind(this);
