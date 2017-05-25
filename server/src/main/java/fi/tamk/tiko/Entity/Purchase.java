@@ -25,7 +25,6 @@ public class Purchase {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "addressId")
     private ShippingAddress address;
-
     @ElementCollection
     @CollectionTable(name ="purchasedProducts" , joinColumns=@JoinColumn(name="id"))
     @Column(name="products")
@@ -101,10 +100,20 @@ public class Purchase {
         this.purchases = purchases;
     }
 
+    /**
+     * Getter for the shippingAddress
+     *
+     * @return shippingAddress
+     */
     public ShippingAddress getAddress() {
         return address;
     }
 
+    /**
+     * Setter for the shippingAddress
+     *
+     * @param address shippingAddress
+     */
     public void setAddress(ShippingAddress address) {
         this.address = address;
     }

@@ -37,21 +37,13 @@ public class User implements UserDetails {
     @NotNull
     @Column(name="email")
     private String email;
-
     private Date lastPasswordResetDate;
-
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinTable(name = "UserRole", joinColumns = @JoinColumn(name = "userId", referencedColumnName = "id"),
-//            inverseJoinColumns = @JoinColumn(name = "roleId", referencedColumnName = "id"))
-//    private Set<Role> roles;
-
     private String role;
-
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Purchase> purchases;
-
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<ShippingAddress> address;
+
     /**
      * Default constructor
      */
@@ -103,26 +95,51 @@ public class User implements UserDetails {
 
     }
 
+    /**
+     * Returns whether account is expired
+     *
+     * @return true = expired
+     */
     @Override
     public boolean isAccountNonExpired() {
         return false;
     }
 
+    /**
+     * Returns whether account is locked
+     *
+     * @return true = locked
+     */
     @Override
     public boolean isAccountNonLocked() {
         return false;
     }
 
+    /**
+     * Returns whether account credentials are expired
+     *
+     * @return true = expired
+     */
     @Override
     public boolean isCredentialsNonExpired() {
         return false;
     }
 
+    /**
+     * Returns whether account is enabled
+     *
+     * @return true = enabled
+     */
     @Override
     public boolean isEnabled() {
         return false;
     }
 
+    /**
+     * Returns account authorities
+     *
+     * @return authorities
+     */
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -189,29 +206,59 @@ public class User implements UserDetails {
         this.lastPasswordResetDate = lastPasswordResetDate;
     }
 
+    /**
+     * Getter for role
+     *
+     * @return role
+     */
     public String getRole() {
         return role;
     }
 
+    /**
+     * Setter for role
+     *
+     * @param role role
+     */
     public void setRole(String role) {
         this.role = role;
     }
 
+
+    /**
+     * Getter for addresses
+     *
+     * @return addresses
+     */
     public List<ShippingAddress> getAddress() {
         return address;
     }
 
+    /**
+     * Setter for address
+     *
+     * @param address address
+     */
     public void setAddress(List<ShippingAddress> address) {
         this.address = address;
     }
 
+    /**
+     * Getter for purchases
+     *
+     * @return purchases
+     */
     public List<Purchase> getPurchases() {
         return purchases;
     }
 
+    /**
+     * Setter for purchases
+     *
+     * @param purchases purchases
+     */
     public void setPurchases(List<Purchase> purchases) {
         this.purchases = purchases;
     }
-
 
 }
