@@ -32,14 +32,19 @@ class CategoryForm extends Component {
         this.setState({ name: e.target.value });
     }
 
-    onSubmit() {
+    onSubmit(e) {
+        e.preventDefault();
         const category = {
             name: this.state.name
         };
 
         axios.post("/categories", category)
             .then(response => {
-                console.log(response)
+                console.log(response);
+                this.setState({
+                    name: '',
+                });
+
             }).catch(err => {
             console.log(err)
         })
@@ -56,6 +61,7 @@ class CategoryForm extends Component {
                     <ControlLabel>Name</ControlLabel>
                     <FormControl
                         type="text"
+                        value={this.state.name}
                         placeholder="Category"
                         onChange={this.handleChange}
                     />

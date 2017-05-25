@@ -59,7 +59,8 @@ class ProductForm extends Component {
         console.log(this.state.name)
     }
 
-    onProductSubmit() {
+    onProductSubmit(e) {
+        e.preventDefault();
 
         const product = {
             name: this.state.name,
@@ -69,17 +70,28 @@ class ProductForm extends Component {
             imgUrl: this.state.url,
             info: this.state.info,
             tags: this.state.tags,
-            categoryId: this.state.category
-        }
+            category: this.state.category
+        };
 
-        console.log(product)
+        console.log(product);
 
         axios.post("/products", product)
             .then(response => {
                 console.log(response)
+                this.setState({
+                    name: '',
+                    price: 0,
+                    measurements: '',
+                    stock: 0,
+                    url: '',
+                    info: '',
+                    tags: '',
+                    categoryId: 1
+                });
+
             }).catch(err => {
                 console.log(err)
-        })
+        });
     }
 
     setCategories() {
@@ -96,7 +108,7 @@ class ProductForm extends Component {
     handleSelect(e) {
         this.setState({
             category:e.target.value
-        })
+        });
         const product = {
             name: this.state.name,
             price: this.state.price,
@@ -106,7 +118,7 @@ class ProductForm extends Component {
             info: this.state.info,
             tags: this.state.tags,
             categoryId: this.state.category
-        }
+        };
         console.log(product)
     }
 
@@ -121,6 +133,7 @@ class ProductForm extends Component {
                     <ControlLabel>Name</ControlLabel>
                     <FormControl
                         type="text"
+                        value={this.state.name}
                         name="name"
                         placeholder="Name"
                         onChange={this.handleChange}
@@ -129,6 +142,7 @@ class ProductForm extends Component {
                     <ControlLabel>Price</ControlLabel>
                     <FormControl
                         type="number"
+                        value={this.state.price}
                         name="price"
                         placeholder="Price"
                         onChange={this.handleChange}
@@ -137,6 +151,7 @@ class ProductForm extends Component {
                     <ControlLabel>Measurements</ControlLabel>
                     <FormControl
                         type="text"
+                        value={this.state.measurements}
                         name="measurements"
                         placeholder="0cm x 0cm x 0cm"
                         onChange={this.handleChange}
@@ -145,6 +160,7 @@ class ProductForm extends Component {
                     <ControlLabel>Initial stock</ControlLabel>
                     <FormControl
                         type="number"
+                        value={this.state.stock}
                         name="stock"
                         placeholder="Stock"
                         onChange={this.handleChange}
@@ -153,6 +169,7 @@ class ProductForm extends Component {
                     <ControlLabel>URL</ControlLabel>
                     <FormControl
                         type="text"
+                        value={this.state.url}
                         name="url"
                         placeholder="http://example.com"
                         onChange={this.handleChange}
@@ -161,6 +178,7 @@ class ProductForm extends Component {
                     <ControlLabel>Info</ControlLabel>
                     <FormControl
                         type="text"
+                        value={this.state.info}
                         name="info"
                         placeholder="Additional info"
                         onChange={this.handleChange}
@@ -170,6 +188,7 @@ class ProductForm extends Component {
                     <FormControl
                         type="text"
                         name="tags"
+                        value={this.state.tags}
                         placeholder="tag,tag,tag"
                         onChange={this.handleChange}
                     />
@@ -178,6 +197,7 @@ class ProductForm extends Component {
                     <FormControl
                         onChange={this.handleSelect}
                         componentClass="select"
+                        value={this.state.category}
                         placeholder="Category">
                         {this.setCategories()}
                     </FormControl>
