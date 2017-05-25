@@ -18,7 +18,7 @@ class Nav extends Component {
         super(props);
 
         this.state = {
-            username: cookie.load('user').username
+            username: cookie.load('user') ? cookie.load('user').username : ''
         };
 
         this.handleSearch = this.handleSearch.bind(this);

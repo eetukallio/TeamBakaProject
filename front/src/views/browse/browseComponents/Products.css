@@ -59,3 +59,28 @@
     margin-left: 200px;
     margin-top: 50px;
 }
+
+@media screen and (max-width: 870px){
+
+    .productListContainer {
+        width: 100vw;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .layoutContainer {
+        flex-direction: column;
+    }
+
+    .sideBar {
+        width: 100vw;
+    }
+
+    .sort {
+        width:200px;
+    }
+
+    .productRowContainer {
+    }
+
+}
