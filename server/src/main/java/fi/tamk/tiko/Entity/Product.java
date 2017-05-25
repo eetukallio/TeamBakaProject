@@ -209,18 +209,38 @@ public class Product {
         this.tags = tags;
     }
 
+    /**
+     * Getter for category
+     *
+     * @return Category
+     */
     public long getCategory() {
         return category;
     }
 
+    /**
+     * Setter for category
+     *
+     * @param category category
+     */
     public void setCategory(long category) {
         this.category = category;
     }
 
+    /**
+     * Getter for reviews
+     *
+     * @return Reviews as a List
+     */
     public List<Review> getReviews() {
         return reviews;
     }
 
+    /**
+     * Setter for reviews.
+     *
+     * @param reviews Reviews to be set
+     */
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }

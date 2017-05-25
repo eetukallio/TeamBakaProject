@@ -4,6 +4,7 @@ import ProductTable from '../ProductTable';
 import Sidebar from './sidebar/Sidebar';
 import './Products.css'
 import axios from 'axios';
+import LoadingButton from '../../login/form/LoadingButton';
 
 /**
  * A component representing the 'Products' view.
@@ -96,7 +97,7 @@ class Products extends Component {
                 <Sidebar data={this.state.categories}
                          handleCategoryChange={this.handleCategoryChange}
                          activeCategory={this.state.categoryId}/>
-                {fetchDone ? this.setDisplayedContent() : 'Loading'}
+                {fetchDone ? this.setDisplayedContent() :<div className="productsLoading" ><LoadingButton/></div> }
             </div>
         );
 

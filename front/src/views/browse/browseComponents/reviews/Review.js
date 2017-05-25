@@ -47,7 +47,7 @@ class Review extends Component {
 
         return (
             <div className="reviewContainer">
-                <span className="userName">{user.username}</span>
+                <span className="reviewUserName">{user.username}</span>
                 <span className="reviewBody">{review.body}</span>
                 <span className="rating">{this.setStars()}</span>
             </div>

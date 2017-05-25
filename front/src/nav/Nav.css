@@ -1,13 +1,15 @@
 .header {
-    position: relative;
     text-align: left;
     background: deepskyblue;
     background-size: cover;
-    overflow: visible;
+    overflow: hidden;
     padding: 1em 0;
     display: flex;
     align-items: center; /* align vertical */
     z-index: 2;
+    position: relative;
+    top: 0;
+    width: 100vw;
 }
 
 

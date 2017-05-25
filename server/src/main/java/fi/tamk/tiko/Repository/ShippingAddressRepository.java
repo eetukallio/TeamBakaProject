@@ -4,7 +4,11 @@ import fi.tamk.tiko.Entity.ShippingAddress;
 import org.springframework.data.repository.CrudRepository;
 
 /**
- * Created by Eetu Kallio on 22.5.2017
+ * Shipping address repository
+ *
+ * @author Eetu Kallio
+ * @since 3.0
+ * @version 3.0
  */
 public interface ShippingAddressRepository extends CrudRepository<ShippingAddress, Long> {
 }

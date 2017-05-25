@@ -15,7 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Eetu Kallio on 21.5.2017
+ * Controller for flooding database with dummy data
+ *
+ *  @author eetukallio
+ *  @version 3.0
+ *  @since 3.0
  */
 
 @RestController
