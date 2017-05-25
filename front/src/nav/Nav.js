@@ -19,11 +19,9 @@ class Nav extends Component {
 
         const user = cookie.load('user');
 
-        if (user) {
-            this.state = {
-                username: user.username
-            };
-        }
+        this.state = {
+            username: user.username || ""
+        };
 
 
         this.handleSearch = this.handleSearch.bind(this);

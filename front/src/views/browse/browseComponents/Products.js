@@ -90,11 +90,11 @@ class Products extends Component {
      */
     render() {
         const {fetchDone} = this.state;
-        console.log(this.state.categoryId)
+        console.log(this.state.categoryId);
         return (
             <div className="layoutContainer">
                 <Sidebar data={this.state.categories}
-                         handleCategoryChange = {this.handleCategoryChange}
+                         handleCategoryChange={this.handleCategoryChange}
                          activeCategory={this.state.categoryId}/>
                 {fetchDone ? this.setDisplayedContent() : 'Loading'}
             </div>

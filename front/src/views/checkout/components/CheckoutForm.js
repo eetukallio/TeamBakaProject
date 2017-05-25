@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Col, Grid, Row, Form, FormControl, ControlLabel, FormGroup, Checkbox } from 'react-bootstrap';
+import { Button, Col, Grid, Row, Form, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
 
 class CheckoutForm extends React.Component {
     constructor(props) {
@@ -55,13 +55,6 @@ class CheckoutForm extends React.Component {
                                 <FormGroup controlId="cityField" validationState={this.getCityValidationState()}>
                                     <ControlLabel>City</ControlLabel>
                                     <FormControl type="text" name="city" value={this.props.data.city} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
-                                    <FormControl.Feedback />
-                                </FormGroup>
-                            </Col>
-                            <Col >
-                                <FormGroup controlId="streetAddressField" validationState={this.getCityValidationState()}>
-                                    <ControlLabel>Country</ControlLabel>
-                                    <FormControl type="text" name="country" value={this.props.data.country} onChange={this.changeForm.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
                                     <FormControl.Feedback />
                                 </FormGroup>
                             </Col>
@@ -144,12 +137,6 @@ class CheckoutForm extends React.Component {
             return 'success';
         } else if (this.props.data.zipCode.length > 0)  {
             return 'warning';
-        }
-    }
-
-    getCityValidationState() {
-        if (this.props.data.city.length > 1) {
-            return 'success';
         }
     }
 }

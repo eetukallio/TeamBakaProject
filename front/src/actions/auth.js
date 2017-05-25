@@ -1,4 +1,4 @@
-import { SET_AUTH, SET_USER, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { SET_AUTH, SET_USER, SET_USERNAME, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookie';
@@ -9,22 +9,24 @@ export function login(data) {
 
         console.log("LOGIN INFO BEING SENT AS " + data);
 
-        axios.post("/login", data, {headers: {'Content-Type': 'Application/Json'}})
+        axios.post("http://localhost:8080/login", data, {headers: {'Content-Type': 'Application/Json'}})
             .then((res) => {
                 console.log("=====RESPONSE WAS======");
-                console.log(res);
+                console.log(res.data.user);
+                const user = res.data.user;
                 cookie.save('token', res.data.token, {path: '/'});
-                cookie.save('user', res.data.user, {path: '/'});
+                cookie.save('user', {id: res.data.userId, username: user.username, role: user.role, address: user.address}, {path: '/'});
                 axios.defaults.headers.common['Authorization'] = res.data.token;
                 dispatch(sendingRequest(false));
                 dispatch(setAuthState(res.data.user.role === "admin"));
-                dispatch(setUser(res.data.user.id));
-                browserHistory.push("/");
+                dispatch(setUser(user.username));
+                // dispatch(setUser(res.data.userId));
+                dispatch(forwardTo("/"));
             })
             .catch((err) => {
                 dispatch(sendingRequest(false));
                 // dispatch(setErrorMessage(err.response.statusText));
-                console.log(err.message)
+                console.log(err)
             });
     }
 }
@@ -66,8 +68,8 @@ export function setAuthState(isAdmin) {
     return { type: SET_AUTH, isAdmin };
 }
 
-export function setUser(newState) {
-    return { type: SET_USER, newState}
+export function setUser(username) {
+    return { type: SET_USERNAME, username}
 }
 
 /**

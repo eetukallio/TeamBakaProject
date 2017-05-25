@@ -16,7 +16,7 @@ import { browserHistory } from 'react-router';
 import rootReducer from './reducers/index';
 import { checkAuth } from './utils/checkAuth';
 import cookie from 'react-cookie';
-import {SET_AUTH} from './constants/AppConstants';
+import {SET_AUTH, SET_USERNAME} from './constants/AppConstants';
 import axios from 'axios';
 import Orders from './views/orders/Orders';
 
@@ -42,8 +42,9 @@ const user = cookie.load(('user'));
 /**
  * Setting the authentication state if an existing token was found.
  */
-if (token || user) {
+if (token && user) {
     store.dispatch({type: SET_AUTH, isAdmin: user.role === "admin"});
+    store.dispatch({type: SET_USERNAME, username: user.username});
     axios.defaults.headers.common['Authorization'] = token;
 }
 
@@ -72,7 +73,7 @@ ReactDOM.render(
                     <Route path="/item" component={ProductShowcase} />
                 </Route>
                 <Route path="/login" name="login" component={Login}/>
-                <Route path="/orders" name="orders" component={Orders}/>
+                <Route path="/orders" name="orders" component={checkAuth(Orders)}/>
             </Route>
         </Router>
     </Provider>,

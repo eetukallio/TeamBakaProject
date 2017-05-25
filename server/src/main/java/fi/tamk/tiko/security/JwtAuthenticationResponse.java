@@ -1,5 +1,6 @@
 package fi.tamk.tiko.security;
 
+
 import fi.tamk.tiko.Entity.User;
 
 import java.io.Serializable;

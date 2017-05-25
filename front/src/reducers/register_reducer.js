@@ -8,7 +8,16 @@ const initialState = {
         password: '',
         confirmPassword: '',
         username: '',
-        email: ''
+        email: '',
+        role: 'user',
+        address: {
+            first_name: '',
+            last_name: '',
+            street_address: '',
+            city: '',
+            zip_code: '',
+            country: ''
+        }
     },
     registerCurrentlySending: false,
     errorMessage: ''

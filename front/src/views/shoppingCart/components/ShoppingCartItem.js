@@ -10,7 +10,7 @@ export default class ShoppingCartItem extends Component {
         return (
             <div className="shopping-cart-item">
                 <div className="item-picture-container">
-                    <img className="item-picture" src={this.props.imgUrl} alt="Product Image"/>
+                    <img className="item-picture" src={this.props.imgUrl} alt="Product"/>
                 </div>
                 <div className="item-info">
                     <span className="item-name">
