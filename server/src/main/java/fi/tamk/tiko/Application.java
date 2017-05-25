@@ -84,6 +84,16 @@ public class Application {
             pr.save(product);
         }
 
+        User none = new User();
+        none.setEmail("none");
+        none.setPassword("none");
+        none.setUsername("none");
+        none.setRole("none");
+        User user2 = new User();
+        none.setEmail("user2");
+        none.setPassword("user2");
+        none.setUsername("user2");
+        none.setRole("user");
         User user = new User();
         user.setEmail("u.u@u.u");
         user.setPassword("user");
@@ -94,8 +104,10 @@ public class Application {
         admin.setPassword("admin");
         admin.setUsername("admin");
         admin.setRole("admin");
+        ur.save(user2);
         ur.save(admin);
         ur.save(user);
+        ur.save(none);
         ShippingAddress address1 = new ShippingAddress();
         address1.setFirstName("Admin");
         address1.setLastName("Administrator");
