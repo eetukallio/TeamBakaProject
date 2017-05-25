@@ -1,4 +1,15 @@
 import { ADD_ITEM, REMOVE_ITEM, CLEAR_SHOPPINGCART, CHANGE_CHECKOUT_FORM } from '../constants/AppConstants';
+import axios from 'axios';
+
+export function sendPurchase(data) {
+    axios.post('/purchases', data, {headers: {'Content-Type': 'Application/Json'}})
+        .then((res) => {
+            console.log(res);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+}
 
 export function addItem(newItem) {
     console.log("IN ACTION: " + newItem);

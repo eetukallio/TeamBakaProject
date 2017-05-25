@@ -374,7 +374,7 @@ class CheckoutForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
 
-        const sendData = Object.assign(this.props.data, {isEmployer: this.props.data.isEmployer ? "1" : "0"});
+        let sendData = this.props.data;
 
         this.props.onSubmit(sendData);
     }
