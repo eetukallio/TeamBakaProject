@@ -384,8 +384,8 @@ class RegisterForm extends React.Component {
         let newState;
         console.log(name);
         if (name === "first_name" || name === "last_name" || name === "zip_code" || name === "country" || name === "city" || name === "street_address") {
-            newState = this.mergeAddressWithCurrentState({
-                [name]: e.target.value
+            newState = this.mergeWithCurrentState({
+                address: {[name]: e.target.value}
             });
         } else {
             newState = this.mergeWithCurrentState({

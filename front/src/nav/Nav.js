@@ -17,10 +17,9 @@ class Nav extends Component {
     constructor(props) {
         super(props);
 
-        const user = cookie.load('user');
 
         this.state = {
-            username: user.username || ""
+            username: this.props.username
         };
 
 
@@ -170,6 +169,7 @@ class Nav extends Component {
  */
 function mapStateToProps(state) {
     return {
+        username: state.auth.username,
         isAdmin: state.auth.isAdmin,
         loggedIn: state.auth.loggedIn
     }
