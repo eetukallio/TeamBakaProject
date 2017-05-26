@@ -17,19 +17,43 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+/**
+ * Class for checking that the user has proper authentication credentials and filters accordingly
+ */
 public class JWTLoginFilter extends OncePerRequestFilter {
 
+    /**
+     * Import of logger
+     */
     private final Log logger = LogFactory.getLog(this.getClass());
 
+    /**
+     * User details service
+     */
     @Autowired
     private UserDetailsService userDetailsService;
 
+    /**
+     * Import of JWT token utility class
+     */
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    /**
+     * Token header, fetched from application properties
+     */
     @Value("${jwt.header}")
     private String tokenHeader;
 
+    /**
+     * Override of the filtering method, checks for credentials from possible token in the request
+     *
+     * @param request Http request
+     * @param response Http response
+     * @param chain Chain of actions
+     * @throws ServletException Servlet Exception
+     * @throws IOException Input Output Exception
+     */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
         String authToken = request.getHeader(this.tokenHeader);

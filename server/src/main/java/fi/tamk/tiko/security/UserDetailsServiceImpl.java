@@ -14,11 +14,24 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Implementation of the user details service for providing custom user information in login
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
+    /**
+     * Import of user repository
+     */
     @Autowired
     private UserRepository userRepository;
 
+    /**
+     * Loads user details by username
+     *
+     * @param username username to search by
+     * @return user details
+     * @throws UsernameNotFoundException if no such username was found
+     */
     @Override
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
