@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.annotation.PostConstruct;
+
 /**
  * The actual Spring Boot application
  *
@@ -36,14 +38,14 @@ public class Application {
     public static void main(String[] args) {
 
         SpringApplication.run(Application.class, args);
-
-
+        printLaunchInfo();
     }
 
     /**
      * Floods the database with dummy data for testing.
      */
-    private void floodDatabase() {
+    @PostConstruct
+    public void floodDatabase() {
 
         String[] names = {"Onodera", "Chitoge", "Subaru", "Hanekawa", "Senjougahara"};
         int random;
@@ -86,22 +88,22 @@ public class Application {
 
         User none = new User();
         none.setEmail("none");
-        none.setPassword("none");
+        none.setPassword("password");
         none.setUsername("none");
         none.setRole("none");
         User user2 = new User();
-        none.setEmail("user2");
-        none.setPassword("user2");
-        none.setUsername("user2");
-        none.setRole("user");
+        user2.setEmail("user2");
+        user2.setPassword("password");
+        user2.setUsername("user2x");
+        user2.setRole("user");
         User user = new User();
         user.setEmail("u.u@u.u");
-        user.setPassword("user");
+        user.setPassword("password");
         user.setUsername("user");
         user.setRole("user");
         User admin = new User();
         admin.setEmail("a.a@a.a");
-        admin.setPassword("admin");
+        admin.setPassword("password");
         admin.setUsername("admin");
         admin.setRole("admin");
         ur.save(user2);
@@ -131,7 +133,7 @@ public class Application {
     /**
      * Prints launch info to the console.
      */
-    private void printLaunchInfo() {
+    public static void printLaunchInfo() {
         System.out.println();
         System.out.println("WELCOME TO BODY PILLOW E-STORE BACKEND" +
                 "\n" +
@@ -145,12 +147,12 @@ public class Application {
                 "'http://localhost:8080/orders'\n" +
                 "'http://localhost:8080/config'\n" +
                 "'http://localhost:8080/cart'\n" +
-                "'http://localhost:8080/login'\n" +
-                "\n" +
+                "'http://localhost:8080/login'" +
+                "\n\n" +
                 "The API can be accessed at 'http://localhost:8080/api' and a HTTP GET to the API root" +
-                "will provide a list of links in the response" +
-                "\n" +
-                "To log in you can use username: 'admin' and password 'admin' for admin experience\n" +
-                "and username: 'user' and password 'user' for user level experience");
+                "will provide a list of links in the response." +
+                "\n\n" +
+                "To log in you can use username: 'admin' and password 'password' for admin experience\n" +
+                "and username: 'user' and password 'password' for user level experience");
     }
 }
