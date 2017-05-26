@@ -1,4 +1,5 @@
 .checkout {
+    display: flex;
     padding: 1em;
     width: 80%;
     margin: auto;
@@ -20,6 +21,7 @@
     width: 60%;
     display: block;
     float: left;
+    background: white;
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -30,9 +32,10 @@
     padding: 1em;
     margin: 1em;
     border: 1px lightgray solid;
-    width: 25%;
+    width: 30%;
     display: block;
     float: left;
+    background: white;
 
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -41,5 +44,29 @@
 
 .container {
     width: auto;
+}
+
+tr, td {
+    text-align: start;
+    padding-left: 0.5em;
+}
+
+@media screen and (max-width: 720px) {
+    .checkout {
+        padding: 0;
+        margin: 0;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .listContainer {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .formContainer {
+        width: 100%;
+        margin-left: 0;
+    }
 }
 

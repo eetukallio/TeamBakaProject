@@ -1,40 +1,52 @@
 import React from 'react';
-import { Button, Col, Form, FormControl, ControlLabel, FormGroup } from 'react-bootstrap';
+import { Button, Col, Form, FormControl, Row, FormGroup, InputGroup, Grid } from 'react-bootstrap';
+import LoadingButton from './LoadingButton';
 
 class LoginForm extends React.Component {
 
     render() {
         return (
             <div className="login">
-                <Form horizontal onSubmit={this.onSubmit.bind(this)}>
-                    <FormGroup controlId="userNameField">
-                        <Col componentClass={ControlLabel} xs={3} sm={4}>
-                            Tunnus
-                        </Col>
-                        <Col xs={8} sm={4}>
-                            <FormControl type="text" name="username" value={this.props.data.username} onChange={this.changeUsername.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup controlId="passwordField">
-                        <Col componentClass={ControlLabel} xs={3} sm={4}>
-                            Salasana
-                        </Col>
-                        <Col xs={8} sm={4}>
-                            <FormControl type="password" name="password" value={this.props.data.password} onChange={this.changePassword.bind(this)} required />
-                        </Col>
-                    </FormGroup>
-                    <FormGroup controlId="submitButton">
-                        <Col componentClass={ControlLabel} xs={3} sm={4}>
+                <Form onSubmit={this.onSubmit.bind(this)}>
+                    <Grid>
 
+                    <Row>
+                        <Col>
+                            <FormGroup controlId="userNameField">
+                                <InputGroup>
+                                    <InputGroup.Addon><span className="glyphicon glyphicon-user" /></InputGroup.Addon>
+                                    <FormControl type="text" name="username" placeholder="Käyttäjätunnus" value={this.props.data.username} onChange={this.changeUsername.bind(this)} autoCorrect="off" autoCapitalize="off" spellCheck="false" required />
+                                </InputGroup>
+                            </FormGroup>
                         </Col>
-                        <Col xs={1} sm={1}>
-                            <Button type="submit">
-                                Kirjaudu
-                            </Button>
-                        </Col>
-                    </FormGroup>
-                    <p style={{color: "red"}}>{this.props.errorMessage}</p>
 
+                    </Row>
+
+                    <Row>
+                        <Col>
+                            <FormGroup controlId="passwordField">
+                                <InputGroup>
+                                    <InputGroup.Addon><span className="glyphicon glyphicon-lock" /></InputGroup.Addon>
+                                    <FormControl type="password" name="password" placeholder="Salasana" value={this.props.data.password} onChange={this.changePassword.bind(this)} required />
+                                </InputGroup>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+
+                        <Row>
+                            <FormGroup controlId="submitButton">
+                                <div className="buttonWrapper">
+                                    {this.props.currentlySending ? (
+                                            <LoadingButton />
+                                        ) : (
+                                            <Button bsStyle="primary" type="submit">{this.props.btnText}</Button>
+                                        )}
+                                </div>
+                            </FormGroup>
+                        </Row>
+
+                    </Grid>
                 </Form>
             </div>
         )
@@ -66,14 +78,13 @@ class LoginForm extends React.Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.onSubmit(this.props.data.username, this.props.data.password);
+        this.props.onSubmit(JSON.stringify({username: this.props.data.username, password: this.props.data.password}));
     }
 }
 
 LoginForm.propTypes = {
     onSubmit: React.PropTypes.func.isRequired,
     btnText: React.PropTypes.string.isRequired,
-    errorMessage: React.PropTypes.string,
     data: React.PropTypes.object.isRequired
 };
 

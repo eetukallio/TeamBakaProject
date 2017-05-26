@@ -9,7 +9,6 @@ const initialState = {
 
 // Takes care of changing the application state
 export default function (state = initialState, action) {
-    console.log("SHOPPING CART REDUCER HELLO");
     switch (action.type) {
         case ADD_ITEM:
             console.log(...state);

@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {Link} from 'react-router';
+import {changeCheckoutForm, sendPurchase} from '../../actions/shoppingcart_actions';
 import './Checkout.css';
 import CheckoutList from './components/CheckoutList';
 import CheckoutForm from './components/CheckoutForm';
-import { removeItem, clearItems } from '../../actions/shoppingcart_actions';
+import cookie from 'react-cookie';
 
 
 class Checkout extends Component {
+    send(data) {
+        let sendData = {};
+        const formData = data;
+        const items = this.props.shoppingData.items;
+        const userInfo = cookie.load('user');
+
+        if (userInfo) {
+            sendData = Object.assign({user: userInfo.id}, {purchases: items.map(function (object) {
+                return object.id;
+            })}, {address: formData});
+            console.log(sendData);
+        } else {
+            sendData = Object.assign({user: 4}, items, formData);
+        }
+        console.log(sendData);
+
+        this.props.sendPurchase(sendData);
+    }
+
     removeItem(item) {
         this.props.removeItem(item);
     }
@@ -26,7 +45,7 @@ class Checkout extends Component {
                 </div>
                 <div className="formContainer">
                     <h3>Shipping information</h3>
-                    <CheckoutForm data={formState} currentlySending={currentlySending} btnText={"Place order"} />
+                    <CheckoutForm onSubmit={this.send.bind(this)} onChange={this.props.changeCheckoutForm.bind(this)} data={formState} currentlySending={currentlySending} btnText={"Place order"} />
                 </div>
             </div>
         );
@@ -40,4 +59,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps)(Checkout);
+export default connect(mapStateToProps, {changeCheckoutForm, sendPurchase})(Checkout);

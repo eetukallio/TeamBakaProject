@@ -1,0 +1,161 @@
+.productContainer2 {
+    margin: 10px auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    padding: 10px;
+    background-color: white;
+    font-weight: bold;
+    display: flex;
+    max-width: 50%;
+    flex-direction: column;
+}
+
+.productImage2 {
+    display: flex;
+    max-width: 250px;
+    max-height: 350px;
+    box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-left: auto;
+}
+
+.productName2 {
+    margin: 10px auto 0 0;
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.productMeasurements2 {
+    margin: 10px auto 0 0;
+}
+
+.productStock2 {
+    margin: 10px auto 0 0;
+}
+
+.additionalInfo2 {
+    margin: 10px auto 0 0;
+    max-width: 300px;
+    text-align: left;
+    font-weight: normal;
+
+}
+
+.productInfoContainer2 {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+}
+
+.cartButton2 {
+    height: 40px;
+    width: 50%;
+    text-align: center;
+    display: block;
+    margin: 10px auto 0 auto;
+}
+
+.priceTag2 {
+    background-color: deepskyblue;
+    width: 130px;
+    max-height: 40px;
+    line-height: 40px;
+    text-align: center;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+.price2 {
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+
+}
+
+.top2 {
+    display: flex;
+    flex-direction: row;
+}
+
+.tags2 {
+    margin: 10px auto 0 0;
+    max-width: 300px;
+    text-align: left;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.stockInput {
+    height: 40px;
+    width: 80px;
+    text-align: center;
+    display: block;
+    margin: 10px auto 0 auto;
+}
+
+.adminSet {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.reviewContainer {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    background-color: white;
+    width: 40%;
+    margin: auto;
+    align-items: flex-start;
+    padding:15px;
+}
+
+.userName {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.reviewUserName {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: black;
+}
+
+
+.rating {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    color: gold;
+}
+
+.reviewForm{
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin: auto auto 20px auto;
+    padding: 10px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    background-color: white;
+}
+
+.textArea {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width: 900px){
+    .top2 {
+        flex-direction: column;
+    }
+    .productImage2 {
+        margin: 20px auto;
+    }
+}

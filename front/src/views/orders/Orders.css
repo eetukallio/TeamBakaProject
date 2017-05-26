@@ -1,0 +1,50 @@
+.ordersContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 60%;
+    margin: auto;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+.singleOrderContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 10px auto;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    padding: 10px;
+    background-color: white;
+    font-weight: bold;
+    width: 100%;
+    transition: height 0.5s;
+
+}
+
+.singleProductContainer {
+    display: flex;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.2);
+    width: 99%;
+    margin: 5px auto;
+    padding: 5px;
+    justify-content: space-between;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.orderHeader {
+    display: flex;
+    text-align: left;
+}
+
+.totalPrice {
+    margin-left: auto;
+}
+
+a:hover{
+    cursor: pointer;
+    text-decoration: none;
+}

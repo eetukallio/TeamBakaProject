@@ -1,17 +1,26 @@
 .products {
-    height: 100vh;
-    margin: auto;
-    width: 70%;
-}
-
-
-.searchBar {
-    float: right;
-    margin: 20px 0 20px 5px
+    margin: auto 200px auto auto;
+    max-width: 100%;
+    font-family: 'Ubuntu', sans-serif;
+    display: flex;
 }
 
 #input {
     margin-left: 5px;
 }
 
+@media screen and (max-width: 600px){
+    .products{
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .searchBar {
+        visibility: hidden;
+    }
+
+    .categoryTitle, .activeCategoryTitle {
+        display: inline;
+    }
+}
 

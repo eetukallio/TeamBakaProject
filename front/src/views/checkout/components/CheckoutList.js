@@ -20,7 +20,7 @@ export default class CheckoutList extends Component {
         return data.map(obj => {
             return <tr key={obj.id}>
                 <td key="name">{obj.name}</td>
-                <td key="price">{obj.price}</td>
+                <td key="price">{obj.price}€</td>
             </tr>;
         });
     }
@@ -36,7 +36,7 @@ export default class CheckoutList extends Component {
         return (
             <tr>
                 <td style={{borderBottom: 'hidden', borderLeft: 'hidden', background: 'white'}} />
-                <td>{price}</td>
+                <td>{price}€</td>
             </tr>
         )
     }

@@ -1,5 +1,6 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Repository;
 
+import fi.tamk.tiko.Entity.User;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -38,4 +39,12 @@ public interface UserRepository extends CrudRepository<User, Long> {
      * @return Returns the result of the query
      */
     User findOne(Long id);
+
+    /**
+     * Finds a single user by their username
+     *
+     * @param username username to be found
+     * @return user
+     */
+    User findByUsername(String username);
 }

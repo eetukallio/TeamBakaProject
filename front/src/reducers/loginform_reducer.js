@@ -1,4 +1,4 @@
-import { CHANGE_FORM, SET_AUTH, UNAUTH_USER, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { CHANGE_FORM, SET_AUTH, SET_USERNAME, UNAUTH_USER, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 
 const assign = Object.assign;
 
@@ -9,7 +9,9 @@ const initialState = {
         password: ''
     },
     loggedIn: false,
+    isAdmin: false,
     currentlySending: false,
+    username: '',
     errorMessage: ''
 };
 
@@ -19,9 +21,12 @@ export default function (state = initialState, action) {
         case CHANGE_FORM:
             return {...state, formState: action.newState};
         case SET_AUTH:
-            return {...state, errorMessage: '', formState: {username: '', password: ''}, loggedIn: true};
+            console.log("In set auth with " + action.isAdmin);
+            return {...state, errorMessage: '', formState: {username: '', password: ''}, loggedIn: true, isAdmin: action.isAdmin};
+        case SET_USERNAME:
+            return {...state, username: action.username};
         case UNAUTH_USER:
-            return {...state, loggedIn: false};
+            return {...state, loggedIn: false, isAdmin: false};
         case SENDING_REQUEST:
             return {...state, currentlySending: action.sending };
         case SET_ERROR_MESSAGE:

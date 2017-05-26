@@ -1,5 +1,6 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Repository;
 
+import fi.tamk.tiko.Entity.Product;
 import org.springframework.data.repository.CrudRepository;
 
 /**
@@ -39,4 +40,5 @@ public interface ProductRepository extends CrudRepository<Product, Long> {
      * @return Product with the specified Id.
      */
     Product findOne(Long id);
+
 }

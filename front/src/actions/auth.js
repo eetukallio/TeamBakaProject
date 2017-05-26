@@ -1,26 +1,32 @@
-import { SET_AUTH, SET_USER, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
+import { SET_AUTH, CHECKOUT_SENT, SET_USERNAME, REGISTER_SENT, UNAUTH_USER, CHANGE_FORM, CHANGE_REGISTER_FORM, SENDING_REQUEST, SET_ERROR_MESSAGE } from '../constants/AppConstants';
 import { browserHistory } from 'react-router';
 import axios from 'axios';
 import cookie from 'react-cookie';
 
-export function login(username, password) {
+export function login(data) {
     return function(dispatch) {
         dispatch(sendingRequest(true));
 
-        axios.post("api/auth/login", {username, password})
+        console.log("LOGIN INFO BEING SENT AS " + data);
+
+        axios.post("/login", data, {headers: {'Content-Type': 'Application/Json'}})
             .then((res) => {
-                console.log("USER ID IS " + res.data.user.id);
+                console.log("=====RESPONSE WAS======");
+                console.log(res.data.user);
+                const user = res.data.user;
                 cookie.save('token', res.data.token, {path: '/'});
-                cookie.save('user', res.data.user, {path: '/'});
+                cookie.save('user', {id: res.data.userId, username: user.username, role: user.role, address: user.address}, {path: '/'});
+                axios.defaults.headers.common['Authorization'] = res.data.token;
                 dispatch(sendingRequest(false));
-                dispatch({type: SET_AUTH});
-                dispatch(setUser(res.data.user.id));
-                browserHistory.push("/home");
+                dispatch(setAuthState(res.data.user.role === "admin"));
+                dispatch(setUser(user.username));
+                // dispatch(setUser(res.data.userId));
+                dispatch(forwardTo("/"));
             })
             .catch((err) => {
                 dispatch(sendingRequest(false));
-                dispatch(setErrorMessage(err.response.statusText));
-                console.log(err.response)
+                // dispatch(setErrorMessage(err.response.statusText));
+                console.log(err)
             });
     }
 }
@@ -29,21 +35,54 @@ export function login(username, password) {
 export function logout() {
     return function (dispatch) {
         dispatch({type: UNAUTH_USER});
+        dispatch({type: CHECKOUT_SENT});
         cookie.remove('token', {path: '/'});
+        cookie.remove('user', {path: '/'});
         browserHistory.push("/login");
     }
 }
 
 export function register(formData) {
     console.log(formData);
+
+    const userData = {  username: formData.username,
+                        password: formData.password,
+                        email: formData.email,
+                        role: formData.role
+                        };
+
+    const addressData = {   firstName: formData.firstName,
+                            lastName: formData.lastName,
+                            streetAddress: formData.streetAddress,
+                            city: formData.city,
+                            zipCode: formData.zipCode,
+                            country: formData.country,
+                            user: 0
+                            };
+
+    console.log(userData);
+    console.log(addressData);
+
+
     return function(dispatch) {
         dispatch(sendingRequest(true));
 
-        axios.post("/register", JSON.stringify(formData), {headers: {'Content-Type': 'application/json'}})
-            .then(res => {
-                console.log("REGISTRATION FORM SENT " + res);
-                dispatch(sendingRequest(false));
-                dispatch(registerFormSent());
+        axios.post("/users", userData, {headers: {'Content-Type': 'application/json'}})
+            .then((res) => {
+                console.log("USER WAS SENT");
+                const addressWithUser = Object.assign(addressData, {user: res.data.id});
+                axios.post("/shippingAddresses", addressWithUser, {headers: {'Content-Type': 'application/json'}})
+                    .then((res) => {
+                        console.log("ADDRESS WAS SENT");
+                        dispatch(sendingRequest(false));
+                        dispatch(registerFormSent());
+                        dispatch(setErrorMessage("success"))
+                })
+                    .catch((err) => {
+                        dispatch(sendingRequest(false));
+                        dispatch(setErrorMessage("error"))
+                        console.log(err.message);
+                    });
             })
             .catch((err) => {
                 dispatch(sendingRequest(false));
@@ -55,14 +94,14 @@ export function register(formData) {
 
 /**
  * Sets the authentication state of the application
- * @param {boolean} newState True means a user is logged in, false means no user is logged in
+ * @param {boolean} isAdmin True means a user is logged in, false means no user is logged in
  */
-export function setAuthState(newState) {
-    return { type: SET_AUTH, newState };
+export function setAuthState(isAdmin) {
+    return { type: SET_AUTH, isAdmin };
 }
 
-export function setUser(newState) {
-    return { type: SET_USER, newState}
+export function setUser(username) {
+    return { type: SET_USERNAME, username}
 }
 
 /**
@@ -76,7 +115,7 @@ export function changeForm(newState) {
     return { type: CHANGE_FORM, newState };
 }
 
-export function changeRegisterForm(newState) {
+export function changeRegistrationForm(newState) {
     return { type: CHANGE_REGISTER_FORM, newState}
 }
 

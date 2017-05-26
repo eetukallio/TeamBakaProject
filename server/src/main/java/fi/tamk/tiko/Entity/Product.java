@@ -1,6 +1,7 @@
-package fi.tamk.tiko;
+package fi.tamk.tiko.Entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  *
@@ -28,6 +29,16 @@ public class Product {
     private String imgUrl;
     @Column(name="stock")
     private int stock;
+    @Column(name = "info")
+    private String info;
+    @Column(name = "tags")
+    private String tags;
+    @Column(name = "category")
+    private long category;
+    @OneToMany(mappedBy = "product",cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
+
 
 
     /**
@@ -38,19 +49,22 @@ public class Product {
     /**
      * Constructor for initializing attributes
      *
-     * @param id The id of the product.
      * @param price The price of the product.
      * @param name The name of the product.
      * @param measurements The measurements of the product.
      * @param imgUrl The url of the product's image.
+     * @param stock Stock of the product.
      */
-    public Product(long id, double price, String name, String measurements, String imgUrl, int stock) {
-        this.id = id;
+    public Product(double price, String name, String measurements,
+                   String imgUrl, int stock, String info, String tags, long category) {
         this.price = price;
         this.name = name;
         this.measurements = measurements;
         this.imgUrl = imgUrl;
         this.stock = stock;
+        this.info = info;
+        this.tags = tags;
+        this.category = category;
     }
 
     /**
@@ -157,5 +171,77 @@ public class Product {
      */
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    /**
+     * Getter for additional info on the product.
+     *
+     * @return Additional info on the product.
+     */
+    public String getInfo() {
+        return info;
+    }
+
+    /**
+     * Setter for additional info on the product.
+     *
+     * @param info Additional info on the product.
+     */
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    /**
+     * Getter for tags on the product.
+     *
+     * @return Tags on the product.
+     */
+    public String getTags() {
+        return tags;
+    }
+
+    /**
+     * Setter for tags on the product.
+     *
+     * @param tags Tags on the product.
+     */
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
+    /**
+     * Getter for category
+     *
+     * @return Category
+     */
+    public long getCategory() {
+        return category;
+    }
+
+    /**
+     * Setter for category
+     *
+     * @param category category
+     */
+    public void setCategory(long category) {
+        this.category = category;
+    }
+
+    /**
+     * Getter for reviews
+     *
+     * @return Reviews as a List
+     */
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    /**
+     * Setter for reviews.
+     *
+     * @param reviews Reviews to be set
+     */
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
     }
 }
