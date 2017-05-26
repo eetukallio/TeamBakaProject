@@ -15,6 +15,7 @@ import { createStore, applyMiddleware } from 'redux';
 import { browserHistory } from 'react-router';
 import rootReducer from './reducers/index';
 import { checkAuth } from './utils/checkAuth';
+import { checkAdmin } from './utils/checkAdmin';
 import cookie from 'react-cookie';
 import {SET_AUTH, SET_USERNAME} from './constants/AppConstants';
 import axios from 'axios';
@@ -67,7 +68,7 @@ ReactDOM.render(
                 {/*<Route path="/login" component={Login}/>*/}
                 <Route path="/cart" component={ShoppingCart} />
                 <Route path="/checkout" component={Checkout} />
-                <Route path="/config" component={Config}/>
+                <Route path="/config" component={checkAdmin(Config)}/>
                 <Route path="/browse">
                     <IndexRoute component={Browse} />
                     <Route path="/item" component={ProductShowcase} />

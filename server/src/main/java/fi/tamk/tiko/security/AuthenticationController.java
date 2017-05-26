@@ -20,22 +20,49 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Controller class for authentication
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 public class AuthenticationController {
 
+    /**
+     * Token header, fetched from application properties
+     */
     @Value("${jwt.header}")
     private String tokenHeader;
 
+    /**
+     * Authentication manager, does exactly what the name implies
+     */
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    /**
+     * Import of JWT token utility class
+     */
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
 
+    /**
+     * Import of user repository
+     */
     @Autowired
     private UserRepository userRepository;
 
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    /**
+     * Handles login requests
+     *
+     * @param authenticationRequest request sent to the server
+     * @param device device
+     * @return response according to successful authentication
+     * @throws AuthenticationException errors upon failed authentication
+     */
+    @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody JwtAuthenticationRequest authenticationRequest, Device device) throws AuthenticationException {
 
         // Perform the security
@@ -57,6 +84,12 @@ public class AuthenticationController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(token, user, user.getId()));
     }
 
+    /**
+     * Utility method for refreshing tokens
+     *
+     * @param request request sent to the server
+     * @return refreshed token
+     */
     @RequestMapping(value = "${jwt.route.authentication.refresh}", method = RequestMethod.GET)
     public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
