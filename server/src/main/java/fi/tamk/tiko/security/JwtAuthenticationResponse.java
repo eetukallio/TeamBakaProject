@@ -7,6 +7,10 @@ import java.io.Serializable;
 
 /**
  * Utility class for building JWT responses
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
  */
 public class JwtAuthenticationResponse implements Serializable {
 

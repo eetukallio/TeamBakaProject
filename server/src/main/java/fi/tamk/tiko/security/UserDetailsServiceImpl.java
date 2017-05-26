@@ -16,6 +16,10 @@ import java.util.Set;
 
 /**
  * Implementation of the user details service for providing custom user information in login
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
  */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{

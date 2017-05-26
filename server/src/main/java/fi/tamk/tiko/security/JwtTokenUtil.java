@@ -1,6 +1,5 @@
 package fi.tamk.tiko.security;
 
-import fi.tamk.tiko.Entity.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,6 +15,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * JWT utility class
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
+ */
 @Component
 public class JwtTokenUtil implements Serializable {
 
@@ -50,6 +56,12 @@ public class JwtTokenUtil implements Serializable {
         return username;
     }
 
+    /**
+     * Gets create date from token
+     *
+     * @param token token to be checked
+     * @return create date
+     */
     public Date getCreatedDateFromToken(String token) {
         Date created;
         try {
@@ -61,6 +73,12 @@ public class JwtTokenUtil implements Serializable {
         return created;
     }
 
+    /**
+     * Used to get expiration date from token
+     *
+     * @param token token to be checked
+     * @return expiration date
+     */
     public Date getExpirationDateFromToken(String token) {
         Date expiration;
         try {
@@ -72,6 +90,12 @@ public class JwtTokenUtil implements Serializable {
         return expiration;
     }
 
+    /**
+     * Gets audience from token
+     *
+     * @param token token to be checked
+     * @return audience
+     */
     public String getAudienceFromToken(String token) {
         String audience;
         try {
@@ -83,6 +107,12 @@ public class JwtTokenUtil implements Serializable {
         return audience;
     }
 
+    /**
+     * Gets claims from token
+     *
+     * @param token token to be checked
+     * @return claims
+     */
     private Claims getClaimsFromToken(String token) {
         Claims claims;
         try {
@@ -96,19 +126,43 @@ public class JwtTokenUtil implements Serializable {
         return claims;
     }
 
+    /**
+     * Generates expiration date for the token
+     *
+     * @return expiration date
+     */
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
     }
 
+    /**
+     * Checks if token is expired
+     *
+     * @param token token to be checked
+     * @return true if expired, false if not
+     */
     private Boolean isTokenExpired(String token) {
         final Date expiration = getExpirationDateFromToken(token);
         return expiration.before(new Date());
     }
 
+    /**
+     * Checks if token was created before last password reset date
+     *
+     * @param created created date
+     * @param lastPasswordReset last password reset date
+     * @return boolean
+     */
     private Boolean isCreatedBeforeLastPasswordReset(Date created, Date lastPasswordReset) {
         return (lastPasswordReset != null && created.before(lastPasswordReset));
     }
 
+    /**
+     * Generates audience for token
+     *
+     * @param device device for audience
+     * @return audience
+     */
     private String generateAudience(Device device) {
         String audience = AUDIENCE_UNKNOWN;
         if (device.isNormal()) {
@@ -121,11 +175,24 @@ public class JwtTokenUtil implements Serializable {
         return audience;
     }
 
+    /**
+     * Checks if audience is tablet or mobile, to check if token expiration should be ignored
+     *
+     * @param token token to be checked
+     * @return true if audience is tablet or mobile, false otherwise
+     */
     private Boolean ignoreTokenExpiration(String token) {
         String audience = getAudienceFromToken(token);
         return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
     }
 
+    /**
+     * Generates info for token
+     *
+     * @param userDetails user details to be put into token
+     * @param device device to be set as audience
+     * @return token
+     */
     public String generateToken(UserDetails userDetails, Device device) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
@@ -134,6 +201,12 @@ public class JwtTokenUtil implements Serializable {
         return generateToken(claims);
     }
 
+    /**
+     * Builds the token
+     *
+     * @param claims claims to be put into token
+     * @return token
+     */
     String generateToken(Map<String, Object> claims) {
         return Jwts.builder()
                 .setClaims(claims)
@@ -142,12 +215,25 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
+    /**
+     * Checks if token can be refreshed
+     *
+     * @param token token to be checked
+     * @param lastPasswordReset last password reset date
+     * @return true if possible, false if not
+     */
     public Boolean canTokenBeRefreshed(String token, Date lastPasswordReset) {
         final Date created = getCreatedDateFromToken(token);
         return !isCreatedBeforeLastPasswordReset(created, lastPasswordReset)
                 && (!isTokenExpired(token) || ignoreTokenExpiration(token));
     }
 
+    /**
+     * Refreshes token
+     *
+     * @param token token to be refreshed
+     * @return refreshed token
+     */
     public String refreshToken(String token) {
         String refreshedToken;
         try {
@@ -160,6 +246,13 @@ public class JwtTokenUtil implements Serializable {
         return refreshedToken;
     }
 
+    /**
+     * Validates token against user details
+     *
+     * @param token token to be validated
+     * @param userDetails user details
+     * @return true if match, false otherwise
+     */
     public Boolean validateToken(String token, UserDetails userDetails) {
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);

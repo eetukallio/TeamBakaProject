@@ -12,6 +12,10 @@ import java.io.Serializable;
 
 /**
  * Authentication entry point, sends a 401 unauthorized response on bad auth attempts
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
  */
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint, Serializable {

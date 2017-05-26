@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 /**
  * Class for building requests for JWT handling.
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
  */
 public class  JwtAuthenticationRequest implements Serializable {
 

@@ -19,6 +19,10 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * Class for checking that the user has proper authentication credentials and filters accordingly
+ *
+ * @author Henri Kankaanpää
+ * @version 1.0
+ * @since 1.0
  */
 public class JWTLoginFilter extends OncePerRequestFilter {
 
