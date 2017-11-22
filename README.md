@@ -1,6 +1,6 @@
 # TeamBakaProject
 
-Live version can be viewed at http://207.154.228.188:8090/browse
+Live version can be viewed at http://207.154.228.188:8090
 
 ## Front End
 
