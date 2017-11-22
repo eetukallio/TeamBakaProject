@@ -1,5 +1,7 @@
 # TeamBakaProject
 
+Live version can be viewed at http://207.154.228.188:8090/browse
+
 ## Front End
 
 To install the dependencies of the front end navigate to front directory and execute `npm install`.
